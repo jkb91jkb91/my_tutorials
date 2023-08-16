@@ -2,7 +2,7 @@
 <?php
 
     if($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['submit'])) {
-        $conn= mysqli_connect('172.17.0.2', 'root', 'root' , 'test1' , '3306') or die("Connection Failed:" .mysqli_connect_error());
+        $conn= mysqli_connect('sql', 'root', 'root' , 'test1' , '3306') or die("Connection Failed:" .mysqli_connect_error());
         if(isset($_POST['name']) && isset($_POST['email']) && isset($_POST['phone']) && isset($_POST['bgroup'])) {
             $name= $_POST['name'];
             $email= $_POST['email'];

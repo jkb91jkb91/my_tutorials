@@ -1,0 +1,23 @@
+version: '3.3'
+services:
+  sql:
+    image: database 
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test1
+    ports:
+      - "3306:3306"
+    container_name: sql
+
+  app:
+    image: webapp
+    restart: always
+    depends_on:
+      - sql
+    environment:
+      DB_HOST: sql
+      DB_NAME: test1
+    ports:
+      - "80:80"
+
