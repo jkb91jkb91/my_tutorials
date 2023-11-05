@@ -1,0 +1,27 @@
+version: '3.3'
+services:
+  sql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test1
+    ports:
+      - "3306:3306"
+    container_name: sql
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  app:
+    build: 
+      context: ./
+      dockerfile: Dockerfile.web
+    restart: always
+    depends_on:
+      - sql
+    environment:
+      DB_HOST: sql
+      DB_NAME: test1
+    ports:
+      - "80:80"
+
