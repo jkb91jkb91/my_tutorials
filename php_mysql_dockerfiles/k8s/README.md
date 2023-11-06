@@ -1,6 +1,7 @@
 PROBLEM > IMAGE HAS NOT init file in it
+![image](https://github.com/jkb91jkb91/my_tutorials/assets/32479224/0640113a-03fc-4fda-a01e-15277ca5e740)
 
-[![Uploading image.png…]()](https://github.com/jkb91jkb91/my_tutorials/blob/kubernetes/php_mysql_dockerfiles/k8s/image.png)
+
 
 
 NODEPORT+Frontend(DEPLOYMENT+CLUSTER_IP) + backend(DEPLOYMENT+CLUSTER_IP)
