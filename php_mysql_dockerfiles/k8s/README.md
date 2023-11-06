@@ -1,5 +1,6 @@
 PROBLEM > IMAGE HAS NOT init file in it
 
+![Uploading image.png…]()
 
 
 NODEPORT+Frontend(DEPLOYMENT+CLUSTER_IP) + backend(DEPLOYMENT+CLUSTER_IP)
