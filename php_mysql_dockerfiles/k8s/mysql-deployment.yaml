@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      component: mysql
+  template:
+    metadata:
+      labels:
+        component: mysql
+    spec:
+      containers:
+        - name: sql
+          image: jkb91/database:latest
+          ports:
+            - containerPort: 3306
