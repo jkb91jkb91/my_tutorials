@@ -1,40 +1,35 @@
-PROBLEM > IMAGE HAS NOT init file in it
 
-![Uploading image.png…]()
+PRESTEP >> branch kubernetes > project with INGRESS
 
-
-NODEPORT+Frontend(DEPLOYMENT+CLUSTER_IP) + backend(DEPLOYMENT+CLUSTER_IP)
+INGRESS+Frontend(DEPLOYMENT+CLUSTER+IP) + backend(DEPLOYMENT+CLUSTER_IP) + VOLUME  
 
 
-Important infos
--Login to DOCKER
--Prepare IMAGES and push to docker
 
-1. docker-compose uses services called 
--app
--sql (this is used as DNS in app) > use metadada: name: sql
 
- apiVersion: v1
-  2 kind: Service
-  3 metadata:
-  4   name: sql
-  5 spec:
-  6   type: ClusterIP
-  7   selector:
-  8     component: mysql
-  9   ports:
- 10     - port: 3306
- 11       targetPort: 3306
 
+FOR NOW DATABASE DOESNT WORK FROM THE BEGINNING , this is the problem
+Correct database here
 
 
 
 Apply all files:
-kubectl apply -f ./
-
-
-How to start minikube nodePort app in browser
+1.) kubectl apply -f ./
 
 
 
-minikube service frontend-nodeport-service
+2.)kubectl get nodes -o wide
+
+http://<NODE_IP>:30080
+
+
+NAME       STATUS   ROLES           AGE   VERSION   INTERNAL-IP    EXTERNAL-IP   OS-IMAGE             KERNEL-VERSION     CONTAINER-RUNTIME
+minikube   Ready    control-plane   10m   v1.26.3   192.168.49.2   <none>        Ubuntu 20.04.5 LTS   6.1.55-1-MANJARO   docker://23.0.2
+
+
+>>> http://192.168.49.2:30080
+
+
+
+
+
+
