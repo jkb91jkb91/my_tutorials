@@ -2,9 +2,9 @@
 
 
 
-FIRST SITE
+FIRST SITE  
 ![first_screen](https://github.com/jkb91jkb91/my_tutorials/assets/32479224/a6d1873c-7b25-45a4-a1f5-1c65380fd1d6)  
-SECOND SITE
+SECOND SITE  
 ![Second](https://github.com/jkb91jkb91/my_tutorials/assets/32479224/5658bff7-1260-4fa9-afdc-34102ee98554)  
 
 1.) kubectl apply -f ./  
