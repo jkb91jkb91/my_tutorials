@@ -16,13 +16,11 @@
             $query = mysqli_query($conn, $sql);
 
             if ($query) {
-                echo '2Entry Successful<br>';
-
-                // Here we fetch and print the names
-                $names = fetchNames($conn);
-                foreach ($names as $name) {
-                    echo $name . "<br>";
-                }
+                echo 'Entry Successful<br>';
+                echo 'Name: ' . $name . '<br>';
+                echo 'Email: ' . $email . '<br>';
+                echo 'Phone: ' . $phone . '<br>';
+                echo 'Blood Group: ' . $bgroup . '<br>';
 
             } else {
                 echo "Entry failed.";
