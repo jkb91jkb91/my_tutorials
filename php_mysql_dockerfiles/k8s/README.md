@@ -1,7 +1,8 @@
 
 PRESTEP >> branch kubernetes > project with INGRESS
 
-INGRESS+Frontend(DEPLOYMENT+CLUSTER+IP) + backend(DEPLOYMENT+CLUSTER_IP) + VOLUME  
+INGRESS+![first_screen](https://github.com/jkb91jkb91/my_tutorials/assets/32479224/8d2da287-a53f-49b4-9e5f-7fb488a33971)
+Frontend(DEPLOYMENT+CLUSTER+IP) + backend(DEPLOYMENT+CLUSTER_IP) + VOLUME  
 
 
 
