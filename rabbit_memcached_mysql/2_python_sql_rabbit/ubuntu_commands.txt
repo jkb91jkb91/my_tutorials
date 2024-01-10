@@ -1,0 +1,7 @@
+apt-get update
+apt-get install amqp-tools
+apt-get install python3
+apt install python3-pip
+pip install mysql-connector-python
+pip install pika
+

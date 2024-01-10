@@ -1,0 +1,35 @@
+sudo apt update -y
+sudo apt install apache2 -y
+sudo ufw allow in "Apache"
+sudo systemctl start apache2.service
+sudo systemctl enable apache2.service
+
+sudo rm index.html
+
+sudo apt install php libapache2-mod-php php-mysql -y
+sudo apt install mysql-server -y
+sudo mysql <<EOF
+    ALTER USER 'root'@'localhost' IDENTIFIED BY 'password';
+    CREATE DATABASE test1;
+    CREATE USER 'kuba'@'%' IDENTIFIED BY 'kuba';
+    GRANT ALL ON test1.* TO 'kuba'@'%';  
+EOF
+
+sudo mysql -u kuba -pkuba <<EOF
+USE test1;
+CREATE TABLE users (
+  id INT PRIMARY KEY AUTO_INCREMENT,
+  name VARCHAR(250) NOT NULL,
+  email VARCHAR(250) UNIQUE,
+  phone VARCHAR(100),
+  bgroup VARCHAR(100)
+);
+EOF
+
+#Skopiuj plik index.php
+#Skopiuj plik connect.php
+
+GRANT ALL ON test2.* TO 'kuba'@'%';  
+CREATE DATABASE test2;
+
+

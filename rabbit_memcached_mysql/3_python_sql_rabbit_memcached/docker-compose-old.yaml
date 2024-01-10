@@ -1,0 +1,34 @@
+version: '3'
+
+services:
+  sql:
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: db_root_pass
+      MYSQL_DATABASE: db_database
+      MYSQL_USER: db_user
+      MYSQL_PASSWORD: db_user_pass
+    ports:
+      - "3306:3306"
+  my_ubuntu:
+    image: ubuntu:latest
+    depends_on:
+     - sql
+    command: tail -f /dev/null
+    volumes:
+      - .:/app
+  memcached:
+    image: memcached:1.6.1
+    ports:
+     - "11211:11211"
+
+  my_rb:
+    image: rabbitmq:3-management
+    hostname: rb
+    environment:
+      RABBITMQ_DEFAULT_VHOST: my_vhost
+      RABBITMQ_DEFAULT_USER: user
+      RABBITMQ_DEFAULT_PASS: password
+    ports:
+      - "15672:15672"
+      - "5672:5672"

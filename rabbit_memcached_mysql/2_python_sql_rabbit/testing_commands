@@ -1,0 +1,14 @@
+1 docker ps  
+2 GET UBUNTU ID
+3 GET MYSQL ID
+
+
+# DO THIS ON UBUNTU
+docker exec -it UBUNTU_ID python3 /app/python_run.py grzyb
+docker exec -it UBUNTU_ID python3 /app/python_run.py heniek
+
+
+#DO THIS ON MYSQL
+mysql -u root -pdb_root_pass
+USE db_database;
+SELECT * FROM imiona;
