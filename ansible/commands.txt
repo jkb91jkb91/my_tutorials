@@ -1,0 +1,151 @@
+# 1
+# Zainstaluj sshpass
+# Kopiowanie KLUCZA SSH Z DOMYSLNEJ LOKALIZACJI ~/.ssh na zdalne hosty, jako ze password jest wymagane potrzebujemy sshpass oraz dla userow ansible oraz root
+for user in ansible root
+  do  
+    for os in ubuntu centos
+    do
+      for instance in 1 2 3
+      do
+        sshpass -f password.txt ssh-copy-id -o StrictHostKeyChecking=no ${user}@${os}${instance}
+    done
+  done
+ done
+
+# 2
+# W ponizszej komendzie zauwaz brak odstepow przy przecinkach,
+# "i"   > podajemy albo inventory file albo liste hostow
+# "all" > oznacz,ze zadanie zostanie wykonane na wszystkich podanych hostach
+# "m"   > oznacza modul w tym przypadku ping
+# ansible -i,ubuntu1,ubuntu2,ubuntu3,centos1,centos2,centos3 all -m ping
+
+# 3
+# Tak sprawdzimy czy ansible ma ustawiony jakis config, jak widac ponizej jest None
+# ansible@ubuntu-c:~$ ansible --version
+# ansible [core 2.16.6]
+# config file = None
+#
+# PRIORITY
+# 1 ANSIBLE_CONFIG=filelocation.cfg
+# 2 ./ansible.cfg
+# 3 ~/.ansible.cfg
+# 4 /etc/ansible/ansible.cfg
+
+# 4
+# Jak zablokowac pytanie o Host Key
+# ansible all -m ping
+# The authenticity of host 'centos1 (172.18.0.2)' can't be established.
+# ED25519 key fingerprint is SHA256:Uh0joGLDzaAsjfYaofpGYveQk4/crPa2KDyhGx5rmKM.
+# This key is not known by any other names
+# Are you sure you want to continue connecting (yes/no/[fingerprint])? ^C [ERROR]: User in# terrupted
+#
+# Dodaj zmienna ANSIBLE_HOST_KEY_CHECKING=False na poczatku
+# ANSIBLE_HOST_KEY_CHECKING=False ansible all -m ping
+#
+# Jak ustawic to na stale ?
+# cat ansible.cfg
+# [defaults]
+# inventory = hosts
+# host_key_checking = False
+
+
+# 5 Pingowanie konkretnej grupy
+# cat hosts
+# [centos]
+# centos1
+# centos2
+# centos3
+
+# [ubuntu]
+# ubuntu1
+# ubuntu2
+# ubuntu3
+#
+# ansible centos -m ping
+# Listowanie hostow z grupy  >> ansible centos --list-hosts
+# Listowanie wszystkich grup >> ansible all --list-hosts
+
+# 6 pingowanie z output w 1 lini 
+# ansible all -m ping -o
+
+# 7 Regular Expressions
+# ~ > tak sie zaczyna regular expression
+# ansible ~.*3 -m ping -o
+
+# 8 uid na Linuxie wskazuje jakiego usera uzywamy
+# wykonujemy komende na wszystkich maszynach
+# ansible all -m command -a 'id' -o
+
+# 9 Jesli chcemy wykonac komendy ktore wymagaja roota 
+#
+# cat hosts
+# [ubuntu]
+# ubuntu1 ansible_become=true ansible_become_pass=password
+#
+
+# 10 Jak zmienic defaultowy port ktory dziala na 22 na inny port np 2222
+# cat hosts
+# [centos]
+# centos1 ansible_port=2222
+#
+# LUB DRUGA OPCJA
+#
+# cat hosts
+# [centos]
+# centos1:2222
+
+
+# 11 Grupowanie
+# [control]
+# ubuntu-c ansible_connection=local
+#
+# [centos]
+# centos1 ansible_user=root ansible_port=2222
+# centos[2:3] ansible_user=root
+# 
+# [ubuntu]
+# ubuntu[1:3] ansible_become=true ansible_become_pass=password
+
+# 12 Dziedziczenie w calej grupie jakiejs zmiennej
+#
+# [control]
+# ubuntu-c ansible_connection=local
+# 
+# [centos]
+# centos1 ansible_port=2222
+# centos[2:3]
+# 
+# [centos:vars]
+# ansible_user=root
+# 
+# [ubuntu]
+# ubuntu[1:3]
+# 
+# [ubuntu:vars]
+# ansible_become=true
+# ansible_become_pass=password
+
+# 11 Grupowanie grup z nazwa linux
+#
+# [control]
+# ubuntu-c ansible_connection=local
+# 
+# [centos]
+# centos1 ansible_port=2222
+# centos[2:3]
+#
+# [centos:vars]
+# ansible_user=root
+# 
+# [ubuntu]
+# ubuntu[1:3]
+# 
+# [ubuntu:vars]
+# ansible_become=true
+# ansible_become_pass=password
+#
+# [linux:children]
+# centos
+# ubuntu
+
+
