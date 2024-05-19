@@ -25,7 +25,7 @@ resource "aws_security_group" "web_sg" {
 resource "aws_instance" "instance" {
   count         = var.ec2_count
   ami           = var.ami_us_east_2
-  instance_type = var.instance_type
+  instance_type = var.ec2_instance_type
   tags          = local.common_tags
   subnet_id     = var.public_subnet_ids[0]
   

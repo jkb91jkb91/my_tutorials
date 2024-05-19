@@ -19,5 +19,5 @@
 ## terraform apply -var="ec2_instance_type=t3.large"
 
 #4)WITH PASSED BOTH PARAMETERS
-## terraform apply -var="ec2_instance_type=t2.large" -var="ec2_instance_type=t2.small"
+## terraform apply -var="ec2_count=2" -var="ec2_instance_type=t2.small"
  

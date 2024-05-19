@@ -1,19 +1,20 @@
 variable "ec2_count" {
-  description = "Liczba instancji EC2 do utworzenia"
+  description = "EC2 INSTANCE COUNT"
   type        = number
   default     = 1
 }
+
+variable "ec2_instance_type" {
+  description = "INSTANCE TYPE"
+  type        = string
+  default     = "t2.micro"
+}
+
 
 variable "ami_us_east_2" {
     description = "ami version"
     type        = string
     default     = "ami-09040d770ffe2224f"
-}
-
-variable "instance_type" {
-    description = "instance type "
-    type        = string
-    default     = "t2.micro"
 }
 
 variable "public_subnet_ids" {
