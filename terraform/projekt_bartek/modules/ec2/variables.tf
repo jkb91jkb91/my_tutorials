@@ -7,14 +7,14 @@ variable "ec2_count" {
 variable "ec2_instance_type" {
   description = "INSTANCE TYPE"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
 
 
 variable "ami_us_east_2" {
     description = "ami version"
     type        = string
-    default     = "ami-09040d770ffe2224f"
+    default     = "ami-0705384c0b33c194c"
 }
 
 variable "public_subnet_ids" {

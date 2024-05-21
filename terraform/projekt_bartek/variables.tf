@@ -7,5 +7,5 @@ variable "ec2_count" {
 variable "ec2_instance_type" {
   description = "EC2 INSTANCE TYPE"
   type        = string
-  default     = "t2.micro"
+  default     = "t3.micro"
 }
