@@ -2,7 +2,7 @@
 
 locals {
   common_tags = {
-    Owner_1 = "kuba"
+    Name = "Master"
     Owner_2 = "bartek"
     Project = "devops_project_aws"
   }
@@ -29,9 +29,6 @@ resource "aws_instance" "instance" {
   tags          = local.common_tags
   subnet_id     = var.public_subnet_ids[0]
   
-  tags = {
-    Name = "Master Node"
-  }
   vpc_security_group_ids = [aws_security_group.web_sg.id]
 }
 
