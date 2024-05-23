@@ -23,3 +23,14 @@ output "sg_id" {
   description = "Security Group ID"
   value       = module.ec2_master.sg_id
 }
+
+# output "data" {
+#   description = "data"
+#   value       = module.s3.s3_object_body
+# }
+
+
+# output "buckets" {
+#   description = "data"
+#   value       = module.s3.out
+# }
