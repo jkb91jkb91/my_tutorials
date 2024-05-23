@@ -15,7 +15,9 @@ resource "aws_instance" "instance" {
   tags          = local.common_tags
   subnet_id     = var.public_subnet_ids[0]
   
-  #key_name               = "TF_key"
+   tags = {
+    Name = "Worker Node"
+  }
   vpc_security_group_ids = [var.sg_id]
 }
 
