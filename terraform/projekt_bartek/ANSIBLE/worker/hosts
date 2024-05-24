@@ -1,0 +1,2 @@
+[web_servers]
+EC2_WORKER ansible_host=16.16.205.100 ansible_user=ubuntu
