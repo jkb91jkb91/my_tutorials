@@ -73,7 +73,7 @@ resource "aws_instance" "instance" {
     command = <<EOT
       cd ANSIBLE/master
       sed -i 's/IP/${self.public_ip}/g' hosts
-      ansible-playbook -i hosts --private-key ${local_file.private_key.filename} --ssh-extra-args="-o StrictHostKeyChecking=no" provisioning.yaml -vvv
+      ansible-playbook -i hosts --private-key ${local_file.private_key.filename} --ssh-extra-args="-o StrictHostKeyChecking=no" provisioning.yaml
     EOT
   }
 }
