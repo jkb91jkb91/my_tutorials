@@ -132,10 +132,9 @@ resource "aws_instance" "instance" {
   provisioner "local-exec" {
     command = <<EOT
       cd ANSIBLE/master
-      cat <<EOF > hosts
-          [web_servers]
-          EC2_MASTER ansible_host=IP ansible_user=ubuntu
-          EOF
+      echo '[web_servers]' > hosts
+      echo 'EC2_MASTER ansible_host=IP ansible_user=ubuntu' >> hosts
+      cat hosts   
       sed -i 's/IP/${self.public_ip}/g' hosts
       ansible-playbook -i hosts --private-key ${local_file.private_key.filename} --ssh-extra-args="-o StrictHostKeyChecking=no" provisioning.yaml
     EOT
