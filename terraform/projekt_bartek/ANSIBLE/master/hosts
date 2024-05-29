@@ -1,2 +1,2 @@
 [web_servers]
-EC2_MASTER ansible_host=IP ansible_user=ubuntu
+EC2_MASTER ansible_host=51.20.83.120 ansible_user=ubuntu

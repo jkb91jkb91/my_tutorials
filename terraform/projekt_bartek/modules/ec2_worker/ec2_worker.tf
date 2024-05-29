@@ -6,33 +6,61 @@ locals {
     Owner_2 = "bartek"
     Project = "devops_project_aws"
   }
+  ssh_user  = "ubuntu"
+  key_name  = "jenkins"
+}
+
+# Pobranie istniejącej grupy zabezpieczeń na podstawie nazwy
+data "aws_security_group" "existing_sg" {
+  filter {
+    name   = "group-name"
+    values= ["ssh"]
+  }
+}
+
+resource "tls_private_key" "example" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+resource "aws_key_pair" "worker" {
+  key_name   = "worker-key"
+  public_key = tls_private_key.example.public_key_openssh
+}
+
+resource "local_file" "private_key" {
+  content  = tls_private_key.example.private_key_pem
+  filename = "/tmp/worker-key.pem"
+  file_permission = "0400"
 }
 
 resource "aws_instance" "instance" {
-  count         = var.ec2_count
-  ami           = var.ami_us_east_2
-  instance_type = var.ec2_instance_type
-  tags          = local.common_tags
-  subnet_id     = var.public_subnet_ids[0]
+  #count                  = var.ec2_count
+  ami                    = var.ami_us_east_2
+  instance_type          = var.ec2_instance_type
+  tags                   = local.common_tags
+  subnet_id              = var.public_subnet_ids[0]
+  vpc_security_group_ids = [data.aws_security_group.existing_sg.id]
+  key_name               = aws_key_pair.worker.key_name
+  associate_public_ip_address = true
   
-  vpc_security_group_ids = [var.sg_id]
+  provisioner "remote-exec" {
+    inline = [
+      "sudo echo 'Wait for ssh creation'"
+    ]
+    connection {
+      type        = "ssh"
+      user        = local.ssh_user
+      private_key = tls_private_key.example.private_key_pem
+      host        = self.public_ip
+    }
+  }
+  provisioner "local-exec" {
+    command = <<EOT
+      cd ANSIBLE/worker
+      echo -e "[web_servers]\nEC2_WORKER ansible_host=IP ansible_user=ubuntu" > hosts
+      sed -i 's/IP/${self.public_ip}/g' hosts
+      ansible-playbook -i hosts --private-key ${local_file.private_key.filename} --ssh-extra-args="-o StrictHostKeyChecking=no" provisioning.yaml
+    EOT
+  }
 }
-
-# resource "local_file" "TF_key" {
-#   content    = tls_private_key.rsa.private_key_pem
-#   filename   = "tfkey"
-#   provisioner "local-exec" {
-#     command  = "chmod 400 tfkey"
-#   }
-# }
-
-# resource "aws_key_pair" "TF_key" {
-#   key_name   = "TF_key"
-#   public_key = tls_private_key.rsa.public_key_openssh
-# }
-
-# # RSA key of size 4096 bits
-# resource "tls_private_key" "rsa" {
-#   algorithm = "RSA"
-#   rsa_bits  = 4096
-# }

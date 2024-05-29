@@ -142,11 +142,6 @@
           - nfs-common
         state: present
 
-    # - name: Check if /var/run/cri-dockerd.sock is active
-    #   shell: ss -lx | grep 'dockerd'
-    #   register: socket_check
-    #   ignore_errors: true
-
     - name: Initialize Kubernetes control plane with dockerd
       shell: sudo kubeadm init --cri-socket unix:///var/run/cri-dockerd.sock
       #when: socket_check.rc != 0
@@ -183,6 +178,28 @@
       service:
         name: kubelet
         enabled: yes
- 
+
+    - name: Download .kube/config
+      fetch:
+        src: /home/ubuntu/.kube/config
+        dest: /tmp/config
+        flat: yes
+
+    - name: Generate kubeadm join command
+      command: sudo kubeadm token create --print-join-command
+      register: join_command
+
+    - name: Save join command to file
+      copy:
+        content: "{{ join_command.stdout }}"
+        dest: /tmp/token
+    
+    - name: Download token
+      fetch:
+        src: /tmp/token
+        dest: /tmp/token
+        flat: yes
+
+
  
    
