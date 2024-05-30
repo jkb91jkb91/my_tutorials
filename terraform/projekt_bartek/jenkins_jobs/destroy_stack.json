@@ -1,0 +1,31 @@
+pipeline {
+	agent any
+	stages {
+	   stage('Fetch code') {
+            steps {
+                sshagent(['SSH_private_key']) {
+				    git branch: 'main', url: 'git@github.com:jkb91jkb91/my_tutorials.git'
+                }
+            }
+	    }
+        stage('Delete master and worker nodes') {
+            steps {
+                withCredentials([[$class: 'AmazonWebServicesCredentialsBinding', credentialsId: 'awscredentials']]) {
+                    script {
+                        sh '''
+                        cd terraform/projekt_bartek
+                        terraform init
+                        #terraform destroy -target=module.ec2_worker -auto-approve
+                        terraform destroy -target=module.ec2_worker -auto-approve
+                        terraform destroy -target=module.vpc -auto-approve
+                        
+                        #REMOVE DEPENDENCIES CREATED IN JOB THAT CREATES WHOLE STACK
+                        rm /tmp/token
+                        rm /tmp/config
+                        '''
+                    }
+                }
+           }
+     	}
+     }
+}

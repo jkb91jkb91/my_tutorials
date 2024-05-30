@@ -145,7 +145,6 @@
 
     - name: Initialize Kubernetes control plane with dockerd
       shell: sudo kubeadm init --cri-socket unix:///var/run/cri-dockerd.sock
-      #when: socket_check.rc != 0
 
     - name: Ensure .kube directory exists
       file:

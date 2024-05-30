@@ -161,36 +161,27 @@
 
     - name: Connect NODES
       shell: sudo $(cat /home/ubuntu/token | head -n1)
- 
 
+    - name: Download HELM
+      get_url:
+        url: https://get.helm.sh/helm-v3.14.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp/helm-v3.14.0-rc.1-linux-amd64.tar.gz
+        mode: '0644'
 
-    # TO DO
-    # 
+    - name: Extract HELM
+      command: tar -xzvf /tmp/helm-v3.14.0-rc.1-linux-amd64.tar.gz -C /tmp/
 
-
-    # - name: Ensure .kube directory exists
-    #   file:
-    #     path: "/home/ubuntu/.kube"
-    #     state: directory
-    #     mode: '0755'
-
-    # - name: Copy admin.conf to .kube/config
-    #   command: cp -i /etc/kubernetes/admin.conf /home/ubuntu/.kube/config
-    #   args:
-    #     creates: "/home/ubuntu/.kube/config"
-
-    # - name: Ensure ownership of .kube/config
-    #   shell: chown ubuntu:ubuntu /home/ubuntu/.kube/config
+    - name: Move HELM binary to /usr/local/bin
+      command: mv /tmp/linux-amd64/helm /usr/local/bin/helm
+      args:
+        creates: /usr/local/bin/helm
     
-    # - name: Restart kubelet service
-    #   service:
-    #     name: kubelet
-    #     state: restarted
-
-    # - name: Enable kubelet service
-    #   service:
-    #     name: kubelet
-    #     enabled: yes
+    - name: Ensure /usr/local/bin/helm is executable
+      file:
+        path: /usr/local/bin/helm
+        mode: '0755'
+        owner: root
+        group: root
  
  
    
