@@ -27,6 +27,7 @@
         path: /etc/apt/keyrings
         state: directory
         mode: '0755'
+
     - name: Download Docker GPG key
       get_url:
         url: https://download.docker.com/linux/ubuntu/gpg
@@ -199,6 +200,28 @@
         src: /tmp/token
         dest: /tmp/token
         flat: yes
+
+    - name: Download HELM
+      get_url:
+        url: https://get.helm.sh/helm-v3.14.0-rc.1-linux-amd64.tar.gz
+        dest: /tmp/helm-v3.14.0-rc.1-linux-amd64.tar.gz
+        mode: '0644'
+
+    - name: Extract HELM
+      command: tar -xzvf /tmp/helm-v3.14.0-rc.1-linux-amd64.tar.gz -C /tmp/
+
+    - name: Move HELM binary to /usr/local/bin
+      command: mv /tmp/linux-amd64/helm /usr/local/bin/helm
+      args:
+        creates: /usr/local/bin/helm
+    
+    - name: Ensure /usr/local/bin/helm is executable
+      file:
+        path: /usr/local/bin/helm
+        mode: '0755'
+        owner: root
+        group: root
+    
 
 
  
