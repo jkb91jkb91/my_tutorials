@@ -21,7 +21,7 @@ Run Jenkins with jcasc
 ## DETAILS  
 Dockerfile requires: 
 
-Dockerfile
+Dockerfile dependencies
 |--------------------|  
 | plugins/plugins.txt                  |   
 | config/check_if_dsl_installed.groovy |  
