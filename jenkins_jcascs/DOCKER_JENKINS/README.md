@@ -36,7 +36,9 @@ Folder: ALTERNATIVE_SCRIPT/init.groovy.d # it is alternative method not used in 
 
 <!-- CONFIGS -->
 ## Configs description  
-
+In config folder there are 2 required scripts  
+-casc.yaml  
+-check_if_dsl_installed.groovy # required to seed JENKINS JOBS  
 
 <!-- Plugins -->
 ## Plugins description  
@@ -47,3 +49,6 @@ plugins.txt
 | workflow-aggregator|   
 | git                |  
 | job-dsl            |  
+
+You have to know that job-dsl is required to seed jenkins JOBS
+Installation of this plugin is checked by script configs/check_if_dsl_installed.groovy 
