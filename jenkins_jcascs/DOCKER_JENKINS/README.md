@@ -19,12 +19,17 @@ Run Jenkins with jcasc
 
 <!-- DETAILS -->
 ## DETAILS  
-Dockerfile requires:  
-plugins/plugins.txt  
-config/check_if_dsl_installed.groovy  
-config/casc.yaml  
-dsl_jobs/freestyle_JOB.groovy  
-dsl_jobs/pipeline_JOB_A.groovy  
+Dockerfile requires: 
+
+Dockerfile
+|--------------------|  
+| plugins/plugins.txt                  |   
+| config/check_if_dsl_installed.groovy |  
+| config/casc.yaml                     |
+| dsl_jobs/freestyle_JOB.groovy        |
+| dsl_jobs/pipeline_JOB_A.groovy       |
+
+
 
 Folder: ALTERNATIVE_SCRIPT/init.groovy.d # it is alternative method not used in this tutorial  
 
