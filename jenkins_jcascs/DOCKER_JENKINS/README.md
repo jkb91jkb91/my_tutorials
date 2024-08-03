@@ -30,8 +30,7 @@ Folder: ALTERNATIVE_SCRIPT/init.groovy.d # it is alternative method not used in 
 
 
 
-
-| plugins.txt        | 
+Content of plugins.txt:
 |--------------------|  
 | workflow-aggregator|   
 | git                |  
