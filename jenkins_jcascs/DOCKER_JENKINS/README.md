@@ -18,7 +18,7 @@ Run Jenkins with jcasc
 
 
 <!-- DETAILS -->
-## DETAILS  
+## Dockerfile description  
 Dockerfile requires: 
 
 Dockerfile dependencies
