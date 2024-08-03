@@ -17,7 +17,7 @@ Run Jenkins with jcasc
 | RUN               | docker run -p 8080:8080 -p 50000:50000 -d jenkins:latest                                      | 
 
 
-<!-- DETAILS -->
+<!-- DOCKERFILE -->
 ## Dockerfile description  
 Dockerfile requires: 
 
@@ -34,9 +34,12 @@ Dockerfile dependencies
 Folder: ALTERNATIVE_SCRIPT/init.groovy.d # it is alternative method not used in this tutorial  
 
 
+<!-- CONFIGS -->
+## Configs description  
 
 
-
+<!-- Plugins -->
+## Plugins description  
 Content of plugins.txt:
 
 plugins.txt
