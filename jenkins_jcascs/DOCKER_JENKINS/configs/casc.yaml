@@ -1,13 +1,19 @@
 jenkins:
-  systemMessage: "Welcome to Jenkins configured with JCasC!"
-  numExecutors: 1
-  authorizationStrategy:
-    loggedInUsersCanDoAnything:
-      allowAnonymousRead: false
   securityRealm:
     local:
       allowsSignup: false
       users:
         - id: "kuba"
           password: "kuba"
-  disableRememberMe: true
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          description: "TERRAFORM_CLOUD_TOKEN"
+          id: "TERRAFORM_CLOUD_TOKEN"
+          scope: GLOBAL
+          secret: "{AQAAABAAAAAQ2wgdZxOyWxSIsEGgdxW+uVje3oed/A//QTYijQinDnI=}"
