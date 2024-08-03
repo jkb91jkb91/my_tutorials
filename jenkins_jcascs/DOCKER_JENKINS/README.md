@@ -31,7 +31,7 @@ Dockerfile dependencies
 
 
 
-Folder: ALTERNATIVE_SCRIPT/init.groovy.d # it is alternative method not used in this tutorial  
+
 
 
 <!-- CONFIGS -->
@@ -52,3 +52,10 @@ plugins.txt
 
 You have to know that job-dsl is required to seed jenkins JOBS
 Installation of this plugin is checked by script configs/check_if_dsl_installed.groovy 
+
+
+
+
+<!-- Others -->
+## Others  
+Folder: ALTERNATIVE_SCRIPT/init.groovy.d # it is alternative method not used in this tutorial    
