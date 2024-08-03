@@ -56,6 +56,16 @@ In folder dsl_jobs we have two examples that will be uploaded to JENKINS instanc
 -pipeline job # based on json file from repository
 -freestyle job # fully written 
 
+<!-- DOCKERFILE -->
+## DOCKERFILE
+Take a look in Dockerfile that we use path:  
+/usr/share/jenkins/ref  
+not /var/lib/jenkins  
+
+Files from /usr/share/jenkins/ref will be copied to /var/lib/jenkins  
+In normal VM installation you can use /var/lib/jenkins  
+
+
 
 <!-- Others -->
 ## Others  
