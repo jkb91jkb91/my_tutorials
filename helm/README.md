@@ -28,9 +28,9 @@ helm install nginx03 --values values_nginx.yaml ./nginx/
 helm get values HELM_NAME_RELEASE -a
 
 # Instalacja wlasnego charta
-# Po wszystkim usun co niepotrzebne
-# Do folderu charts pobierz interesujacy cie chart np jenkinsa
-helm create my_jenkins_chart
+Po wszystkim usun co niepotrzebne  
+Do folderu charts pobierz interesujacy cie chart np jenkinsa  
+helm create my_jenkins_chart  
 
 
 # Testowanie 
