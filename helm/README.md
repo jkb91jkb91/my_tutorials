@@ -1,3 +1,5 @@
+# Dokument opisujacy stawianie jenkinsa z helmem
+https://docs.google.com/document/d/1LEd5tayTqqe-6_9hQ9WD_OxJh-ChLqvM6jmcxXbIKOc/edit
 
 helm install NAME_OF_INSTALLATION REPO_NAME # helm install my-nginx bitnami/nginx
 helm install my-installation ./jenkins
