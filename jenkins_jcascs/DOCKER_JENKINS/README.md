@@ -52,9 +52,10 @@ Installation of this plugin is checked by script configs/check_if_dsl_installed.
 
 <!-- DSL JOBS -->
 ## DSL JOBS
-In folder dsl_jobs we have two examples that will be uploaded to JENKINS instance
--pipeline job # based on json file from repository
--freestyle job # fully written 
+In folder dsl_jobs we have three different examples that will be uploaded to JENKINS instance
+-pipeline job from repo # based on json file from repository
+-freestyle job # fully written
+-pipeline_job_from_code 
 
 <!-- DOCKERFILE -->
 ## DOCKERFILE
