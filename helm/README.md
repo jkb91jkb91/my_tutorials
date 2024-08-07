@@ -9,6 +9,11 @@ helm search repo --versions nginx
 
 helm search repo --versions "nginx"  
 
+
+# Helm get notes
+helm get notes releasename
+
+
 # Instalacja konkretnej wersji
 helm install nginx02 --version 18.1.3 -n default  
 
@@ -33,5 +38,9 @@ Do folderu charts pobierz interesujacy cie chart np jenkinsa
 helm create my_jenkins_chart  
 
 
-# Testowanie 
+# Testowanie template lub --dry-run
 helm template . -f values.yaml
+helm install REALASENAME FILES --dry-run
+
+# Szybki update jakiejs wartosci za pomoca set
+helm upgrade graf --set adminUser=bartek .
