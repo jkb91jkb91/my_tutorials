@@ -1,3 +1,14 @@
+# TIP1 po zrobieniu helm create usuwaj /templates bo blad wyskoczy
+# w value.yaml na najnwyzsym poziomie musi byc nazwa folderu charts/nginx to wtedy bedziesz mial nginx
+# jak sprawdzic czy pody flux dzialaja >> kubectl get pods -n flux-system
+# TIP 4 Jak sprawdzic czy FLUX widzi REPO >> kubectl get gitrepositories -A
+# TIP 5 jesli helm file wstawiasz np do staging to musisz miec juz utworzony ten namespace
+# TIP 6 pamietaj ze Kustomization tez musi dzialac >> kubectl get kustomizations -A
+# JAK TESTOWAC FLUXA
+# na poczatku odpalasz values.yaml na najwyzszym poziomie helm template . -f values.yaml
+# nastepnie wrzucasz wartosci do HelmRelease i testujesz to tak >>> k apply -f ADRES_RELEASEA , to i tak zostanie przez Fluxa wyjebane po 10 minutach czy ilus tam
+
+
 # Dokument opisujacy stawianie jenkinsa z helmem
 https://docs.google.com/document/d/1LEd5tayTqqe-6_9hQ9WD_OxJh-ChLqvM6jmcxXbIKOc/edit
 
