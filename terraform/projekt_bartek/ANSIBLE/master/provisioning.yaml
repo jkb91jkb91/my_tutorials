@@ -160,14 +160,11 @@
     - name: Ensure ownership of .kube/config
       shell: chown ubuntu:ubuntu /home/ubuntu/.kube/config
 
-    - name: Download Calico manifest
-      get_url:
-        url: https://docs.projectcalico.org/manifests/calico.yaml
-        dest: /tmp/calico.yaml
-        mode: '0644'
-
-    - name: Apply Calico
-      command: kubectl apply -f /tmp/calico.yaml --kubeconfig=/home/ubuntu/.kube/config
+    - name: Apply Calico YAML
+      ansible.builtin.command:
+        cmd: kubectl apply -f https://raw.githubusercontent.com/projectcalico/calico/v3.27.2/manifests/calico.yaml
+      become: yes
+      become_user: ubuntu
 
     - name: Restart kubelet service
       service:
