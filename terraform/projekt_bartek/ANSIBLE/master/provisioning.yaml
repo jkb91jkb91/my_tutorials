@@ -159,15 +159,15 @@
 
     - name: Ensure ownership of .kube/config
       shell: chown ubuntu:ubuntu /home/ubuntu/.kube/config
-    
-    - name: Download weave-daemonset
+
+    - name: Download Calico manifest
       get_url:
-        url: https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml
-        dest: /tmp/weave-daemonset-k8s.yaml
+        url: https://docs.projectcalico.org/manifests/calico.yaml
+        dest: /tmp/calico.yaml
         mode: '0644'
 
-    - name: Apply wave
-      command: kubectl apply -f /tmp/weave-daemonset-k8s.yaml --kubeconfig=/home/ubuntu/.kube/config
+    - name: Apply Calico
+      command: kubectl apply -f /tmp/calico.yaml --kubeconfig=/home/ubuntu/.kube/config
 
     - name: Restart kubelet service
       service:
