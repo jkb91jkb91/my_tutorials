@@ -1,5 +1,5 @@
 
-#PREREQUSUITE
+# PREREQUSUITE
 1) Create artifactory on GCLOUD > mysimpleappdocker
 2) Build Image > docker build -t simple-app-green .
 3) Tag IMAGE   >  docker tag simple-app  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v1
