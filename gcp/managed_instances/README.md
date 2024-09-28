@@ -1,6 +1,6 @@
 
 #PREREQUSUITE
-1) Create artifactory on GCLOUD
+1) Create artifactory on GCLOUD > mysimpleappdocker
 2) Build Image > docker build -t simple-app-green .
 3) Tag IMAGE   >  docker tag simple-app  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v1
 4) Push IMAGE > docker push  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v2
@@ -37,7 +37,7 @@ docker tag simple-app  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdock
 docker push  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v2
 
 
-#NEW TEMPLATE
+# NEW TEMPLATE
 gcloud compute instance-templates create my-template-v2 \
     --machine-type=e2-micro \
     --metadata=startup-script='#!/bin/bash
@@ -50,7 +50,7 @@ gcloud compute instance-templates create my-template-v2 \
     --boot-disk-size=10GB \
     --boot-disk-type=pd-standard
 
-#ROLLING UPDATE
+# ROLLING UPDATE
 gcloud compute instance-groups managed rolling-action start-update NAME \
     --version=template=my-template-v2 \
     --zone=us-central1-c
