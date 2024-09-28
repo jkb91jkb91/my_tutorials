@@ -1,9 +1,18 @@
 
 # PREREQUSUITE
-1) Create artifactory on GCLOUD > mysimpleappdocker
-2) Build Image > docker build -t simple-app-green .
-3) Tag IMAGE   >  docker tag simple-app  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v1
-4) Push IMAGE > docker push  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v2
+1) Create artifactory on GCLOUD mysimpleappdocker >>
+2) Build Image
+```
+ docker build -t simple-app-green .
+```
+3) Tag IMAGE
+```
+docker tag simple-app  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v1
+```
+4) Push IMAGE
+```
+docker push  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app:v2
+```
 
 
 # Create TEMPLATE
