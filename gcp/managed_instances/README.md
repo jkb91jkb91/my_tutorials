@@ -7,7 +7,8 @@
 
 
 # Create TEMPLATE
-```gcloud compute instance-templates create my-template-v1 \
+```
+gcloud compute instance-templates create my-template-v1 \
     --machine-type=e2-micro \
     --metadata=startup-script='#!/bin/bash
     sudo apt-get update
@@ -43,7 +44,8 @@ docker push  us-central1-docker.pkg.dev/stronki-429707/mysimpleappdockerrepo/app
 ```
 
 # NEW TEMPLATE
-```gcloud compute instance-templates create my-template-v2 \
+```
+gcloud compute instance-templates create my-template-v2 \
     --machine-type=e2-micro \
     --metadata=startup-script='#!/bin/bash
     sudo apt-get update
