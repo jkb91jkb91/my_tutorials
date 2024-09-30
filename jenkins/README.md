@@ -20,6 +20,23 @@
 16. [Stage>When(Part2)-BRANCH](#Stage>When(Part2)-BRANCH)
 17. [Stage>When(Part2)-BuildingTag&Tag](#Stage>When(Part2)-BuildingTag&Tag)
 18. [Stage>When(Part2)-CHANGELOG](#Stage>When(Part2)-CHANGELOG)
+19. [Stage>When(Part2)-ChangeRequest](#Stage>When(Part2)-ChangeRequest)
+20. [Stage>When(Part2)-ChangeSet](#Stage>When(Part2)-ChangeSet)
+21. [Stage>When(Part3)-BeforeAgent](#Stage>When(Part3)-BeforeAgent)
+22. [Stage>Parallel/FailFast](#Stage>Parallel/FailFast)
+23. [Stage>Input](#Stage>Input)
+24. [Stage>Post](#Stage>Post)
+25. [Options>BuildDiscarder](#Options>BuildDiscarder)
+26. [Options>DisableConcurrentBuilds](#Options>DisableConcurrentBuilds)
+27. [Options>OverrideIndexTriggers](#Options>OverrideIndexTriggers)
+28. [Options>SkipStagesAfterUnstable](#Options>SkipStagesAfterUnstable)
+29. [Options>CheckoutToSubdirectory](#Options>CheckoutToSubdirectory)
+30. [Options>NewContainerPerStage](#Options>NewContainerPerStage)
+31. [Parameters](#Parameters)
+32. [Pipeline-Triggers>Cron](#Pipeline-Triggers>Cron)
+33. [Pipeline-Triggers>PollSCM](#Pipeline-Triggers>PollSCM)
+34. [Pipeline-Triggers>Upstream](#Pipeline-Triggers>Upstream)
+35. [Pipeline-Agent>Docker](#Pipeline-Agent>Docker)
 
 
 
