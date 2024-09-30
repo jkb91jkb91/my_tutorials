@@ -4,12 +4,9 @@
 
 1. [Get Output of Shell Script](#Get-Output-of-Shell-Script)
 2. [Creating-Env-Variable](#Creating-Env-Variable)
-3. [Użycie](#użycie)
-4. [Konfiguracja](#konfiguracja)
-   - [Opcja 1](#opcja-1)
-   - [Opcja 2](#opcja-2)
-5. [FAQ](#faq)
-6. [Kontakt](#kontakt)
+3. [Triggering and passing params between jobs](#Triggering-and-passing-params-between-jobs)
+4. [Lockable Resources](#Lockable-Resources)
+5. [Extended Choice Parameter](#Extended-Choice-Paramter)
 
 
 
@@ -76,5 +73,11 @@ pipeline {
         }
     }
 }
+
+```
+
+# Triggering and passing params between jobs
+
+```
 
 ```
