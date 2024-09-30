@@ -6,7 +6,17 @@
 2. [Creating-Env-Variable](#Creating-Env-Variable)
 3. [Triggering and passing params between jobs](#Triggering-and-passing-params-between-jobs)
 4. [Lockable Resources](#Lockable-Resources)
-5. [Extended Choice Parameter](#Extended-Choice-Paramter)
+5. [Agent](#Agent)
+6. [Stage](#Stage)
+7. [Tools](#Tools)
+8. [](#)
+9. [](#)
+10. [](#)
+11. [](#)
+12. [](#)
+
+
+
 
 
 
