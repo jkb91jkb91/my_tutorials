@@ -1,0 +1,24 @@
+import jenkins.model.*
+import hudson.model.*
+
+def jenkinsInstance = Jenkins.getInstance()
+def jobName = 'SimpleJob'
+
+// Sprawdź, czy zadanie już istnieje
+def job = jenkinsInstance.getItem(jobName)
+if (job == null) {
+    // Jeśli nie istnieje, utwórz nowe zadanie
+    def project = jenkinsInstance.createProject(FreeStyleProject, jobName)
+    
+    // Skonfiguruj zadanie z prostym krokiem
+    project.with {
+        description = 'This is a simple job that prints Hello, World!'
+        buildersList.add(new hudson.tasks.Shell('echo Hello, World!'))
+    }
+    project.save()
+    println("Zadanie ${jobName} zostało utworzone.")
+} else {
+    println("Zadanie ${jobName} już istnieje.")
+}
+
+jenkinsInstance.reload()
