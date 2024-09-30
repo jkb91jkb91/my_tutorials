@@ -2,7 +2,7 @@
 
 
 
-1. [Get Output of Shell Script](#Get Output of Shell Script)
+1. [Get Output of Shell Script](#Get-Output-of-Shell-Script)
 2. [Instalacja](#instalacja)
 3. [Użycie](#użycie)
 4. [Konfiguracja](#konfiguracja)
