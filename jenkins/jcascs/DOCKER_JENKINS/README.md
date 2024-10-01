@@ -85,8 +85,29 @@ ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jcasc.yaml
 <!-- CONFIGS -->
 ## Configs description  
 In config folder there are 2 required scripts  
--casc.yaml  
--check_if_dsl_installed.groovy # required to seed JENKINS JOBS  
+-casc.yaml                     #Jenkins configuration as file
+-check_if_dsl_installed.groovy #Required to seed JENKINS JOBS  
+```
+jenkins:
+  securityRealm:
+    local:
+      allowsSignup: false
+      users:
+        - id: "kuba"
+          password: "kuba"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          description: "TERRAFORM_CLOUD_TOKEN"
+          id: "TERRAFORM_CLOUD_TOKEN"
+          scope: GLOBAL
+          secret: "{AQAsdsdsdsda3fsdfsfsdfsdfsfsdfsdfsdf=}"
+```
 
 <!-- Plugins -->
 ## Plugins description  
