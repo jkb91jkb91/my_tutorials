@@ -1,4 +1,4 @@
-# JCASC jenkins on Docker  
+# JCASC(jenkins configuration as code) jenkins on Docker  
 
 
 <!-- Details -->  
@@ -7,7 +7,8 @@
 3. [Dockerfile description](#Dockerfile-description)
 4. [Config description](#Config-description)
 5. [Plugin description](#Plugin-description)
-6. [DSL JOBS](#DSL JOBS)
+6. [DSL JOBS](#DSL-JOBS)
+7. [Others](#Others)
 
 
 <!-- ABOUT THE PROJECT -->  
@@ -47,7 +48,39 @@ not /var/lib/jenkins
 
 Files from /usr/share/jenkins/ref will be copied to /var/lib/jenkins  
 In normal VM installation you can use /var/lib/jenkins  
+```
+FROM jenkins/jenkins:lts
 
+
+USER root
+RUN apt-get update
+RUN apt-get install -y groovy
+RUN apt-get clean
+
+#INSTALACJA WTYCZEK
+COPY plugins/plugins.txt /usr/share/jenkins/ref/plugins.txt
+RUN jenkins-plugin-cli --plugin-file /usr/share/jenkins/ref/plugins.txt
+
+#COPY DSL JOBS
+COPY dsl_jobs/ /var/lib/jenkins/dsl_jobs/
+
+# CHECK IF DSL INSTALLED
+COPY configs/check_if_dsl_installed.groovy /usr/share/jenkins/ref/init.groovy.d/check_if_dsl_installed.groovy
+
+
+# JCASC
+COPY configs/casc.yaml /var/jenkins_home/casc_configs/jcasc.yaml
+ENV CASC_JENKINS_CONFIG=/var/jenkins_home/casc_configs/jcasc.yaml
+
+
+#ALTERNATIVE WAY OF USING DOCKER AND JENKINS
+#RUN jenkins-plugin-cli --plugins configuration-as-code git job-dsl
+#Copy init script
+#COPY init.groovy.d /usr/share/jenkins/ref/init.groovy.d/
+#COPY JCASC
+#COPY casc.yaml /var/jenkins_home/casc_configs/jcasc.yaml
+#ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs/jcasc.yaml
+```
 
 <!-- CONFIGS -->
 ## Configs description  
