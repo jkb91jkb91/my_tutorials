@@ -1,5 +1,15 @@
 # JCASC jenkins on Docker  
 
+
+<!-- Details -->  
+1. [About The Project](#About-The-Project)
+2. [HOW TO RUN](#HOW-TO-RUN)
+3. [Dockerfile description](#Dockerfile-description)
+4. [Config description](#Config-description)
+5. [Plugin description](#Plugin-description)
+6. [DSL JOBS](#DSL JOBS)
+
+
 <!-- ABOUT THE PROJECT -->  
 ## About The Project   
 Run Jenkins with jcasc  
@@ -7,6 +17,8 @@ Run Jenkins with jcasc
 -automatically installed plugins   
 -automatically added pipeline JOB  
 -automatically added freestyle JOB  
+
+
 
 <!-- HOW TO RUN -->
 ## HOW TO RUN
@@ -28,6 +40,13 @@ Dockerfile dependencies
 | config/casc.yaml                     |
 | dsl_jobs/freestyle_JOB.groovy        |
 | dsl_jobs/pipeline_JOB_A.groovy       |
+
+Take a look in Dockerfile that we use path:  
+/usr/share/jenkins/ref  
+not /var/lib/jenkins  
+
+Files from /usr/share/jenkins/ref will be copied to /var/lib/jenkins  
+In normal VM installation you can use /var/lib/jenkins  
 
 
 <!-- CONFIGS -->
@@ -56,15 +75,6 @@ In folder dsl_jobs we have three different examples that will be uploaded to JEN
 -pipeline job from repo # based on json file from repository
 -freestyle job # fully written
 -pipeline_job_from_code 
-
-<!-- DOCKERFILE -->
-## DOCKERFILE
-Take a look in Dockerfile that we use path:  
-/usr/share/jenkins/ref  
-not /var/lib/jenkins  
-
-Files from /usr/share/jenkins/ref will be copied to /var/lib/jenkins  
-In normal VM installation you can use /var/lib/jenkins  
 
 
 
