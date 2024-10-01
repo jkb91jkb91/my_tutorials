@@ -24,7 +24,7 @@ COPY configs/check_if_dsl_installed.groovy /usr/share/jenkins/ref/init.groovy.d/
 
 # JCASC 
 COPY configs/casc.yaml /var/jenkins_home/casc_configs/jcasc.yaml
-ENV CASC_JENKINS_CONFIG /var/jenkins_home/casc_configs/jcasc.yaml
+ENV CASC_JENKINS_CONFIG=var/jenkins_home/casc_configs/jcasc.yaml
 
 
 #ALTERNATIVE WAY OF USING DOCKER AND JENKINS
