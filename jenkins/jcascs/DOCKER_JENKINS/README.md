@@ -13,8 +13,8 @@ Run Jenkins with jcasc
 
 | Step              | COMMAND                                                                                       |
 |-------------------|-----------------------------------------------------------------------------------------------|
-| BUILD             | docker build -t jenkins:latest .                                                              | 
-| RUN               | docker run -p 8080:8080 -p 50000:50000 -d jenkins:latest                                      | 
+| BUILD             | docker build -t customized_jenkins .                                                          | 
+| RUN               | docker run -p 8080:8080 -p 50000:50000 -d customized_jenkins                                  | 
 
 
 <!-- DOCKERFILE -->
