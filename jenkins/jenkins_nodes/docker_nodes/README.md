@@ -1,7 +1,7 @@
 # Firstly install jenkins based on this Dockerfile that set path to /jenkins
 
 ```
-FROM jenkins/jenkins:lts                                                                                                                                                                                                                                                                                                  ENV JENKINS_OPTS="--prefix=/jenkins"
+FROM jenkins/jenkins:lts                                                                                                      ENV JENKINS_OPTS="--prefix=/jenkins"
 ```
 # REQUIRED PLUGIN ON JENKINS >> Wihtout this plugin you wont connect AGENT
 Instance Identity
