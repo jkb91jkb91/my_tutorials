@@ -1,32 +1,6 @@
-# Ustaw w obrazie docker to, w innych miejscach np /etc/default/jenkins ta zmienna moze nie byc widoczna >>
-W DOCKER w OBRAZIE USTAW TO>> to da ci http://localhost:8080/jenkins << bedzie tutaj stal wiec potrzeba proxy jeszcze                                     ENV JENKINS_OPTS="--prefix=/jenkins"
+# ODPAL APACHE(httpd) w DOCKERZE DO HOSTOWANIA STRON
 
-
-
-# Create Network ALTERNATIVE
-#docker network create --subnet=172.20.0.0/16 --gateway=172.20.0.1 my_internal_network
-docker network create kuba_networ
-
-# Apache
-sudo docker run -d --name apache -v $(pwd)/httpd.conf:/usr/local/apache2/conf/httpd.conf -p 80:80 httpd:2.4
-
-
-# Jenkins
-
-Dockerfile.jenkins  
-```
-FROM jenkins/jenkins:lts  
-ENV JENKINS_OPTS="--prefix=/jenkins"
-```
-docker build -t customized_jenkins -f Dockerfile.jenkins .  
-
-docker run -d --name jenkins -p 8080:8080 customized_jenkins
-
-
-
-
-
-# Config >> /usr/local/apache2/conf/httpd.conf
+Config bedzie tutaj przekopiowany >> /usr/local/apache2/conf/httpd.conf
 ```
 ServerName localhost
 DocumentRoot "/usr/local/apache2/htdocs"
@@ -58,12 +32,45 @@ LoadModule access_compat_module modules/mod_access_compat.so
 </VirtualHost>
 ```
 
+```
+sudo docker run -d --name apache -v $(pwd)/httpd.conf:/usr/local/apache2/conf/httpd.conf -p 80:80 httpd:2.4
+```
 
-# Create network
-docker network connect kuba_network apache
-docker network connect kuba_network jenkins
+# JENKINS
+
+W obrazie jenkinsa ustawiamy to
+```
+ENV JENKINS_OPTS="--prefix=/jenkins"
+```
+czyli caly Dockerfile.jenkins
+```
+FROM jenkins/jenkins:lts  
+ENV JENKINS_OPTS="--prefix=/jenkins"
+```
+
+```
+docker build -t customized_jenkins -f Dockerfile.jenkins .  
+docker run -d --name jenkins -p 8080:8080 customized_jenkins
+```
+
+Ta zmienna jest takze tutaj /etc/default/jenkins ale jej zmiana moze nie dac rezultatu wiec lepiej ustawic to w obrazie  
+
+Dostaniemy dostep po prefixie /jenkins   
+http://localhost:8080/jenkins << bedzie tutaj stal wiec potrzeba proxy jeszcze                                     
 
 
-# Check if both are in network
-docker network inspect kuba_network
+# Create Network ALTERNATIVE  
+#docker network create --subnet=172.20.0.0/16 --gateway=172.20.0.1 my_internal_network  
+docker network create kuba_networ  
+
+
+
+
+# Create network  
+docker network connect kuba_network apache  
+docker network connect kuba_network jenkins  
+
+
+# Check if both are in network  
+docker network inspect kuba_network  
 
