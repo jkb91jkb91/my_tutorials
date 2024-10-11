@@ -12,11 +12,13 @@ sudo docker run -d --name apache -v $(pwd)/httpd.conf:/usr/local/apache2/conf/ht
 
 
 # Jenkins
-docker build -t customized_jenkins -f Dockerfile.jenkins .
+
+Dockerfile.jenkins  
 ``
 FROM jenkins/jenkins:lts
 ENV JENKINS_OPTS="--prefix=/jenkins"
-``
+``  
+docker build -t customized_jenkins -f Dockerfile.jenkins .  
 
 docker run -d --name jenkins -p 8080:8080 customized_jenkins
 
