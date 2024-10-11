@@ -1,34 +1,33 @@
-#ReverseProxy for Jenkins for 80 and 443
+# ReverseProxy for Jenkins for 80 and 443
 
+# Jenkins
+Install Jenkins from common instruction  
 
-Przy stawanianiu na service zmiany w /etc/default/jenkins moga nie byc widoczne
+# Prefix set 
+PREFIX
+DOCKER           >> ENV JENKINS_OPTS="--prefix=/jenkins"
+SERVER_JENKINS   >> /lib/systemd/system/jenkins.service       <<<<<<<<<<<<<<<
+SERVERR_JENKINS  >> /etc/default/jenkins #Ustawienie tutaj nie dziala  
 
-i mozliwe ze tutaj trzeba bd to ustawic
-/lib/systemd/system/jenkins.service
+Ponizsze zmiany wystarcza aby jenkins byl dostepny pod prefiksem /jenkins  
+Pod tymi adresami http://IP:8080 ale tez z http://IP:8080/jenkins  
 
-W DOCKER w OBRAZIE USTAW TO>> to da ci http://localhost:8080/jenkins << bedzie tutaj stal wiec potrzeba proxy jeszcze
-ENV JENKINS_OPTS="--prefix=/jenkins"
-
-
-# This is common installation of jenkins on server
-Find instruction
-
-# Install Apache and modules
-sudo a2enmod proxy
-sudo a2enmod proxy_http
-sudo a2enmod ssl
-sudo a2enmod rewrite
-sudo a2enmod headers
-
-# Ustaw tutaj > /lib/systemd/system/jenkins.service
-
-# Ponizsze zmiany wystarcza aby jenkins byl dostepny nie tylko z http://IP:8080 ale tez z http://IP:8080/jenkins
+Set here >> /lib/systemd/system/jenkins.service  
+```
 Environment="JENKINS_PREFIX=/jenkins"
 Environment="JENKINS_OPTS=--prefix=/jenkins"
+```
+
+# Install Apache and modules
+sudo a2enmod proxy  
+sudo a2enmod proxy_http  
+sudo a2enmod ssl  
+sudo a2enmod rewrite  
+sudo a2enmod headers  
 
 
 # Set configuration for proxy for HTTP > /etc/apache2/sites-available
-sudo a2ensite jenkins.conf
+sudo a2ensite jenkins.conf  
 ```
 <VirtualHost *:80>
     #ServerName projectdevops.eu
@@ -47,9 +46,9 @@ sudo a2ensite jenkins.conf
     CustomLog ${APACHE_LOG_DIR}/access.log combined
 </VirtualHost>
 ```
-Check site on http://IP/jenkins WITHOUT 8080
+Check site on http://IP/jenkins WITHOUT 8080  
 # Set configuration for HTTPS > /etc/apache2/sites-available
-sudo a2ensite jenkins-ssl.conf
+sudo a2ensite jenkins-ssl.conf  
 
 ```
 <IfModule mod_ssl.c>
@@ -96,10 +95,10 @@ sudo a2ensite jenkins-ssl.conf
  </IfModule>
 ```
 Check site on https://domainName/jenkins 
-If Above works you dont need to perform below steps
+If Above works you dont need to perform below steps  
 # Set this value here ONLY IF IT DOES NOT WORK WITHOUT ABOVE
 
-WITHOUT THESE FLAGS SHOULD ALSO WORK
+WITHOUT THESE FLAGS SHOULD ALSO WORK  
 ```
 -Djenkins.model.Jenkins.location=https://projectdevops.eu/jenkins"
 
