@@ -1,0 +1,7 @@
+workflow-aggregator
+git
+job-dsl
+configuration-as-code
+instance-identity
+docker-plugin
+docker-workflow
