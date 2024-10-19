@@ -78,7 +78,7 @@ provider "google" {
 ```
 
 # 3. From where load modules
-a) ./environments/production/main.tf
+a) ./environments/production/main.tf  
 b) ./environments/staging/main.tf
 
 ```
