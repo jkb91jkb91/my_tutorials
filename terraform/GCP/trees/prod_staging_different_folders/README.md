@@ -5,10 +5,12 @@ a# TWO ENVIRONMENTS STAGING && PRODUCTION AND PROVIDERS ON EACH LEVEL
 
 
 # INFO
-STAGING provider    >> projectNAME GOWNO
-PRODUCTION provider >> projectNAME NOWY
+PROD provider    >> projectNAME GOWNO
+STAGING provider >> projectNAME NOWY
 
 PROD
+-Project NOWY  
+-CREDS gowno  
 ```
 terraform {
   required_providers {
@@ -24,7 +26,9 @@ provider "google" {
   zone = "us-central1-a"
   credentials ="/home/jkb91/.sa_bartek_gowno_project.json"
 ```
-STAGING
+STAGING >> 
+-Project NOWY  
+-CREDS gowno  
 ```
 terraform {
   required_providers {
