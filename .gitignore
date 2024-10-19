@@ -6,3 +6,15 @@
 terraform.tfstate
 terraform.tfstate.backup
 
+
+.terraform/
+*.tfplan
+*.tfvars
+crash.log
+*.log
+.terraform.rc
+output.log  
+plan.out  
+*.backup  
+*.bak
+
