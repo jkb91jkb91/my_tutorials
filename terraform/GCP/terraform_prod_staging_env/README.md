@@ -8,12 +8,21 @@
 # 0. RUN COMMANDS  
 a) cd environments/production && terraform init  
 
-W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=production.tfvars mozesz podac  
-b) terraform plan # automatycznie bd szukal pliku terraform tf.vars, tak na prawde to komenda ktora uruchomi to terraform plan -var-file="terraform.tfvars"  
 
+b) 
+```
+terraform plan
+```
+Automatycznie bd szukal pliku terraform tf.vars, tak na prawde to komenda ktora uruchomi to terraform plan -var-file="terraform.tfvars"  
 W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=production.tfvars mozesz podac  
-c) terraform apply  # automatycznie bd szukal pliku terraform tf.vars, tak na prawde to komenda ktora uruchomi to terraform apply -var-file="terraform.tfvars"  
 
+ 
+c)
+```
+ terraform apply
+```
+Automatycznie bd szukal pliku terraform tf.vars, tak na prawde to komenda ktora uruchomi to terraform apply -var-file="terraform.tfvars"  
+W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=production.tfvars mozesz podac 
 
 
 # 2. Tree  
