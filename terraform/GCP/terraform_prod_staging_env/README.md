@@ -1,4 +1,4 @@
-# DESCRIPTION
+# TWO ENVIRONMENTS STAGING && PRODUCTION AND PROVIDERS ON EACH LEVEL
 
 0.) Run commands  
 1.) Tree  
@@ -6,6 +6,7 @@
 3.) From where load modules  
 
 # 0. RUN COMMANDS  
+INFO: You have to run terraform from the level where terraform provider is located
 a) 
 ```
 cd environments/production && terraform init
@@ -35,11 +36,13 @@ W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=produc
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
+│   │   ├── provider.tf
 │   │   └── terraform.tfvars
 │   ├── staging
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
+│   │   ├── provider.tf
 │   │   └── terraform.tfvars
 ├── modules
 │   ├── compute
@@ -52,10 +55,6 @@ W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=produc
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
 │   │   └── README.md
-├── terraform.tfvars
-├── variables.tf
-├── outputs.tf
-└── backend.tf
 ```
 # 2. ./terraform.tfvars
 a) Terraform provider  
