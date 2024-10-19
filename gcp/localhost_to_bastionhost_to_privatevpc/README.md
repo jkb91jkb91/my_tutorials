@@ -8,17 +8,24 @@ gcloud compute networks create private-vpc \
     --bgp-routing-mode=regional
 
 
-# CREATE SUBNET1
+# CREATE PRIVATE SUBNET
 gcloud compute networks subnets create private-subnet \
     --network=private-vpc \
     --region=us-central1 \
     --range=10.0.0.0/24 \
 
-# CREATE SUBNET2
-gcloud compute networks subnets create private-subnet1 \
-    --network=private-vpc \
-    --region=us-central1 \
-    --range=10.0.1.0/24 
+# CREATE PUBLIC SUBNET
+gcloud compute networks subnets create public-subnet \
+  --network=my-vpc \
+  --region=us-central1 \
+  --range=10.0.3.0/24
+
+
+# CRETE ROUTE TO PUBLIC SUBNET
+gcloud compute routes create route-to-internet-for-subnet \
+  --network=private-vpc \
+  --destination-range=0.0.0.0/0 \
+  --next-hop-gateway=default-internet-gateway
 
 # CREATE ROUTER
 gcloud compute routers create my-router \
@@ -66,11 +73,11 @@ gcloud compute instances create my-vm-private-vpc \
     --network=private-vpc
 
 # **************************************************************** VM DEFAULT ********************************************************************
-gcloud compute instances create my-vm-default-vpc \
+gcloud compute instances create my-vm \
     --zone=us-central1-a \
-    --image-family=debian-11 \
-    --image-project=debian-cloud \                                                                                                                                                                                                                                                                                            --machine-type=e2-micro \
-    --boot-disk-size=10GB \                                                                                                                                                                                                                                                                                                   --network=default
+    --network=private-vpc \
+    --subnet=public-subnet
+
 
 
 
