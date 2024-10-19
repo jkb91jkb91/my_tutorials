@@ -72,18 +72,18 @@ W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=produc
 # 2. Tree  
 ```
 ├── environments
-│   ├── production
-│   │   ├── main.tf
-│   │   ├── variables.tf
+│   ├── production  
 │   │   ├── outputs.tf
 │   │   ├── provider.tf
-│   │   └── terraform.tfvars
+│   │   ├── variables.tf     >>> #1 DEKLARACJA ZMIENNYCH
+│   │   ├── terraform.tfvars >>> #2 USTAWIAMY WARTOSCI ZMIENNYCH DLA main.tf
+│   │   └── main.tf          >>> #3 ODWOLUJEMY SIE DO variables.tf
 │   ├── staging
-│   │   ├── main.tf
-│   │   ├── variables.tf
 │   │   ├── outputs.tf
 │   │   ├── provider.tf
-│   │   └── terraform.tfvars
+│   │   ├── variables.tf      >>> #1 DEKLARACJA ZMIENNYCH
+│   │   ├── terraform.tfvars  >>> #2 USTAWIAMY WARTOSCI ZMIENNYCH DLA main.tf
+│   │   └── main.tf           >>> #3 ODWOLUJEMY SIE DO variables.tf
 ├── modules
 │   ├── compute
 │   │   ├── main.tf
