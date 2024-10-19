@@ -1,10 +1,45 @@
-# TWO ENVIRONMENTS STAGING && PRODUCTION AND PROVIDERS ON EACH LEVEL
+a# TWO ENVIRONMENTS STAGING && PRODUCTION AND PROVIDERS ON EACH LEVEL
 
 0.) Run commands  
-1.) Tree  
-2.) ./terraform.tfvars HIGHEST LEVEL  
-3.) From where load modules  
+1.) Tree   
 
+
+# INFO
+STAGING provider    >> projectNAME GOWNO
+PRODUCTION provider >> projectNAME NOWY
+
+PROD
+```
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "5.40.0"
+    }
+  }
+}
+provider "google" {
+  project = "gowno-439010"
+  region = "us-central-1"
+  zone = "us-central1-a"
+  credentials ="/home/jkb91/.sa_bartek_gowno_project.json"
+```
+STAGING
+```
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "5.40.0"
+    }
+  }
+}
+provider "google" {
+  project = "nowy-437906"
+  region = "us-central-1"
+  zone = "us-central1-a"
+  credentials ="/home/jkb91/.sa_bartek_nowy_project.json"
+```
 # 0. RUN COMMANDS  FROM PROVIDER LOCATION LIKE: ENVIRONMENTS/PRODUCTION or ENVIRONEMTS/STAGING
 INFO: You have to run terraform from the level where terraform provider is located  
 a) 
@@ -57,39 +92,3 @@ W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=produc
 │   │   ├── outputs.tf
 │   │   └── README.md
 ```
-# 2. ./terraform.tfvars
-a) Terraform provider  
-b) Google project information  
-```
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "5.40.0"
-    }
-  }
-}
-provider "google" {
-  project = "gowno-439010"
-  region = "us-central-1"
-  zone = "us-central1-a"
-  credentials ="~/.sa_bartek_gowno_project"
-}
-```
-
-# 3. From where load modules
-a) ./environments/production/main.tf  
-b) ./environments/staging/main.tf
-
-```
-module "compute_instance" {
-  source        = "../../modules/compute"  # Ścieżka do modułu
-  instance_name = "my-vm-instance"
-  machine_type  = "e2-micro-1"
-  zone          = "us-central1-a"
-  disk_image    = "debian-cloud/debian-9"
-  network       = "default"
-  tags          = ["web", "dev"]
-}
-```
-
