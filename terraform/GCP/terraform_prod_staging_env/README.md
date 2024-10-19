@@ -6,7 +6,10 @@
 3.) From where load modules  
 
 # 0. RUN COMMANDS  
-a) cd environments/production && terraform init  
+a) 
+```
+cd environments/production && terraform init
+```
 
 
 b) 
