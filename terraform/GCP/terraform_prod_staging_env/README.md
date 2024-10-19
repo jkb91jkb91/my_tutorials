@@ -5,7 +5,7 @@
 2.) ./terraform.tfvars HIGHEST LEVEL  
 3.) From where load modules  
 
-0. RUN COMMANDS  
+# 0. RUN COMMANDS  
 a) cd environments/production && terraform init  
 
 W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=production.tfvars mozesz podac  
@@ -16,7 +16,7 @@ c) terraform apply  # automatycznie bd szukal pliku terraform tf.vars, tak na pr
 
 
 
-2. Tree  
+# 2. Tree  
 ```
 ├── environments
 │   ├── production
@@ -45,7 +45,7 @@ c) terraform apply  # automatycznie bd szukal pliku terraform tf.vars, tak na pr
 ├── outputs.tf
 └── backend.tf
 ```
-2. ./terraform.tfvars
+# 2. ./terraform.tfvars
 a) Terraform provider  
 b) Google project information  
 ```
@@ -65,7 +65,7 @@ provider "google" {
 }
 ```
 
-3. From where load modules
+# 3. From where load modules
 a) ./environments/production/main.tf
 b) ./environments/staging/main.tf
 
