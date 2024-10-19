@@ -12,8 +12,5 @@ provider "google" {
   project = "gowno-439010"
   region = "us-central-1"
   zone = "us-central1-a"
-  credentials ="~/.sa_bartek_gowno_project" 
-
+  credentials ="~/.sa_bartek_gowno_project"
 }
-
-
