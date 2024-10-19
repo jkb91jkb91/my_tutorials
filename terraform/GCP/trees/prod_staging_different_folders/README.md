@@ -69,7 +69,7 @@ Automatycznie bd szukal pliku terraform tf.vars, tak na prawde to komenda ktora 
 W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=production.tfvars mozesz podac 
 
 
-# 2. Tree  
+# 1. Tree  
 ```
 ├── environments
 │   ├── production  
@@ -94,5 +94,25 @@ W ponizszej komendzie jesli bd chcial podac konkretny plik to w -var-file=produc
 │   │   ├── main.tf
 │   │   ├── variables.tf
 │   │   ├── outputs.tf
+│   │   └── README.md
+```
+# 2. UZYWANIE OUTPUTS
+Aby wykorzystac outputs.tf na najwyzszym poziomie czyli tutaj:
+```
+├── environments
+│   ├── production  
+│   │   ├── outputs.tf # >> PRZEJMUJE WARTOSCI OD outputs.tf z modules
+│   │   ├── provider.tf
+│   │   ├── variables.tf
+│   │   ├── terraform.tfvars
+│   │   └── main.tf 
+```
+
+```
+├── modules
+│   ├── compute
+│   │   ├── main.tf
+│   │   ├── variables.tf
+│   │   ├── outputs.tf  # >> Dawca info dla output.tf na poziomie environment
 │   │   └── README.md
 ```
