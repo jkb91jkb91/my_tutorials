@@ -5,10 +5,11 @@
 2.) ./terraform.tfvars HIGHEST LEVEL  
 3.) From where load modules  
 
-# 0. RUN COMMANDS  
-INFO: You have to run terraform from the level where terraform provider is located
+# 0. RUN COMMANDS  FROM PROVIDER LOCATION LIKE: ENVIRONMENTS/PRODUCTION or ENVIRONEMTS/STAGING
+INFO: You have to run terraform from the level where terraform provider is located  
 a) 
 ```
+cd environments/production && terraform init
 cd environments/production && terraform init
 ```
 
