@@ -1,49 +1,11 @@
-a# TWO ENVIRONMENTS STAGING && PRODUCTION AND PROVIDERS ON EACH LEVEL
+# TWO ENVIRONMENTS STAGING && PRODUCTION AND PROVIDERS ON EACH LEVEL
 
 0.) Run commands  
 1.) Tree   
+2.) Uzywanie outputs.tf na roznych poziomach
+3.) Providers
 
 
-# INFO
-PROD provider    >> projectNAME GOWNO
-STAGING provider >> projectNAME NOWY
-
-PROD
--Project NOWY  
--CREDS gowno  
-```
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "5.40.0"
-    }
-  }
-}
-provider "google" {
-  project = "gowno-439010"
-  region = "us-central-1"
-  zone = "us-central1-a"
-  credentials ="/home/jkb91/.sa_bartek_gowno_project.json"
-```
-STAGING >> 
--Project NOWY  
--CREDS gowno  
-```
-terraform {
-  required_providers {
-    google = {
-      source = "hashicorp/google"
-      version = "5.40.0"
-    }
-  }
-}
-provider "google" {
-  project = "nowy-437906"
-  region = "us-central-1"
-  zone = "us-central1-a"
-  credentials ="/home/jkb91/.sa_bartek_nowy_project.json"
-```
 # 0. RUN COMMANDS  FROM PROVIDER LOCATION LIKE: ENVIRONMENTS/PRODUCTION or ENVIRONEMTS/STAGING
 INFO: You have to run terraform from the level where terraform provider is located  
 a) 
@@ -101,7 +63,7 @@ Aby wykorzystac outputs.tf na najwyzszym poziomie czyli tutaj:
 ```
 ├── environments
 │   ├── production  
-│   │   ├── outputs.tf # >> PRZEJMUJE WARTOSCI OD outputs.tf z modules
+│   │   ├── outputs.tf # >> PRZEJMUJE WARTOSCI OD module.NAME_OF_MODULE_IN_production/main.tf.NAME_OF_OUTPUT_IN_/modules/compute/outputs.tf
 │   │   ├── provider.tf
 │   │   ├── variables.tf
 │   │   ├── terraform.tfvars
@@ -113,6 +75,47 @@ Aby wykorzystac outputs.tf na najwyzszym poziomie czyli tutaj:
 │   ├── compute
 │   │   ├── main.tf
 │   │   ├── variables.tf
-│   │   ├── outputs.tf  # >> Dawca info dla output.tf na poziomie environment
+│   │   ├── outputs.tf  # >> Wystawia outputy z modulu
 │   │   └── README.md
+```
+
+# 3. Providers
+PROD provider    >> projectNAME GOWNO
+STAGING provider >> projectNAME NOWY
+
+PROD
+-Project NOWY  
+-CREDS gowno  
+```
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "5.40.0"
+    }
+  }
+}
+provider "google" {
+  project = "gowno-439010"
+  region = "us-central-1"
+  zone = "us-central1-a"
+  credentials ="/home/jkb91/.sa_bartek_gowno_project.json"
+```
+STAGING >> 
+-Project NOWY  
+-CREDS gowno  
+```
+terraform {
+  required_providers {
+    google = {
+      source = "hashicorp/google"
+      version = "5.40.0"
+    }
+  }
+}
+provider "google" {
+  project = "nowy-437906"
+  region = "us-central-1"
+  zone = "us-central1-a"
+  credentials ="/home/jkb91/.sa_bartek_nowy_project.json"
 ```
