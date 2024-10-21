@@ -1,6 +1,3 @@
- 
-
-
 
 1. [Get Output of Shell Script](#Get-Output-of-Shell-Script)
 2. [Creating-Env-Variable](#Creating-Env-Variable)
@@ -203,3 +200,22 @@ stage('Await Input') {
             }
         }
 ```
+
+# VARIABLES
+
+BUILD_NUMBER  
+BUILD_ID  
+BUILD_URL  
+JOB_NAME  
+BUILD_TAG  
+WORKSPACE  
+GIT_COMMIT  
+GIT_URL  
+NODE_NAME  
+JENKINS_HOME  
+JENKINS_URL  
+EXECUTOR_NUMBER  
+NODE_LABELS  
+STAGE_NAME  
+BRANCH_NAME  
+CHANGE_ID  
