@@ -48,7 +48,12 @@ services:
 NAME OF YOUR DOMAIN  
 
 ```
+
+ServerName projectdevops.eu
+
 SSLCertificateFile /usr/local/apache2/conf/projectdevops.eu.crt
 SSLCertificateKeyFile /usr/local/apache2/conf/projectdevops.eu.key
 
 ```
+
+
