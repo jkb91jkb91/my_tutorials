@@ -6,7 +6,8 @@
 terraform.tfstate
 terraform.tfstate.backup
 
-
+projectdevops.eu.crt
+projectdevops.eu.key
 .terraform/
 *.tfplan
 *.tfvars
