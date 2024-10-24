@@ -31,6 +31,12 @@ gitlab run on 80:8081 BUT STILL in httpd.conf you will use 80 >>>
 docker-compose up -d   
 
 
+# RUN WITH COMMAND
+
+```
+http://localhost:8081/gitlab
+```
+
 # RESULT
 You will have running gitlab as localhost/gitlab instead of localhost  
 
