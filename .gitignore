@@ -8,7 +8,6 @@ terraform.tfstate.backup
 
 
 
-gitlab
 projectdevops.eu.crt
 projectdevops.eu.key
 .terraform/

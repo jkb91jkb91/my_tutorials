@@ -23,6 +23,8 @@ services:
     depends_on:
       - apache
     environment:
+      GITLAB_ROOT_PASSWORD: "123*kuba987&"  
+      GITLAB_ROOT_EMAIL: "kuba" 
       GITLAB_OMNIBUS_CONFIG: |
         external_url 'http://gitlab.domain.com/gitlab'
     ports:

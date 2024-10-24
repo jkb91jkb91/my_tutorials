@@ -28,10 +28,14 @@ gitlab run on 80:8081 BUT STILL in httpd.conf you will use 80 >>>
 ```
 
 # HOW TO RUN
-docker-compose up -d   
+INIT USER=root  
+INIT PASSWORD=docker exec -it gitlab cat /etc/gitlab/initial_root_password | grep Password | tail -n1 | awk -F ': ' '{ print $2 }'  
 
+``
+docker-compose up -d && echo "login=root" && echo -n "password=" && docker exec -it gitlab cat /etc/gitlab/initial_root_password | grep Password | tail -n1 | awk -F ': ' '{ print $2 }' 
+```
 
-# RUN WITH COMMAND
+# RUN WITH COMMAND !! IT TAKES EVEN 3 MINUTES TO START THE SERVER
 
 ```
 http://localhost:8081/gitlab
@@ -44,3 +48,4 @@ You will have running gitlab as localhost/gitlab instead of localhost
 # NEXT STEPS
 1) Please add http://domain
 2) Please add https://domain
+
