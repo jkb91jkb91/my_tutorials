@@ -29,10 +29,13 @@ docker exec -it gitlab netstat -tuln | grep LISTEN
 # PREREQUISUITE
 
 ```
-mkdir -p gitlab_data/logs && chown -R root:root gitlab_data/logs
-mkdir -p gitlab_data/config && chown -R root:root gitlab_data/config
-mkdir -p gitlab_data/data && chown -R root:root gitlab_data/data
+mkdir -p gitlab_data/logs
+mkdir -p gitlab_data/config
+mkdir -p gitlab_data/data
+
+sudo su
 export GITLAB_HOME=$(pwd)/gitlab_data
+chown -R root:root gitlab_data
 ```
 
 # DEBUGGING
