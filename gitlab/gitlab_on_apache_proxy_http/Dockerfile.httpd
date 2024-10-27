@@ -1,0 +1,4 @@
+FROM httpd:2.4
+
+
+RUN apt-get update && apt-get install vim -y && apt-get install curl -y && apt-get install wget -y
