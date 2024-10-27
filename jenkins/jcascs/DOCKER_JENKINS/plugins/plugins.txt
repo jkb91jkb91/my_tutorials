@@ -2,3 +2,5 @@ workflow-aggregator
 git
 job-dsl
 configuration-as-code
+pipeline-stage-view-plugin
+blue-ocean
