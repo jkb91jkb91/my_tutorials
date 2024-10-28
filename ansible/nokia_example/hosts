@@ -1,0 +1,23 @@
+[kobiety]
+kobiety ansible_host=10.178.0.5 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp
+
+[bydgoszcz]
+bydgoszcz ansible_host=10.178.0.109 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp
+
+[krakow]
+krakow ansible_host=10.178.0.64 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp ansible_become=yes
+
+[wroclaw]
+wroclaw ansible_host=10.178.0.105 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp ansible_become=yes
+
+[garage]
+garage ansible_host=10.178.0.11 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp ansible_become=yes
+
+[testdive]
+testdive ansible_host=10.178.0.35 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp ansible_become=yes
+
+[codedive]
+codedive ansible_host=10.178.0.29 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp
+
+[fpghackaton]
+fpghackaton ansible_host=10.178.15.225 ansible_user=a_jgrzeg ansible_ssh_private_key_file=~/.ssh/klucz_kuba_gcp 

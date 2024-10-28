@@ -1,0 +1,134 @@
+- name: Provision web servers in nokia
+  hosts:
+    - bydgoszcz
+    - wroclaw
+    - krakow
+    - garage
+    - testdive
+    - codedive
+    - fpghackaton
+  become: yes
+  become_user: root
+  tasks:
+    - name: Install Rsync
+      yum:
+        name: rsync
+        state: present
+    - name: Install apache
+      yum:
+        name: httpd
+        state: present
+    - name: Enable Apache and start
+      systemd:
+        name: httpd
+        enabled: yes
+        state: started
+    - name: Install php-fpm
+      yum:
+        name: php-fpm
+        state: present
+    - name: Enable php-fpm
+      systemd:
+        name: php-fpm
+        enabled: yes
+        state: started
+    - name: Disable SELinux in /etc/selinux/config
+      lineinfile:
+        path: /etc/selinux/config
+        regexp: '^SELINUX='
+        line: 'SELINUX=disabled'
+        state: present
+        backup: yes
+    - name: Stop firewalld service
+      service:
+        name: firewalld
+        state: stopped
+    - name: Disable firewalld service
+      service:
+        name: firewalld
+        enabled: no
+    - name: Install MySQL server
+      yum:
+        name: mysql-server
+        state: present
+    - name: Ensure MySQL service is started and enabled
+      systemd:
+        name: mysqld
+        state: started
+        enabled: yes
+    - name: Reset PHP module
+      command: yum module reset php -y
+      args:
+        warn: false
+    - name: Enable PHP 7.4 from Remi repository
+      command: yum module enable php:remi-7.4 -y
+      args:
+        warn: false
+      when: inventory_hostname in ["bydgoszcz", "wroclaw", "garage", "codedive", "fpghackaton", "testdive", "krakow"]
+    - name: Install PHP and extensions
+      yum:
+        name:
+          - php
+          - php-mysqlnd
+          - php-fpm
+          - php-cli
+          - php-common
+          - php-opcache
+          - php-mbstring
+          - php-xml
+          - php-gd
+        state: present
+    - name: Install mod_ssl
+      yum:
+        name:
+          - mod_ssl
+        state: present
+    - name: Create /etc/letsencrypt directory
+      file:
+        path: /etc/letsencrypt
+        state: directory
+        mode: '0755'
+    - name: Copy options-ssl-apache.conf to /etc/letsencrypt
+      copy:
+        src: COMMON_TO_COPY/options-ssl-apache.conf
+        dest: /etc/letsencrypt/options-ssl-apache.conf
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Create directory in apache
+      file:
+        path: "/mnt/app/{{ inventory_hostname }}"
+        state: directory
+        mode: '0755'
+    - name: Create directory cgi-bin
+      file:
+        path: "/mnt/app/{{ inventory_hostname }}/cgi-bin"
+        state: directory
+        mode: '0755'
+    - name: Create ssl
+      file:
+        path: "/mnt/app/{{ inventory_hostname }}/ssl"
+        state: directory
+        mode: '0755'
+    - name: Print source and destination paths
+      debug:
+        msg: "Copying from SSL_TO_COPY_SELF_SIGNED/{{ inventory_hostname }}/{{ inventory_hostname }}.key to /mnt/app/{{ inventory_hostname }}/ssl/{{ inventory_hostname }}.key"
+    - name: Copy self-signed ssl key
+      copy:
+        src: "SSL_TO_COPY_SELF_SIGNED/{{ inventory_hostname }}/{{ inventory_hostname }}.key"
+        dest: "/mnt/app/{{ inventory_hostname }}/ssl/{{ inventory_hostname }}.key"
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Copy self-signed ssl crt
+      copy:
+        src: "SSL_TO_COPY_SELF_SIGNED/{{ inventory_hostname }}/{{ inventory_hostname }}.crt"
+        dest: "/mnt/app/{{ inventory_hostname }}/ssl/{{ inventory_hostname }}.crt"
+        owner: root
+        group: root
+        mode: '0644'
+    - name: Rename welcome.conf to disable it
+      command: mv /etc/httpd/conf.d/welcome.conf.disable /etc/httpd/conf.d/welcome.conf
+      args:
+        removes: /etc/httpd/conf.d/welcome.conf.disable
+        creates: /etc/httpd/conf.d/welcome.conf
