@@ -23,8 +23,11 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.php
-    platform: linux/amd64
     container_name: php
+    environment:
+      MYSQL_DATABASE: test1
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
     depends_on:
       - mysql
     ports:
