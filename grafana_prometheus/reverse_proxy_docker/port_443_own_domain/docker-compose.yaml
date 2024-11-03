@@ -26,6 +26,7 @@ services:
       - "9090:9090"
     volumes:
       - ./prometheus.yml:/etc/prometheus/prometheus.yml
+      - ./apache_alerts.yaml:/etc/prometheus/apache_alerts.yaml
     environment:
       - PROMETHEUS_EXTERNAL_URL=https://projectdevops.eu/prometheus
     command:
