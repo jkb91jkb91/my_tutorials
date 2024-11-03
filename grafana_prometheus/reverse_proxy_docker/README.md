@@ -10,6 +10,7 @@
 # 1.) PROVISIONING  
 a) SERVER_1 >> RUN docker-compose up -d   
 b) SERVER_2 >> RUN configure_apache.sh  # THIS WILL INSTALL && RUN APACHE EXPORTER ON 9117  
+- CHECK IF SERVICE IS RUNNING: systemctl list-units --type=service --state=running  
 
 # 2.) CONFIGURATION FILE  WITH APACHE_EXPORTER  
 prometheus.yaml  
