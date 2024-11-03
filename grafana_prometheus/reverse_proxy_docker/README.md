@@ -1,8 +1,9 @@
 # THIS IS TUTORIAL ON HOW TO USE PROMETHEUS WITH EXPORTERS  
 
 1.) Use configure_apache.sh to provision whole remote server with apache_exporter  
-2.) Use prometheus.yml  
-3.) Use apache_alerts.yaml  
+2.) CONFIGURATION FILE >> Use prometheus.yml  
+3.) ALERTS             >> Use apache_alerts.yaml
+4.) ACTION ON ALERTS   >>  
 
 ```
 global:
