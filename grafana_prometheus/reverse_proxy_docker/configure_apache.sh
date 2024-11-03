@@ -4,6 +4,7 @@
 #INSTALL APACHE
 sudo apt update
 sudo apt install -y apache2
+sudo apt-get install lsof -y  
 
 
 # RUN THIS TO RUN APACHE_EXPORTER ON LOCALHOST
