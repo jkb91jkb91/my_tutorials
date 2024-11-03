@@ -1,0 +1,11 @@
+groups:
+  - name: apache_alerts
+    rules:
+      - alert: ApacheDown
+        expr: apache_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Apache Server is Down"
+          description: "The Apache server is down on instance {{ $labels.instance }}."
