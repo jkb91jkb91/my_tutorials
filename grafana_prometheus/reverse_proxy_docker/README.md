@@ -7,11 +7,11 @@
 
 
 
-1.) PROVISIONING  
+# 1.) PROVISIONING  
 a) SERVER_1 >> RUN docker-compose up -d   
 b) SERVER_2 >> RUN configure_apache.sh  
 
-2.) CONFIGURATION FILE  
+# 2.) CONFIGURATION FILE  
 
 prometheus.yaml  
 ```
@@ -27,6 +27,6 @@ scrape_configs:
       - targets: ['34.55.219.151:9117']
 ```
 
-3.) ALERTS   
+# 3.) ALERTS   
 a) apache_alerts.yml  
 b) other_alerts.yml  
