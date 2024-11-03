@@ -1,4 +1,4 @@
-# INFO
+# THIS IS TUTORIAL ON HOW TO USE PROMETHEUS WITH EXPORTERS  
 
 1.) Use configure_apache.sh to provision whole remote server with apache_exporter  
 2.) Use prometheus.yml  
