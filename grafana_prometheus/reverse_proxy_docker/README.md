@@ -1,7 +1,7 @@
 # THIS IS TUTORIAL ON HOW TO USE PROMETHEUS WITH EXPORTERS  
 
 1.) PROVISIONING   
-2.) CONFIGURATION FILE  
+2.) CONFIGURATION FILE  WITH APACHE_EXPORTER  
 3.) ALERTS    
 4.) ACTION ON ALERTS  
 
@@ -9,10 +9,9 @@
 
 # 1.) PROVISIONING  
 a) SERVER_1 >> RUN docker-compose up -d   
-b) SERVER_2 >> RUN configure_apache.sh  
+b) SERVER_2 >> RUN configure_apache.sh  # THIS WILL INSTALL && RUN APACHE EXPORTER ON 9117  
 
-# 2.) CONFIGURATION FILE  
-
+# 2.) CONFIGURATION FILE  WITH APACHE_EXPORTER  
 prometheus.yaml  
 ```
 global:
@@ -24,7 +23,7 @@ scrape_configs:
       - targets: ['localhost:9090']
   - job_name: 'apache'
     static_configs:
-      - targets: ['34.55.219.151:9117']
+      - targets: ['REMOTE_SERVER_IP:9117']
 ```
 
 # 3.) ALERTS   
