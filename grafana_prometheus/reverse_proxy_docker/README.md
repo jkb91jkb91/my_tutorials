@@ -2,8 +2,9 @@
 
 1.) PROVISIONING   
 2.) CONFIGURATION FILE  WITH APACHE_EXPORTER  
-3.) ALERTS    
-4.) ACTION ON ALERTS  
+3.) API  
+4.) ALERTS    
+5.) ACTION ON ALERTS  
 
 
 
@@ -27,6 +28,17 @@ scrape_configs:
       - targets: ['REMOTE_SERVER_IP:9117']
 ```
 
-# 3.) ALERTS   
+# 3.) API
+To turn of API
+```
+ command:
+      - "--web.enable-lifecycle"
+```
+Reload example  
+```
+curl -v -X POST http://localhost/prometheus/-/reload
+```
+
+# 4.) ALERTS   
 a) apache_alerts.yml  
 b) other_alerts.yml  
