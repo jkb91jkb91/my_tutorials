@@ -7,9 +7,11 @@ terraform {
   }
 }
 
+
 provider "google" {
-  project = "gowno-439010"
+  project = "nowy-437906"
   region = "us-central-1"
   zone = "us-central1-a"
-  credentials ="/home/jkb91/.sa_bartek_gowno_project.json"
+  credentials ="/home/jkb91/.sa_bartek_nowy_project.json"
+
 }

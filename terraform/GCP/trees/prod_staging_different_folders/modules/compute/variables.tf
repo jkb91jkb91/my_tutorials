@@ -28,3 +28,9 @@ variable "tags" {
   type        = list(string)
   default     = []
 }
+
+variable "assign_public_ip" {
+  description = "Give Public IP or not"
+  type        = bool
+  default     = false
+}
