@@ -1,0 +1,37 @@
+version: '3'
+services:
+  apache:
+    build:
+      context: ./
+      dockerfile: Dockerfile.httpd
+    container_name: 'apache'
+    restart: always
+    volumes:
+      - ./httpd.conf:/usr/local/apache2/conf/httpd.conf
+    ports:
+      - '80:80'
+    networks:
+      - mynetwork
+
+  gitlab:
+    build:
+      context: ./
+      dockerfile: Dockerfile.gitlab
+    container_name: gitlab
+    restart: always
+    depends_on:
+      - apache
+    environment:
+      GITLAB_ROOT_PASSWORD: "JakBar97*%%Lucyna"
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://34.44.80.191:80/gitlab'
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge
