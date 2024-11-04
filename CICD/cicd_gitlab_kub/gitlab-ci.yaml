@@ -1,0 +1,37 @@
+stages:
+  - deploy
+  - verify
+  - test
+  - notify
+
+deploy_staging:
+  stage: deploy
+  script:
+    - kubectl apply -f k8s-manifests/deployment.yaml --namespace=staging
+  only:
+    - develop
+  when: on_success
+
+check_rollout_status:
+  stage: verify
+  script:
+    - kubectl rollout status deployment/myapp --namespace=staging
+  only:
+    - develop
+  when: on_success
+
+test_staging:
+  stage: test
+  script:
+    - ./run-e2e-tests.sh  # Twoje testy E2E/integracyjne
+  only:
+    - develop
+  when: on_success
+
+notify_slack:
+  stage: notify
+  script:
+    - curl -X POST -H 'Content-type: application/json' --data '{"text":"Wdrożenie na staging zakończone sukcesem!"}' https://hooks.slack.com/services/YOUR_WEBHOOK_URL
+  only:
+    - develop
+  when: on_success
