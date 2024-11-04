@@ -1,0 +1,45 @@
+version: '3.8'
+
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: Dockerfile.mysql
+    container_name: mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: test1
+      MYSQL_USER: user       # Nazwa nowego użytkownika
+      MYSQL_PASSWORD: user
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./custom.cnf:/etc/mysql/conf.d/custom.cnf  # Montowanie pliku konfiguracyjnego
+    ports:
+      - "3306:3306"
+    networks:
+      - my_network
+
+  php:
+    build:
+      context: .
+      dockerfile: Dockerfile.php
+    container_name: php
+    environment:
+      MYSQL_DATABASE: test1
+      MYSQL_USER: user
+      MYSQL_PASSWORD: user
+    depends_on:
+      - mysql
+    ports:
+      - "80:80"
+    volumes:
+      - ./connect.php:/app/connect.php
+      - ./index.php:/app/index.php
+    networks:
+      - my_network
+
+
+
+networks:
+  my_network:
+    driver: bridge
