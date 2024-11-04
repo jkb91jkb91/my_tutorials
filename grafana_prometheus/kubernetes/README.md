@@ -1,9 +1,9 @@
 # INFO
 https://github.com/prometheus-community/helm-charts/tree/main/charts/kube-prometheus-stack
 
-1.) INSTALL HELM
-2.) UPDATE HELM REPOSITORY
-3.) INSTALL FOUND VERSION
+1.) INSTALL HELM  
+2.) UPDATE HELM REPOSITORY  
+3.) INSTALL FOUND VERSION  
 
 
 
