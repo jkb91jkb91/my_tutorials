@@ -8,6 +8,8 @@ services:
       - "3000:3000"
     environment:
       - GF_SERVER_ROOT_URL=http://localhost:3000/grafana/
+      - GF_SECURITY_ADMIN_USER=kuba
+      - GF_SECURITY_ADMIN_PASSWORD=kuba
 
   apache:
     image: httpd:2.4
