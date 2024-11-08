@@ -101,7 +101,7 @@ gcloud container clusters get-credentials <CLUSTER-NAME> --region <REGION> --pro
 
 
 
-#************************************MANAGED INSTANCES**********************************
+# ************************************MANAGED INSTANCES**********************************
 #TEMPLATKA
 gcloud compute instance-templates create my-template-v1 \
     --machine-type=e2-micro \
@@ -145,7 +145,7 @@ gcloud compute instance-groups managed rolling-action start-update NAME \
 
 
 
-#**************************************VPC********************************************
+# **************************************VPC********************************************
 #Tworzenie VPC, bgp-routing(regional lub global)(subnet-moode  custom lub auto)
 gcloud compute networks create my-vpc \
   --subnet-mode=custom \
