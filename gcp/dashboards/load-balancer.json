@@ -187,53 +187,66 @@
         "width": 24,
         "height": 16,
         "widget": {
-          "title": "Backend Request Count for 2 BACKEND",
           "xyChart": {
-            "chartOptions": {
-              "mode": "COLOR"
-            },
             "dataSets": [
               {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"loadbalancing.googleapis.com/https/backend_request_count\" resource.type=\"https_lb_rule\" resource.label.\"backend_name\"=\"warsaw-ig\"",
+                    "aggregation": {
+                      "alignmentPeriod": "60s",
+                      "perSeriesAligner": "ALIGN_RATE",
+                      "crossSeriesReducer": "REDUCE_SUM",
+                      "groupByFields": []
+                    }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
                 "legendTemplate": "WARSAW",
                 "minAlignmentPeriod": "60s",
-                "plotType": "LINE",
                 "targetAxis": "Y1",
-                "timeSeriesQuery": {
-                  "timeSeriesFilter": {
-                    "aggregation": {
-                      "alignmentPeriod": "60s",
-                      "crossSeriesReducer": "REDUCE_SUM",
-                      "groupByFields": [],
-                      "perSeriesAligner": "ALIGN_RATE"
-                    },
-                    "filter": "metric.type=\"loadbalancing.googleapis.com/https/backend_request_count\" resource.type=\"https_lb_rule\" resource.label.\"backend_name\"=\"warsaw-ig\""
-                  }
-                }
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
               },
               {
-                "legendTemplate": "US",
-                "minAlignmentPeriod": "60s",
-                "plotType": "LINE",
-                "targetAxis": "Y1",
                 "timeSeriesQuery": {
                   "timeSeriesFilter": {
+                    "filter": "metric.type=\"loadbalancing.googleapis.com/https/backend_request_count\" resource.type=\"https_lb_rule\" resource.label.\"backend_name\"=\"ig\"",
                     "aggregation": {
                       "alignmentPeriod": "60s",
+                      "perSeriesAligner": "ALIGN_RATE",
                       "crossSeriesReducer": "REDUCE_SUM",
-                      "groupByFields": [],
-                      "perSeriesAligner": "ALIGN_RATE"
-                    },
-                    "filter": "metric.type=\"loadbalancing.googleapis.com/https/backend_request_count\" resource.type=\"https_lb_rule\" resource.label.\"backend_name\"=\"ig\""
-                  }
-                }
+                      "groupByFields": []
+                    }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "US",
+                "minAlignmentPeriod": "60s",
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
               }
             ],
             "thresholds": [],
             "yAxis": {
               "label": "",
               "scale": "LINEAR"
+            },
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "displayHorizontal": false
             }
-          }
+          },
+          "title": "Backend Request Count for 2 BACKEND",
+          "id": ""
         }
       },
       {
@@ -247,14 +260,146 @@
             "format": "MARKDOWN",
             "style": {
               "backgroundColor": "#F4B400",
-              "fontSize": "FS_LARGE",
-              "horizontalAlignment": "H_LEFT",
-              "padding": "P_EXTRA_SMALL",
-              "pointerLocation": "POINTER_LOCATION_UNSPECIFIED",
               "textColor": "#212121",
-              "verticalAlignment": "V_TOP"
+              "horizontalAlignment": "H_LEFT",
+              "verticalAlignment": "V_TOP",
+              "padding": "P_EXTRA_SMALL",
+              "fontSize": "FS_LARGE",
+              "pointerLocation": "POINTER_LOCATION_UNSPECIFIED"
             }
-          }
+          },
+          "id": ""
+        }
+      },
+      {
+        "yPos": 56,
+        "width": 48,
+        "height": 4,
+        "widget": {
+          "title": "VM",
+          "text": {
+            "content": "",
+            "format": "MARKDOWN",
+            "style": {
+              "backgroundColor": "#F4B400",
+              "textColor": "#212121",
+              "horizontalAlignment": "H_LEFT",
+              "verticalAlignment": "V_TOP",
+              "padding": "P_EXTRA_SMALL",
+              "fontSize": "FS_LARGE",
+              "pointerLocation": "POINTER_LOCATION_UNSPECIFIED"
+            }
+          },
+          "id": ""
+        }
+      },
+      {
+        "yPos": 60,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"compute.googleapis.com/instance/cpu/utilization\" resource.type=\"gce_instance\"",
+                    "aggregation": {
+                      "alignmentPeriod": "60s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [
+                        "metadata.system_labels.\"name\"",
+                        "resource.label.\"zone\"",
+                        "resource.label.\"project_id\"",
+                        "resource.label.\"instance_id\""
+                      ]
+                    }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "${metadata.system_labels\\.name} (${resource.labels.zone})",
+                "minAlignmentPeriod": "60s",
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
+              }
+            ],
+            "thresholds": [],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "displayHorizontal": false
+            }
+          },
+          "title": "CPU UTILIZATION ALL VMS",
+          "id": ""
+        }
+      },
+      {
+        "xPos": 24,
+        "yPos": 60,
+        "width": 24,
+        "height": 16,
+        "widget": {
+          "xyChart": {
+            "dataSets": [
+              {
+                "timeSeriesQuery": {
+                  "timeSeriesFilter": {
+                    "filter": "metric.type=\"agent.googleapis.com/memory/percent_used\" resource.type=\"gce_instance\" metric.label.\"state\"=\"used\"",
+                    "aggregation": {
+                      "alignmentPeriod": "60s",
+                      "perSeriesAligner": "ALIGN_MEAN",
+                      "crossSeriesReducer": "REDUCE_MEAN",
+                      "groupByFields": [
+                        "metadata.system_labels.\"name\"",
+                        "resource.label.\"zone\"",
+                        "resource.label.\"project_id\"",
+                        "resource.label.\"instance_id\""
+                      ]
+                    }
+                  },
+                  "unitOverride": "",
+                  "outputFullDuration": false
+                },
+                "plotType": "LINE",
+                "legendTemplate": "${metadata.system_labels\\.name} (${resource.labels.zone})",
+                "minAlignmentPeriod": "60s",
+                "targetAxis": "Y1",
+                "dimensions": [],
+                "measures": [],
+                "breakdowns": []
+              }
+            ],
+            "thresholds": [
+              {
+                "label": "",
+                "value": 50,
+                "color": "COLOR_UNSPECIFIED",
+                "direction": "DIRECTION_UNSPECIFIED",
+                "targetAxis": "Y1"
+              }
+            ],
+            "yAxis": {
+              "label": "",
+              "scale": "LINEAR"
+            },
+            "chartOptions": {
+              "mode": "COLOR",
+              "showLegend": false,
+              "displayHorizontal": false
+            }
+          },
+          "title": "RAM UTILIZATION",
+          "id": ""
         }
       }
     ]
