@@ -21,13 +21,21 @@ gcloud config configurations delete CONFIG_NAME
 ```
 
 
+
 #WEWNATRZ KONFIGURACJI WYBRANEJ
 #Szczegoly tylko biezacej konfiguracji
+```
 gcloud config list
+```
 #Wyswietlenie projektow w danej konfiguracji
+```
 gcloud projects list
+```
 #Stworzenie projektu po wybraniu konfiguracji
+```
 gcloud projects create
+```
+
 
 
 #USTAWIENIA PO UTWORZENIU KONFIGURACJI
