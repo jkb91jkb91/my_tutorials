@@ -2,15 +2,24 @@
 #******************************************ADMIN****************************************
 #
 # SPRAWDZ Z JAKIEGO KONTA KORZYSTASZ
+```
 gcloud auth list
-#
+```
+```
 gcloud compute [PRESS TAB AND YOU WILL SE MANY OPTIONS]
+```
 #Wyswietlenie dostepnych konfiguracji
+```
 gcloud config configurations list
+```
 #Aktywacja jednej z tych konfiguracji
+```
 gcloud config configurations activate NAZWA
+```
 #Usuniecie konfiguracji
-gcloud config configurations delete CONFIG_NAME 
+```
+gcloud config configurations delete CONFIG_NAME
+```
 
 
 #WEWNATRZ KONFIGURACJI WYBRANEJ
