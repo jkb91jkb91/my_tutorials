@@ -1,38 +1,31 @@
 
 # ******************************************ADMIN****************************************
+```
 SPRAWDZ Z JAKIEGO KONTA KORZYSTASZ
-```
 gcloud auth list
-```
-```
 gcloud compute [PRESS TAB AND YOU WILL SE MANY OPTIONS]
-```
+
 Wyswietlenie dostepnych konfiguracji
-```
 gcloud config configurations list
-```
+
 Aktywacja jednej z tych konfiguracji
-```
 gcloud config configurations activate NAZWA
-```
+
 Usuniecie konfiguracji
-```
 gcloud config configurations delete CONFIG_NAME
 ```
 
 
 
 #WEWNATRZ KONFIGURACJI WYBRANEJ
+```
 #Szczegoly tylko biezacej konfiguracji
-```
 gcloud config list
-```
+
 #Wyswietlenie projektow w danej konfiguracji
-```
 gcloud projects list
-```
+
 #Stworzenie projektu po wybraniu konfiguracji
-```
 gcloud projects create
 ```
 
@@ -84,6 +77,7 @@ gcloud sql instances list
 gcloud app services list
 
 # ************************************FIREWALL RULES***********************************
+```
 gcloud compute firewall-rules create gke-nodeport \
     --network=my-vpc \
     --allow=tcp:30080 \
@@ -92,12 +86,15 @@ gcloud compute firewall-rules create gke-nodeport \
     --priority=1000 \
     --description="Allow NodePort to GKE" \
     --target-tags=nodeport-gke
-
+```
+```
 gcloud compute firewall-rules list
-#******************************************VM***************************************** 
+```
+# ******************************************VM***************************************** 
+```
 gcloud compute instances list
 gcloud compute instances describe INSTANCE_NAME --zone=ZONE #Opis instancji
-
+```
 
 #******************************************GKE*****************************************
 #PREREQUISUITE >>
