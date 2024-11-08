@@ -21,7 +21,7 @@ gcloud config configurations delete CONFIG_NAME
 ```
 
 
-# WEWNATRZ KONFIGURACJI WYBRANEJ
+#WEWNATRZ KONFIGURACJI WYBRANEJ
 #Szczegoly tylko biezacej konfiguracji
 gcloud config list
 #Wyswietlenie projektow w danej konfiguracji
