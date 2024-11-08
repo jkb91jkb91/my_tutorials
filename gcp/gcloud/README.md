@@ -1,28 +1,27 @@
 
-#******************************************ADMIN****************************************
-#
-# SPRAWDZ Z JAKIEGO KONTA KORZYSTASZ
+# ******************************************ADMIN****************************************
+SPRAWDZ Z JAKIEGO KONTA KORZYSTASZ
 ```
 gcloud auth list
 ```
 ```
 gcloud compute [PRESS TAB AND YOU WILL SE MANY OPTIONS]
 ```
-#Wyswietlenie dostepnych konfiguracji
+Wyswietlenie dostepnych konfiguracji
 ```
 gcloud config configurations list
 ```
-#Aktywacja jednej z tych konfiguracji
+Aktywacja jednej z tych konfiguracji
 ```
 gcloud config configurations activate NAZWA
 ```
-#Usuniecie konfiguracji
+Usuniecie konfiguracji
 ```
 gcloud config configurations delete CONFIG_NAME
 ```
 
 
-#WEWNATRZ KONFIGURACJI WYBRANEJ
+# WEWNATRZ KONFIGURACJI WYBRANEJ
 #Szczegoly tylko biezacej konfiguracji
 gcloud config list
 #Wyswietlenie projektow w danej konfiguracji
@@ -76,7 +75,7 @@ gcloud sql instances list
 #listowanie app engine
 gcloud app services list
 
-#************************************FIREWALL RULES***********************************
+# ************************************FIREWALL RULES***********************************
 gcloud compute firewall-rules create gke-nodeport \
     --network=my-vpc \
     --allow=tcp:30080 \
