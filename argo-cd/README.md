@@ -63,7 +63,7 @@ kubectl edit  svc/argocd-server -n argocd
 kubectl get secret argocd-initial-admin-secret -n argocd -o jsonpath="{.data.password}" | base64 -d
 ```
 
-9. Go to UI
+9. Go to UI  
 admin: admin  
 password: FROM_SECRET
 
