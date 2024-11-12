@@ -1,4 +1,11 @@
 
+
+
+
+https://github.com/jkb91jkb91/argocd/blob/master/README.md  
+
+
+
 1. Install argocd CLI
 ```
 curl -sSL -o argocd-linux-amd64 https://github.com/argoproj/argo-cd/releases/latest/download/argocd-linux-amd64
