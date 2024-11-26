@@ -7,6 +7,7 @@ IT IS BETTER TO RUN GITLAB AS NORMAL SERVER NOT DOCKER BECAUSE OF COMPLICITY
 1. export
 
 ```
+apt-get install docker-compose
 export GITLAB_HOME=$(pwd)
 docker-compose up -d
 
