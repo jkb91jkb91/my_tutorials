@@ -2,5 +2,7 @@ workflow-aggregator
 git
 job-dsl
 configuration-as-code
-pipeline-stage-view-plugin
-blue-ocean
+pipeline-stage-view
+blueocean
+generic-webhook-trigger
+multibranch-scan-webhook-trigger
