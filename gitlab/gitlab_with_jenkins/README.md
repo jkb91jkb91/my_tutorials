@@ -1,3 +1,13 @@
+
+# ADDITIONAL PLUGINS NEEEDED
+```
+gitlab
+gitlab-api
+jersey2
+gitlab branch source plugin
+```
+
+
 # START POINT
 start point for this project is >> gitlab_on_reverse_apache_http
 
