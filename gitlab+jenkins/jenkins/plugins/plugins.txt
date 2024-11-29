@@ -1,0 +1,12 @@
+workflow-aggregator
+git
+job-dsl
+configuration-as-code
+pipeline-stage-view
+generic-webhook-trigger
+multibranch-scan-webhook-trigger
+gitlab-api
+gitlab-branch-source
+gitlab-plugin
+jersey2-api
+credentials-binding
