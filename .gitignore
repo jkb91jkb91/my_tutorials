@@ -6,7 +6,9 @@
 terraform.tfstate
 terraform.tfstate.backup
 
+jenkins_home
 
+*.swp
 
 projectdevops.eu.crt
 projectdevops.eu.key
