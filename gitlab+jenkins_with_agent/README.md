@@ -47,6 +47,16 @@ Sprawdzamy IP dockera i wstawiamy do jenkins-casc.yaml
 ```
 ip addr show | grep docker0 | tail -n1 | awk '{print $2}' | cut -d'/' -f1 #172.17.0.1
 ```
+```
+clouds:
+  - docker:
+      containerCap: 3
+      dockerApi:
+        connectTimeout: 23
+        dockerHost:
+          uri: "tcp://172.17.0.1:2375"
+```
+
 # 1. Quick Start
 ```
 docker create volume jenkins_data
