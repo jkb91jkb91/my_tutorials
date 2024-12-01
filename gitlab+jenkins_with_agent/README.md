@@ -13,6 +13,9 @@
 -Alwasy use specific PLUGIN VERSIONS  
 -Container is run as jenkins user but for debugging you can enter with root later >> docker exec -u root -it jenkins bash  
 
+AGENT
+-your agent has to has privilleges to clone repo and so on
+
 
 How it works
 Load Balancer on gcp points to domain on GoDaddy  
@@ -36,7 +39,8 @@ LoadBalancer can use IAP to give privilleges only for specifif users
 0. Prerequisuites
 1. Quick Start  
 2. Descriptions of docker Image
-3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP  
+3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP
+4. Connect with Gitlab
 
 # 0. Prerequisuites for dynamic docker AGENT
 You have to go into docker settings
@@ -169,3 +173,11 @@ credentials-binding:687.v619cb_15e923f
 docker-plugin:1.7.0
 ```
 
+# 5 Connect with Gitlab
+Add to known_hosts
+```
+root@5a4705f118d1:/var/jenkins_home/.ssh# touch known_hosts
+root@5a4705f118d1:/var/jenkins_home/.ssh# chmod 600 known_hosts 
+root@5a4705f118d1:/var/jenkins_home/.ssh# ssh-keyscan -p 2022 gitlab.projectdevops.eu >> known_hosts
+root@5a4705f118d1:/var/jenkins_home/.ssh# 
+```
