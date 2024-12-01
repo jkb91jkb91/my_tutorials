@@ -40,7 +40,9 @@ LoadBalancer can use IAP to give privilleges only for specifif users
 1. Quick Start  
 2. Descriptions of docker Image
 3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP
-4. Connect with Gitlab
+4. Docker agent configuration
+5. Plugins
+6. Connect with Gitlab
 
 # 0. Prerequisuites for dynamic docker AGENT
 You have to go into docker settings
@@ -156,7 +158,11 @@ ssh-keyscan -p 2022 -t rsa gitlab.projectdevops.eu >> ~/.ssh/known_hosts
 
 ```
 
-# 4 Plugins
+#4. Docker agent configuration
+sd
+
+
+# 5 Plugins
 ```
 workflow-aggregator
 git:5.6.0
@@ -173,7 +179,7 @@ credentials-binding:687.v619cb_15e923f
 docker-plugin:1.7.0
 ```
 
-# 5 Connect with Gitlab
+# 6 Connect with Gitlab
 Add to known_hosts
 ```
 root@5a4705f118d1:/var/jenkins_home/.ssh# touch known_hosts
