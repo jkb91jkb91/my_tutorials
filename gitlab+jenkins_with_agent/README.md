@@ -32,10 +32,21 @@ LoadBalancer can use IAP to give privilleges only for specifif users
 
 
 # Details
+0. Prerequisuites
 1. Quick Start  
 2. Descriptions of docker Image
 3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP  
 
+# 0. Prerequisuites for dynamic docker AGENT
+You have to go into docker settings
+```
+sudo vim /lib/systemd/system/docker.service
+ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
+```
+Sprawdzamy IP dockera i wstawiamy do jenkins-casc.yaml
+```
+ip addr show | grep docker0 | tail -n1 | awk '{print $2}' | cut -d'/' -f1 #172.17.0.1
+```
 # 1. Quick Start
 ```
 docker create volume jenkins_data
