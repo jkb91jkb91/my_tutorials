@@ -19,6 +19,12 @@ GoDaddy has to A records
 -gitlab.projectdevops.eu  
 -jenkins.projectdevops.eu  
 
+GODADDY
+a	@	34.49.185.177  
+cname	gitlab	projectdevops.eu.  
+cname	jenkins	projectdevops.eu.  
+
+
 Why to use LoadBalancer here ??
 Because jenkins and gitlab are in VPC with only internal IP addresses
 LoadBalancer hides them  
