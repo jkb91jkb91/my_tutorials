@@ -45,7 +45,10 @@ LoadBalancer can use IAP to give privilleges only for specifif users
 6. Connect with Gitlab
 
 # 0. Prerequisuites for dynamic docker AGENT
-You have to go into docker settings
+
+
+
+a) USE THIS SETTINGS ONLY IF YOUR AGENT IS SETUP REMOTELY  NOT USE IN THIS TUTORIAL !!!!
 ```
 sudo vim /lib/systemd/system/docker.service
 ExecStart=/usr/bin/dockerd -H tcp://0.0.0.0:2375 -H unix:///var/run/docker.sock
@@ -63,6 +66,58 @@ clouds:
         dockerHost:
           uri: "tcp://172.17.0.1:2375"
 ```
+b) USE THIS FOR THIS TUTORIAL ON LOCAL HOST MACHINE TO START DOCKER AGENT <<< USE THIS
+
+jenkins-casc.yaml
+```
+clouds:
+  - docker:
+      containerCap: 3
+      dockerApi:
+        connectTimeout: 23
+        dockerHost:
+          uri: "unix:///var/run/docker.sock"
+```
+
+Dockerfile.agent
+Agent to copy repository uses keys so you have to prepare IMAGE  
+In this image you have to place ssh keys and config and known host to eneable cloning repository
+```
+FROM jenkins/agent
+
+
+USER root
+RUN mkdir -p /home/jenkins/.ssh
+# Skopiowanie plików SSH z build context do obrazu
+COPY ssh_config/config  /home/jenkins/.ssh/config
+COPY ssh_config/gitlab-key /home/jenkins/.ssh/gitlab-key
+
+
+USER root
+# Ustawienie odpowiednich uprawnień dla katalogu i plików SSH
+RUN chmod 700 /home/jenkins/.ssh 
+RUN chmod 600 /home/jenkins/.ssh/gitlab-key 
+RUN chmod 644 /home/jenkins/.ssh/config 
+RUN chown -R jenkins:jenkins /home/jenkins/.ssh
+
+COPY ssh_config/known_hosts /home/jenkins/.ssh/known_hosts
+RUN chown jenkins:jenkins /home/jenkins/.ssh/known_hosts
+
+
+USER jenkins
+```
+
+```
+docker login 
+docker build --no-cache -t jkb91/custom_agent:5.0 -f Dockerfile.agent .
+docker push jkb91/custom_agent:5.0
+```
+
+IN GUI on the settings you have to set >> https://jenkins.projectdevops.eu/manage/cloud/my-docker-cloud/configure >> Docker Agent Templates: Docker Image: jkb91/custom_agent:5.0  
+
+Set  
+In GUI >> https://jenkins.projectdevops.eu/manage/configureSecurity/ >> Host Key Verification Stratedy >> No Verfication  
+
 
 # 1. Quick Start
 ```
