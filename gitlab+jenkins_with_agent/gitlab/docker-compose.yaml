@@ -1,0 +1,20 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile.gitlab
+    container_name: gitlab
+    restart: always
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'https://gitlab.projectdevops.eu'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2022
+    ports:
+      - "80:80"
+      - "2022:22"
+    volumes:
+      - '/home/kuba/gitlab_backup/config:/etc/gitlab'
+      - '/home/kuba/gitlab_backup/logs:/var/log/gitlab'
+      - '/home/kuba/gitlab_backup/data:/var/opt/gitlab'

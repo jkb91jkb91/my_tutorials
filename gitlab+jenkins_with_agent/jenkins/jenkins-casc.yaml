@@ -1,0 +1,184 @@
+credentials:
+  system:
+    domainCredentials:
+    - credentials:
+      - string:
+          description: "TERRAFORM_CLOUD_TOKEN"
+          id: "TERRAFORM_CLOUD_TOKEN"
+          scope: GLOBAL
+          secret: "{AQAAABAAAACAPY4gDU3u+bh3mbDKPlUJpeuGsPovudbDUgN6saLTRBdVRBywByG3KYxiNbQQ8zQ9LnTn48/SRDpCWPC68m1BTnHHPm+FsPz0AT5PiCxkF2yB5DbMVImmpHAg9bYi7bA3e4VJnxKHGocJcCx7QJ2iLZXNtuwDXGXMBd3cgUK3aw9NNRXYQeDWzT9nb6AhajiP}"
+      - basicSSHUserPrivateKey:
+          id: "gitlab"
+          privateKeySource:
+            directEntry:
+              privateKey: "{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}"
+          scope: GLOBAL
+          username: "root"
+      - gitlabPersonalAccessToken:
+          id: "gitlab-token"
+          scope: GLOBAL
+          token: "{AQAAABAAAABQBQxe4Sz38dGy3LusbnbAVwS8MVTaHB/ssYbJVDO+JO+pWebGX+jdZ3pnEezLmcDpfHqIM7PWpsIKiMjHccLcFW84OLz3SKsQJNWfGq40JNGXJ9fjPEJtK2bf/Tx824AE}"
+jenkins:
+  agentProtocols:
+  - "JNLP4-connect"
+  - "Ping"
+  authorizationStrategy:
+    loggedInUsersCanDoAnything:
+      allowAnonymousRead: false
+  clouds:
+  - docker:
+      containerCap: 3
+      dockerApi:
+        connectTimeout: 23
+        dockerHost:
+          uri: "unix:///var/run/docker.sock"
+        readTimeout: 43
+      errorDuration: 313
+      name: "my-docker-cloud"
+      templates:
+      - connector:
+          jnlp:
+            jenkinsUrl: "http://jenkins:8080/"
+            user: "1000"
+        dockerTemplateBase:
+          cpuPeriod: 0
+          cpuQuota: 0
+          image: "jenkins/inbound-agent:latest-alpine-jdk21"
+        labelString: "alpine jdk21 alpine-jdk21 git-2.43"
+        name: "alpine-jdk21"
+        pullTimeout: 171
+        remoteFs: "/home/jenkins/agent"
+  crumbIssuer:
+    standard:
+      excludeClientIPFromCrumb: false
+  disableRememberMe: false
+  disabledAdministrativeMonitors:
+  - "hudson.util.DoubleLaunchChecker"
+  labelAtoms:
+  - name: "alpine"
+  - name: "alpine-jdk21"
+  - name: "built-in"
+  - name: "git-2.43"
+  - name: "jdk21"
+  markupFormatter: "plainText"
+  mode: NORMAL
+  myViewsTabBar: "standard"
+  nodeMonitors:
+  - "architecture"
+  - "clock"
+  - diskSpace:
+      freeSpaceThreshold: "1GiB"
+      freeSpaceWarningThreshold: "2GiB"
+  - "swapSpace"
+  - tmpSpace:
+      freeSpaceThreshold: "1GiB"
+      freeSpaceWarningThreshold: "2GiB"
+  - "responseTime"
+  numExecutors: 2
+  primaryView:
+    all:
+      name: "all"
+  projectNamingStrategy: "standard"
+  quietPeriod: 5
+  remotingSecurity:
+    enabled: true
+  scmCheckoutRetryCount: 0
+  securityRealm:
+    local:
+      allowsSignup: false
+      enableCaptcha: false
+      users:
+      - id: "kuba"
+        name: "kuba"
+        properties:
+        - "apiToken"
+        - "consoleUrlProvider"
+        - "mailer"
+        - "myView"
+        - preferredProvider:
+            providerId: "default"
+        - "timezone"
+        - "experimentalFlags"
+  slaveAgentPort: 50000
+  updateCenter:
+    sites:
+    - id: "default"
+      url: "https://updates.jenkins.io/update-center.json"
+  views:
+  - all:
+      name: "all"
+  viewsTabBar: "standard"
+globalCredentialsConfiguration:
+  configuration:
+    providerFilter: "none"
+    typeFilter: "none"
+appearance:
+  prism:
+    theme: PRISM
+security:
+  apiToken:
+    creationOfLegacyTokenEnabled: false
+    tokenGenerationOnCreationEnabled: false
+    usageStatisticsEnabled: true
+  cps:
+    hideSandbox: false
+  gitHooks:
+    allowedOnAgents: false
+    allowedOnController: false
+  gitHostKeyVerificationConfiguration:
+    sshHostKeyVerificationStrategy: "knownHostsFileVerificationStrategy"
+  globalJobDslSecurityConfiguration:
+    useScriptSecurity: true
+  sSHD:
+    port: -1
+  scriptApproval:
+    forceSandbox: false
+unclassified:
+  buildDiscarders:
+    configuredBuildDiscarders:
+    - "jobBuildDiscarder"
+  fingerprints:
+    fingerprintCleanupDisabled: false
+    storage: "file"
+  gitLabConnectionConfig:
+    connections:
+    - clientBuilderId: "autodetect"
+      connectionTimeout: 10
+      ignoreCertificateErrors: false
+      readTimeout: 10
+    useAuthenticatedEndpoint: true
+  gitLabServers:
+    servers:
+    - credentialsId: "gitlab-token"
+      manageWebHooks: true
+      name: "gitlab"
+      serverUrl: "https://gitlab.projectdevops.eu/"
+  junitTestResultStorage:
+    storage: "file"
+  location:
+    adminAddress: "address not configured yet <nobody@nowhere>"
+    url: "https://jenkins.projectdevops.eu/"
+  mailer:
+    charset: "UTF-8"
+    useSsl: false
+    useTls: false
+  pollSCM:
+    pollingThreadCount: 10
+  scmGit:
+    addGitTagAction: false
+    allowSecondFetch: false
+    createAccountBasedOnEmail: false
+    disableGitToolChooser: false
+    hideCredentials: false
+    showEntireCommitSummaryInChanges: false
+    useExistingAccountWithSameEmail: false
+  whitelist:
+    enabled: false
+tool:
+  git:
+    installations:
+    - home: "git"
+      name: "Default"
+  mavenGlobalConfig:
+    globalSettingsProvider: "standard"
+    settingsProvider: "standard"

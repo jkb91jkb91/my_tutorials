@@ -1,0 +1,4 @@
+FROM gitlab/gitlab-ce:latest
+
+COPY gitlab.rb /etc/gitlab/gitlab.rb
+RUN apt-get update && apt-get install vim -y && apt-get install netcat -y
