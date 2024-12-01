@@ -1,5 +1,0 @@
-Host gitlab.projectdevops.eu
-    HostName 10.0.3.2
-    User jenkins
-    IdentityFile ~/.ssh/gitlab-key
-kuba
