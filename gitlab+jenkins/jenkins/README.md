@@ -9,8 +9,21 @@
 -Remember that if container restart it will launch with "default" jcasc config so each new changes you have to add to jcasc config made in GUI  
 -USE docker volumes instead of volumes mapping >> its recomended  
 -After starting Jenkins remember to test persistence with docker restart jenkins  
-Always use specific version of IMAGE of Jenkins  
+-Always use specific version of IMAGE of Jenkins  
 -Alwasy use specific PLUGIN VERSIONS  
+
+
+How it works
+Load Balancer on gcp points to domain on GoDaddy  
+GoDaddy has to A records  
+-gitlab.projectdevops.eu  
+-jenkins.projectdevops.eu  
+
+Why to use LoadBalancer here ??
+Because jenkins and gitlab are in VPC with only internal IP addresses
+LoadBalancer hides them  
+LoadBalancer can use IAP to give privilleges only for specifif users  
+
 
 # Details
 1. Quick Start  
@@ -19,10 +32,11 @@ Always use specific version of IMAGE of Jenkins
 
 # 1. Quick Start
 ```
+docker create volume jenkins_data
 docker-compose up -d
 ```
 
-# 2. Docker Image
+# 2. Docker Image and docker-compose
 ```
 FROM jenkins/jenkins:2.479.1-lts
 USER root
@@ -43,6 +57,41 @@ USER jenkins
 You can read also about this case here:  
 ```
 https://stackoverflow.com/questions/63095927/give-permission-to-jenkins-to-access-unix-var-run-docker-sock
+```
+
+docker-compose.yaml  
+
+required for dynamic-agent
+```
+volumes
+  - /var/run/docker.sock:/var/run/docker.sock
+```
+
+```
+version: '3.8'
+
+services:
+  jenkins:
+    build:
+      context: . 
+      dockerfile: Dockerfile
+    container_name: jenkins
+    ports:
+      - "80:8080"    #Map to local port 80
+      - "50000:50000"  #Port dla agentów
+    volumes:
+      - jenkins_data:/var/jenkins_home  
+      - ./jenkins-casc.yaml:/var/jenkins_conf.yaml
+      - ./ssh_config/config:/var/jenkins_home/.ssh/config
+      - ./ssh_config/gitlab-key:/var/jenkins_home/.ssh/gitlab-key
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      - CASC_JENKINS_CONFIG=/var/jenkins_conf.yaml
+
+volumes:
+  jenkins_data:
+    driver: local
 ```
 
 # 3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP 
