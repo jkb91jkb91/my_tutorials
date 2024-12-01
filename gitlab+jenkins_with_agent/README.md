@@ -126,6 +126,11 @@ docker-compose up -d
 ```
 
 # 2. Docker Image and docker-compose
+Installing requires root
+On the end set jenkins user
+
+Allow jenkins user to use docker to run docker agent locally
+a) check >> getent group docker # docker:x:994:kuba  >> ARG DOCKERGID=994 >> Add jenkins user to docker group inside of the container  
 ```
 FROM jenkins/jenkins:2.479.1-lts
 USER root
@@ -148,7 +153,7 @@ You can read also about this case here:
 https://stackoverflow.com/questions/63095927/give-permission-to-jenkins-to-access-unix-var-run-docker-sock
 ```
 
-docker-compose.yaml  
+File docker-compose.yaml  
 
 required for dynamic-agent
 ```
@@ -183,7 +188,7 @@ volumes:
     driver: local
 ```
 
-# 3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP 
+# 3. Adding SSH to ~/.ssh/config to map DOMAIN on INTERNAL_IP not Public_IP >> ONLY ON AGENT IMAGE REQUIRED
 We want to make git clone by only internal IP address of Gitlab so we have to map URL somewhere
 in files: ssh_config we have:  
 config  
@@ -204,20 +209,22 @@ Host gitlab.projectdevops.eu
     IdentityFile ~/.ssh/gitlab-key
 ```
 
+DO ONLY IF ON JENKINS YOU WONT DISABLE >> CHECKING KNOWN_HOSTS>> IF YOU DISABLE IT > BELOW IS NOT REQUIRED  
 After starting jenkins possibly below also will be required   
 SSH PORT OF JENKINS: 2022 # for my case instead of 22 I used 2022  
 domain where gitlab runs: gitlab.projectdevops.eu  
+gitlab.projectdevops.eu  IP: 10.0.3.2
 ```
-docker exec -it jenkins bash
-ssh-keyscan -p 2022 -t rsa gitlab.projectdevops.eu >> ~/.ssh/known_hosts
+docker exec -it agent bash
+ssh-keyscan -p 2022 -t rsa 10.0.3.2:2022  >> ~/.ssh/known_hosts
 
 ```
 
 #4. Docker agent configuration
-sd
+look in section >> required for dynamic-agent  
 
 
-# 5 Plugins
+# 5 Plugins: Better to give directly PLUGIN VERSIONS
 ```
 workflow-aggregator
 git:5.6.0
@@ -235,10 +242,4 @@ docker-plugin:1.7.0
 ```
 
 # 6 Connect with Gitlab
-Add to known_hosts
-```
-root@5a4705f118d1:/var/jenkins_home/.ssh# touch known_hosts
-root@5a4705f118d1:/var/jenkins_home/.ssh# chmod 600 known_hosts 
-root@5a4705f118d1:/var/jenkins_home/.ssh# ssh-keyscan -p 2022 gitlab.projectdevops.eu >> known_hosts
-root@5a4705f118d1:/var/jenkins_home/.ssh# 
-```
+Agent Image has to have ssh keys inside and in Jenkins turn off known_hosts
