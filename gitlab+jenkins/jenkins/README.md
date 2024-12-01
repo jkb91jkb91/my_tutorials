@@ -75,4 +75,19 @@ ssh-keyscan -p 2022 -t rsa gitlab.projectdevops.eu >> ~/.ssh/known_hosts
 
 ```
 
-
+# 4 Plugins
+```
+workflow-aggregator
+git:5.6.0
+job-dsl:1.90
+configuration-as-code:1897.v79281e066ea_7
+pipeline-stage-view:2.34
+generic-webhook-trigger:2.2.5
+multibranch-scan-webhook-trigger:1.0.11
+gitlab-api:5.6.0-97.v6603a_83f8690
+gitlab-branch-source:715.v4c830b_ca_ef95
+gitlab-plugin:1.9.6
+jersey2-api:2.44-151.v6df377fff741
+credentials-binding:687.v619cb_15e923f
+docker-plugin:1.7.0
+```
