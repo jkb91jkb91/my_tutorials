@@ -11,6 +11,7 @@
 -After starting Jenkins remember to test persistence with docker restart jenkins  
 -Always use specific version of IMAGE of Jenkins  
 -Alwasy use specific PLUGIN VERSIONS  
+-Container is run as jenkins user but for debugging you can enter with root later >> docker exec -u root -it jenkins bash  
 
 
 How it works
