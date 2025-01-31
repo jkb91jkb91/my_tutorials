@@ -15,4 +15,6 @@ sudo apt update && sudo apt install -y apt-utils
 export GITLAB_HOME=$(pwd)
 sudo docker-compose up -d
 
+sudo docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
+
 ```
