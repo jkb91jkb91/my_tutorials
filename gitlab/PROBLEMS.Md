@@ -1,5 +1,5 @@
 
-git@35.223.44.15:root/gitflow.git <<<< THIS IS NOT VALID LINK >> PORT NOT EXPOSED 
+git@35.223.44.15:root/gitflow.git <<<< THIS IS NOT VALID LINK >> PORT NOT EXPOSED  
 ssh://git@35.223.44.15:2424/root/gitflow.git <<< THIS IS VALID >>> PORT EXPOSED
 
 # docker-compose ssh ports 2424:22 << PROBLEMS WITH SSH 22  
