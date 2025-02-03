@@ -64,6 +64,13 @@ services:
       - jfrog:/var/opt/jfrog/artifactory
       - ./artifactory-config:/var/opt/jfrog/artifactory/etc/artifactory
       - ./artifactory-config/master.key:/opt/jfrog/artifactory/var/etc/security/master.key  # Zamontowanie master.key
+      - ./artifactory-config/join.key:/opt/jfrog/artifactory/var/security/join.key  # Zamontowanie join.key
+    environment:
+      - JF_SHARED_RESTRICTEDMODE_ENABLED=false
+      - JF_SHARED_NODE_ID=
+      - JF_SHARED_NODE_IP=
+      - JF_ACCESS_USEEXTERNALTOPOLOGY=false
+      - JF_PRODUCT_DATA_INTERNAL=/var/opt/jfrog/artifactory
 volumes:
   jfrog:
 networks:
