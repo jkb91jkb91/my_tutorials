@@ -1,5 +1,5 @@
-# 1 PACKAGE REGISTRY JFROG
-# 2 Docker REGISTRY JFROG
+# 1 PACKAGE REGISTRY JFROG  
+# 2 Docker REGISTRY JFROG >> https://medium.com/@tomer.klein/deploying-jfrog-container-registry-within-a-dockerized-infrastructure-a3f67328bd27  
 
 
 
