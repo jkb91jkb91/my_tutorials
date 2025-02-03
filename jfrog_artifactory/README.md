@@ -52,7 +52,7 @@ networks:
 version: "3.3"
 services:
   artifactory-service:
-    image: docker.bintray.io/jfrog/artifactory-jcr:latest 
+    image: releases-docker.jfrog.io/jfrog/artifactory-jcr:7.63.14
     container_name: artifactory
     restart: always
     networks:
@@ -63,9 +63,7 @@ services:
     volumes:
       - jfrog:/var/opt/jfrog/artifactory
       - ./artifactory-config:/var/opt/jfrog/artifactory/etc/artifactory
-    environment:
-      - JCR_HOME=/var/opt/jfrog/artifactory
-
+      - ./artifactory-config/master.key:/opt/jfrog/artifactory/var/etc/security/master.key  # Zamontowanie master.key
 volumes:
   jfrog:
 networks:
