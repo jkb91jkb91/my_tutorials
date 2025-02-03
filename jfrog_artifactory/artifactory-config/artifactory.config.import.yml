@@ -1,0 +1,8 @@
+GeneralConfiguration: 
+  eula: 
+    accepted: true  # Akceptacja EULA
+    
+OnboardingConfiguration:
+  repoTypes:
+    - docker
+    - helm  # Typy repozytoriów, które chcesz włączyć
