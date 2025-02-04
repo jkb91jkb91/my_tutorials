@@ -3,7 +3,7 @@
 
 
 
-https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-single-node-with-docker-compose
+[https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-single-node-with-docker-compose](https://jfrog.com/download-jfrog-container-registry/)
 
 
 # 1 Package REGISTRY JFROG
