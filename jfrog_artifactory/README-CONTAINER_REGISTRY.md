@@ -4,7 +4,10 @@ https://jfrog.com/download-jfrog-container-registry/
 # 2 ACCEPT EULA  
 # 3 CREATE EXAMPLE DOCKER REGISTRY
 # 4 LOGIN TO DOCKER REGISTRY  
-# 5 DEBUGGING    
+# 5 PUSH SIMPLE ALPINE IMAGE  
+# 6 DOWNLOAD IMAGE  
+# 7 DEBUGGING     
+ 
 
 
 PREREQUISUITES CLOUD  
@@ -95,7 +98,11 @@ docker pull alpine
 docker tag alpine:latest 34.68.19.150:8082/kuba-docker-local/alpine:latest
 docker push 34.68.19.150:8082/kuba-docker-local/alpine
 ```
-# 4 DEBUGGING    
+
+# 6 DOWNLOAD IMAGE
+```
+```
+# 7 DEBUGGING    
 ```
 curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
 ```
