@@ -58,7 +58,8 @@ ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZE
 ```
 ArtifactoryURL=http://34.68.19.150:8082
 curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
-
+```
+```
 jakub_g26101991@gitlab:~$ curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
 *   Trying 34.68.19.150:8082...
 * Connected to 34.68.19.150 (34.68.19.150) port 8082
