@@ -1,6 +1,6 @@
 # 1 PACKAGE REGISTRY JFROG  
 # 2 Docker REGISTRY JFROG >> https://medium.com/@tomer.klein/deploying-jfrog-container-registry-within-a-dockerized-infrastructure-a3f67328bd27  
-
+# 3 Instalacja container registry zgodnie z dokumentacja
 
 
 [https://jfrog.com/help/r/jfrog-installation-setup-documentation/install-artifactory-single-node-with-docker-compose](https://jfrog.com/download-jfrog-container-registry/)
@@ -86,4 +86,34 @@ OnboardingConfiguration:
   repoTypes:
     - docker
     - helm  # Typy repozytoriów, które chcesz włączyć
+```
+
+
+# 3 Instalacja container registry zgodnie z dokumentacja
+https://jfrog.com/download-jfrog-container-registry/ # tutaj pobierajac docker-compsose >> wejdz w NEtwork i pod 302 znajdziesz link, ktory zostal uzyty ponizej  
+```
+wget -O jfrog-container.tar https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/jcr/docker/jfrog-artifactory-jcr/[RELEASE]/jfrog-artifactory-jcr-[RELEASE]-compose.tar.gz?_gl=1*c39zeb*_gcl_au*NTk4MTUyMTg1LjE3Mzg1OTE1NzM.*FPAU*NTk4MTUyMTg1LjE3Mzg1OTE1NzM.*_ga*MTE3MzcwMzk4Mi4xNzM4NTg0NDYw*_ga_SQ1NR9VTFJ*MTczOTEwMTM4My45LjEuMTczOTEwMTQ5MC4wLjAuMTY1NzIwOTUwMQ..*_fplc*ZlRLMEh1a2ZzYSUyQkJSc1psbmdqdTdWcUhpRmolMkJDQ0xyd0hkZGNzWjEyRXl1cm1ScHlXS0paYlI2aGFSUlZSNGtGOXpUMGlRZzJWQWVIUncyMDJQQWRocnRacXlIJTJGT3hJa0ZmNXNjcU9NYjIlMkJUMjVYb0ZmdWtONXlTcHBJdkElM0QlM0Q.
+```
+```
+tar -xf jfrog-container.tar
+```
+
+Dostaniemy taki folder >> artifactory-jcr-7.104.6  oraz takie pliki  
+```
+README.md  bin  config.sh  templates  third-party
+```
+
+KOMENDA
+```
+sudo ./config.sh
+```
+```
+Installation Directory (Default: /root/.jfrog/artifactory): 
+```
+
+FOR QUICK SETUP
+```
+Do you want to install PostgreSQL? [Y/n]: N
+Enter database type, supported values [ postgresql mssql mariadb mysql oracle derby ]: derby
+start:               docker compose -p rt up -d
 ```
