@@ -52,6 +52,73 @@ KOMENDA
 sudo ./config.sh
 ```
 ```
+jakub_g26101991@gitlab:~/artifactory-jcr-7.104.6$ sudo ./config.sh 
+
+
+Beginning JFrog Artifactory setup
+
+
+Validating System requirements
+
+Installation Directory (Default: /root/.jfrog/artifactory): /home/jakub_g26101991/jfrog-dir
+
+Running system diagnostics checks, logs can be found at [/home/jakub_g26101991/artifactory-jcr-7.104.6/systemDiagnostics.log]
+[ERROR] Ulimit level for open files is less than the recommended minimum 32000
+
+[WARN] One or more system diagnostic checks have failed, check [/home/jakub_g26101991/artifactory-jcr-7.104.6/systemDiagnostics.log] for additional details
+
+Triggering migration script. This will migrate if needed and may take some time.
+
+Migration logs will be available at [/home/jakub_g26101991/artifactory-jcr-7.104.6/bin/migration.log]. The file will be archived at [/home/jakub_g26101991/jfrog-dir/var/log] after installation
+
+For IPv6 address, enclose value within square brackets as follows : [<ipv6_address>]
+Please specify the IP address of this machine (Default: 10.128.0.4): 34.68.19.150
+
+Are you adding an additional node to an existing product cluster? [y/N]: n
+
+The installer can install a PostgreSQL database, or you can connect to an existing compatible PostgreSQL database
+(https://jfrog.com/help/r/jfrog-installation-setup-documentation/requirements-matrix)
+If you are upgrading from an existing installation, select N if you have externalized PostgreSQL, select Y if not.
+Do you want to install PostgreSQL? [Y/n]: y
+
+To setup PostgreSQL, please enter a password
+database password: 
+
+confirm database password: 
+
+[WARN] Confirmed database password doesn't match
+
+To setup PostgreSQL, please enter a password
+database password (****): 
+
+confirm database password: 
+
+Creating third party directories (if necessary)
+
+Attempting to seed PostgreSQL. This may take some time.
+
+Successfully seeded PostgreSQL
+
+Docker setup complete
+
+Installation directory: [/home/jakub_g26101991/jfrog-dir] contains data and configurations.
+
+Use docker-compose commands to start the application. Once the application has started, it can be accessed at [http://10.128.0.4:8082]
+
+Examples:
+cd /home/jakub_g26101991/artifactory-jcr-7.104.6
+
+
+start postgresql:    docker compose -p rt-postgres -f docker-compose-postgres.yaml up -d
+stop  postgresql:    docker compose -p rt-postgres -f docker-compose-postgres.yaml down
+start:               docker compose -p rt up -d
+stop:                docker compose -p rt down
+
+NOTE: The compose file uses several environment variables from the .env file. Remember to run from within the [/home/jakub_g26101991/artifactory-jcr-7.104.6] folder
+
+Done
+```
+```
 Installation Directory (Default: /root/.jfrog/artifactory): 
 ```
 
