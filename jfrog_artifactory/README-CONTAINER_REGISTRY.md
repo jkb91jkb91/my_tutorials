@@ -53,5 +53,8 @@ ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZE
 
 # 2 Debugging  
 ```
+curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
+```
+```
 docker logs artifactory --tail 50
 ```
