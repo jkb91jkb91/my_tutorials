@@ -1,5 +1,6 @@
  
 # 1 Instalacja container registry zgodnie z dokumentacja
+# 2 Debugging  
 
 PREREQUISUITES CLOUD  
 -UNBLOCK PORT artifactory:8081/8082  
@@ -48,3 +49,9 @@ start:               docker compose -p rt up -d
 
 
 ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZESNIEJ I MUSI JUZ STAC
+
+
+# 2 Debugging  
+```
+docker logs artifactory --tail 50
+```
