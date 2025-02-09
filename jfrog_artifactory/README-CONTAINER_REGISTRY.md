@@ -1,7 +1,9 @@
  
-# 1 Instalacja container registry zgodnie z dokumentacja
-# 2 Accept EULA  
-# 3 Debugging  
+# 1 INSTALLATION JFROG CONTAINER REGISTRY (ACCORDING TO OFFICIAL DOCUMENTATION)  DOCKER-COMPOSE  
+https://jfrog.com/download-jfrog-container-registry/  
+# 2 ACCEPT EULA  
+# 3 LOGIN TO DOCKER REGISTRY  
+# 4 DEBUGGING    
 
 
 PREREQUISUITES CLOUD  
@@ -20,7 +22,7 @@ docker info | grep -i "insecure registries"
  Insecure Registries:
 ```
 
-# 1 Instalacja container registry zgodnie z dokumentacja
+# 1 INSTALLATION JFROG CONTAINER REGISTRY (ACCORDING TO OFFICIAL DOCUMENTATION) 
 https://jfrog.com/download-jfrog-container-registry/ # tutaj pobierajac docker-compsose >> wejdz w NEtwork i pod 302 znajdziesz link, ktory zostal uzyty ponizej  
 ```
 wget -O jfrog-container.tar https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/jcr/docker/jfrog-artifactory-jcr/[RELEASE]/jfrog-artifactory-jcr-[RELEASE]-compose.tar.gz?_gl=1*c39zeb*_gcl_au*NTk4MTUyMTg1LjE3Mzg1OTE1NzM.*FPAU*NTk4MTUyMTg1LjE3Mzg1OTE1NzM.*_ga*MTE3MzcwMzk4Mi4xNzM4NTg0NDYw*_ga_SQ1NR9VTFJ*MTczOTEwMTM4My45LjEuMTczOTEwMTQ5MC4wLjAuMTY1NzIwOTUwMQ..*_fplc*ZlRLMEh1a2ZzYSUyQkJSc1psbmdqdTdWcUhpRmolMkJDQ0xyd0hkZGNzWjEyRXl1cm1ScHlXS0paYlI2aGFSUlZSNGtGOXpUMGlRZzJWQWVIUncyMDJQQWRocnRacXlIJTJGT3hJa0ZmNXNjcU9NYjIlMkJUMjVYb0ZmdWtONXlTcHBJdkElM0QlM0Q.
@@ -52,12 +54,14 @@ start:               docker compose -p rt up -d
 
 ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZESNIEJ I MUSI JUZ STAC
 
-# 2 Accept EULA  
+# 2 ACCEPT EULA 
 ```
 ArtifactoryURL=http://34.68.19.150:8082
 curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
 ```
-# 2 Debugging  
+# 3 LOGIN TO DOCKER REGISTRY 
+
+# 4 DEBUGGING    
 ```
 curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
 ```
