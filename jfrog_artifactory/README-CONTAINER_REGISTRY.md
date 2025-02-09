@@ -52,6 +52,11 @@ KOMENDA
 ```
 sudo ./config.sh
 ```
+GIVE FULL PATH TO >> jfrog-dir  
+FIVE IP ADDRESS   >> http://34.68.19.150/  OR DOMAIN  
+INSTALL POSTGRESQL  
+GIVE DEFAULT PASS TO POSTGRESQL: password  
+
 ```
 jakub_g26101991@gitlab:~/artifactory-jcr-7.104.6$ sudo ./config.sh 
 
