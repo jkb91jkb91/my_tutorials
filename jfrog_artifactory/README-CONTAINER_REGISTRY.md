@@ -6,7 +6,7 @@ PREREQUISUITES CLOUD
 -5432 < postgres  
 
 JESLI CHCESZ SIE ZALOGOWAC NA HTTP DOCKEREM MUSISZ DODAC INSECURE REGISTRIES DO CELOW TESTOWYCH  
-sudo nano /etc/docker/daemon.json  
+sudo nano /etc/docker/daemon.json  >> IP maszyny 34.68.19.150  
 ```
 {
   "insecure-registries": ["34.68.19.150:8082"]
