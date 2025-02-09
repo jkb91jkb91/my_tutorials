@@ -112,3 +112,7 @@ curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
 ```
 docker logs artifactory --tail 50
 ```
+Remove all unused containers
+```
+docker container prune -f
+```
