@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  web:
+    build:
+      context: ./
+      dockerfile: Dockerfile.gitlab
+    container_name: gitlab
+    restart: always
+    networks:
+      - ci_net
+    environment:
+      GITLAB_OMNIBUS_CONFIG: |
+        external_url 'http://gitlab.devopsproject.pl'
+        gitlab_rails['gitlab_shell_ssh_port'] = 2424
+        nginx['redirect_http_to_https'] = true
+        nginx['ssl_certificate'] = "/etc/letsencrypt/live/gitlab.devopsproject.pl/fullchain.pem"
+        nginx['ssl_certificate_key'] = "/etc/letsencrypt/live/gitlab.devopsproject.pl/privkey.pem"
+    ports:
+      - "80:80"
+      - "2424:22"
+      - "443:443"
+    volumes:
+      - '$GITLAB_HOME/config:/etc/gitlab'
+      - '$GITLAB_HOME/logs:/var/log/gitlab'
+      - '$GITLAB_HOME/data:/var/opt/gitlab'
+      - '/etc/letsencrypt:/etc/letsencrypt:ro'
+
+networks:
+  ci_net:
