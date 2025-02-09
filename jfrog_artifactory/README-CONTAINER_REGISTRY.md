@@ -53,7 +53,7 @@ KOMENDA
 sudo ./config.sh
 ```
 GIVE FULL PATH TO >> jfrog-dir  
-FIVE IP ADDRESS   >> http://34.68.19.150/  OR DOMAIN  
+GIVE IP ADDRESS   >> 34.68.19.150  OR DOMAIN  
 INSTALL POSTGRESQL  
 GIVE DEFAULT PASS TO POSTGRESQL: password  
 
@@ -133,7 +133,7 @@ docker compose -p rt-postgres -f docker-compose-postgres.yaml up -d
 docker compose -p rt up -d
 ```
 
-# 2 ACCEPT EULA 
+# 3 ACCEPT EULA 
 ```
 ArtifactoryURL=http://34.68.19.150:8082
 curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
@@ -159,26 +159,26 @@ jakub_g26101991@gitlab:~$ curl -XPOST -vu admin:password ${ArtifactoryURL}/artif
 < 
 ```
 
-# 3 CREATE EXAMPLE DOCKER REGISTRY
+# 4 CREATE EXAMPLE DOCKER REGISTRY
 >>> http://34.68.19.150:8082/ui/admin/repositories/local  
 Utworz kuba-docker-local  
 
-# 4 LOGIN TO DOCKER REGISTRY 
+# 5 LOGIN TO DOCKER REGISTRY 
 ```
 docker login 34.68.19.150:8082 -u 'admin' -p'password'
 ```
-# 5 PUSH SIMPLE ALPINE IMAGE
+# 6 PUSH SIMPLE ALPINE IMAGE
 ```
 docker pull alpine
 docker tag alpine:latest 34.68.19.150:8082/kuba-docker-local/alpine:latest
 docker push 34.68.19.150:8082/kuba-docker-local/alpine
 ```
 
-# 6 DOWNLOAD IMAGE
+# 7 DOWNLOAD IMAGE
 ```
 docker pull 34.68.19.150:8082/kuba-docker-local/alpine:latest
 ```
-# 7 DEBUGGING    
+# 8 DEBUGGING    
 ```
 curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
 ```
