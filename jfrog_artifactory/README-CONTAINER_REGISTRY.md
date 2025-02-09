@@ -58,3 +58,12 @@ curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
 ```
 docker logs artifactory --tail 50
 ```
+```
+OKjakub_g26101991@gitlab:~curl -u admin:password "http://34.68.19.150:8082/artifactory/api/docker/kuba-docker-local/v2/_catalog"g"
+{
+  "errors" : [ {
+    "status" : 503,
+    "message" : "status code: 503, reason phrase: In order to use Artifactory you must accept the EULA first"
+  } ]
+}
+```
