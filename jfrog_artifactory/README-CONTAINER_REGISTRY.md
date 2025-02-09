@@ -58,6 +58,25 @@ ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZE
 ```
 ArtifactoryURL=http://34.68.19.150:8082
 curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
+
+jakub_g26101991@gitlab:~$ curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
+*   Trying 34.68.19.150:8082...
+* Connected to 34.68.19.150 (34.68.19.150) port 8082
+* Server auth using Basic with user 'admin'
+> POST /artifactory/ui/jcr/eula/accept HTTP/1.1
+> Host: 34.68.19.150:8082
+> Authorization: Basic YWRtaW46cGFzc3dvcmQ=
+> User-Agent: curl/8.5.0
+> Accept: */*
+> 
+< HTTP/1.1 200 OK
+< Content-Length: 0
+< Date: Sun, 09 Feb 2025 13:35:43 GMT
+< Sessionvalid: false
+< X-Artifactory-Id: 6d1731817a707a2f:-416a877d:194eae4b80d:-8000
+< X-Artifactory-Node-Id: gitlab.us-central1-c.c.gitlab-449514.internal
+< X-Jfrog-Version: Artifactory/7.104.6 80406900
+< 
 ```
 # 3 LOGIN TO DOCKER REGISTRY 
 
