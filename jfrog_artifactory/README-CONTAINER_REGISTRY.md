@@ -79,6 +79,9 @@ jakub_g26101991@gitlab:~$ curl -XPOST -vu admin:password ${ArtifactoryURL}/artif
 < 
 ```
 # 3 LOGIN TO DOCKER REGISTRY 
+```
+docker login 34.68.19.150:8082 -u 'admin' -p'password'
+```
 
 # 4 DEBUGGING    
 ```
