@@ -1,6 +1,8 @@
  
 # 1 Instalacja container registry zgodnie z dokumentacja
-# 2 Debugging  
+# 2 Accept EULA  
+# 3 Debugging  
+
 
 PREREQUISUITES CLOUD  
 -UNBLOCK PORT artifactory:8081/8082  
@@ -50,7 +52,11 @@ start:               docker compose -p rt up -d
 
 ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZESNIEJ I MUSI JUZ STAC
 
-
+# 2 Accept EULA  
+```
+ArtifactoryURL=http://34.68.19.150:8082
+curl -XPOST -vu admin:password ${ArtifactoryURL}/artifactory/ui/jcr/eula/accept
+```
 # 2 Debugging  
 ```
 curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
