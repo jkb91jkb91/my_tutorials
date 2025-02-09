@@ -12,7 +12,10 @@ sudo nano /etc/docker/daemon.json  >> IP maszyny 34.68.19.150
   "insecure-registries": ["34.68.19.150:8082"]
 }
 ```
-
+docker info | grep -i "insecure registries"  
+```
+ Insecure Registries:
+```
 
 # 1 Instalacja container registry zgodnie z dokumentacja
 https://jfrog.com/download-jfrog-container-registry/ # tutaj pobierajac docker-compsose >> wejdz w NEtwork i pod 302 znajdziesz link, ktory zostal uzyty ponizej  
