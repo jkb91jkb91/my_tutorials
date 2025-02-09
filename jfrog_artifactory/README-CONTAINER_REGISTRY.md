@@ -2,8 +2,9 @@
 # 1 INSTALLATION JFROG CONTAINER REGISTRY (ACCORDING TO OFFICIAL DOCUMENTATION)  DOCKER-COMPOSE  
 https://jfrog.com/download-jfrog-container-registry/  
 # 2 ACCEPT EULA  
-# 3 LOGIN TO DOCKER REGISTRY  
-# 4 DEBUGGING    
+# 3 CREATE EXAMPLE DOCKER REGISTRY
+# 4 LOGIN TO DOCKER REGISTRY  
+# 5 DEBUGGING    
 
 
 PREREQUISUITES CLOUD  
@@ -79,11 +80,21 @@ jakub_g26101991@gitlab:~$ curl -XPOST -vu admin:password ${ArtifactoryURL}/artif
 < X-Jfrog-Version: Artifactory/7.104.6 80406900
 < 
 ```
-# 3 LOGIN TO DOCKER REGISTRY 
+
+# 3 CREATE EXAMPLE DOCKER REGISTRY
+>>> http://34.68.19.150:8082/ui/admin/repositories/local  
+Utworz kuba-docker-local  
+
+# 4 LOGIN TO DOCKER REGISTRY 
 ```
 docker login 34.68.19.150:8082 -u 'admin' -p'password'
 ```
-
+# 5 PUSH SIMPLE ALPINE IMAGE
+```
+docker pull alpine
+docker tag alpine:latest 34.68.19.150:8082/kuba-docker-local/alpine:latest
+docker push 34.68.19.150:8082/kuba-docker-local/alpine
+```
 # 4 DEBUGGING    
 ```
 curl -u admin:password "http://34.68.19.150:8082/artifactory/api/system/ping"
