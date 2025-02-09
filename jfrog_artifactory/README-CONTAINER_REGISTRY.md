@@ -34,7 +34,7 @@ https://jfrog.com/download-jfrog-container-registry/ # tutaj pobierajac docker-c
 wget -O jfrog-container.tar https://releases.jfrog.io/artifactory/bintray-artifactory/org/artifactory/jcr/docker/jfrog-artifactory-jcr/[RELEASE]/jfrog-artifactory-jcr-[RELEASE]-compose.tar.gz?_gl=1*c39zeb*_gcl_au*NTk4MTUyMTg1LjE3Mzg1OTE1NzM.*FPAU*NTk4MTUyMTg1LjE3Mzg1OTE1NzM.*_ga*MTE3MzcwMzk4Mi4xNzM4NTg0NDYw*_ga_SQ1NR9VTFJ*MTczOTEwMTM4My45LjEuMTczOTEwMTQ5MC4wLjAuMTY1NzIwOTUwMQ..*_fplc*ZlRLMEh1a2ZzYSUyQkJSc1psbmdqdTdWcUhpRmolMkJDQ0xyd0hkZGNzWjEyRXl1cm1ScHlXS0paYlI2aGFSUlZSNGtGOXpUMGlRZzJWQWVIUncyMDJQQWRocnRacXlIJTJGT3hJa0ZmNXNjcU9NYjIlMkJUMjVYb0ZmdWtONXlTcHBJdkElM0QlM0Q.
 ```
 ```
-tar -xf jfrog-container.tar
+tar -xf jfrog-container.tar $$ cd artifactory-jcr-7.104.6
 ```
 
 Dostaniemy taki folder >> artifactory-jcr-7.104.6  oraz takie pliki  
