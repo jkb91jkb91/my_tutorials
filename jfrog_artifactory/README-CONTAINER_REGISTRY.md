@@ -1,13 +1,14 @@
  
 # 1 INSTALLATION JFROG CONTAINER REGISTRY (ACCORDING TO OFFICIAL DOCUMENTATION)  DOCKER-COMPOSE  
 https://jfrog.com/download-jfrog-container-registry/  
-# 2 ACCEPT EULA  
-# 3 CREATE EXAMPLE DOCKER REGISTRY
-# 4 LOGIN TO DOCKER REGISTRY  
-# 5 PUSH SIMPLE ALPINE IMAGE  
-# 6 DOWNLOAD IMAGE  
-# 7 DELETE IAMGE WITH CURL
-# 8 DEBUGGING     
+# 2 RUN DOCKER-COMPOSE  
+# 3 ACCEPT EULA  
+# 4 CREATE EXAMPLE DOCKER REGISTRY
+# 5 LOGIN TO DOCKER REGISTRY  
+# 6 PUSH SIMPLE ALPINE IMAGE  
+# 7 DOWNLOAD IMAGE  
+# 8 DELETE IAMGE WITH CURL
+# 9 DEBUGGING     
 
  
 
@@ -118,19 +119,14 @@ NOTE: The compose file uses several environment variables from the .env file. Re
 
 Done
 ```
-```
-Installation Directory (Default: /root/.jfrog/artifactory): 
-```
 
-FOR QUICK SETUP
-```
-Do you want to install PostgreSQL? [Y/n]: N
-Enter database type, supported values [ postgresql mssql mariadb mysql oracle derby ]: derby
-start:               docker compose -p rt up -d
-```
-
+# 2 RUN DOCKER-COMPOSE  
 
 ZEBY ODPALIC docker-compose dla artifactory BAZA DANYCH MUSI BYC POSTAWIONA WCZESNIEJ I MUSI JUZ STAC
+```
+docker compose -p rt-postgres -f docker-compose-postgres.yaml up -d
+docker compose -p rt up -d
+```
 
 # 2 ACCEPT EULA 
 ```
