@@ -41,7 +41,12 @@ Dostaniemy taki folder >> artifactory-jcr-7.104.6  oraz takie pliki
 ```
 README.md  bin  config.sh  templates  third-party
 ```
-
+TWORZYMY FOLDER GDZIE BEDA PLIKI ARTIFACTORY
+```
+mkdir jfrog-dir
+sudo chown -R 1030:1030 jfrog-dir
+sudo chmod -R 700 jfrog-dir
+```
 KOMENDA
 ```
 sudo ./config.sh
