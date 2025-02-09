@@ -6,7 +6,9 @@ https://jfrog.com/download-jfrog-container-registry/
 # 4 LOGIN TO DOCKER REGISTRY  
 # 5 PUSH SIMPLE ALPINE IMAGE  
 # 6 DOWNLOAD IMAGE  
-# 7 DEBUGGING     
+# 7 DELETE IAMGE WITH CURL
+# 8 DEBUGGING     
+
  
 
 
@@ -101,6 +103,7 @@ docker push 34.68.19.150:8082/kuba-docker-local/alpine
 
 # 6 DOWNLOAD IMAGE
 ```
+docker pull 34.68.19.150:8082/kuba-docker-local/alpine:latest
 ```
 # 7 DEBUGGING    
 ```
