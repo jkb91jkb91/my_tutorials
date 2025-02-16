@@ -3,6 +3,8 @@
 # 2 Paste configuration to config >> Logs(apache) && Metrics  
 # 3 Run  
 
+
+
 # 0 IAM ROLE for EC2  
 Create custom role cloudwatch-ec2  
 CloudWatchAgentServerPolicy  
