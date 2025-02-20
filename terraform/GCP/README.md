@@ -1,11 +1,11 @@
 # DETAILS
-0.) .gitignore
-1.) DIFFFERENT ENVIRONMENTS WITHOUT WORKSPACES 
-  a) staging/terraform.tfvars
-  b) production/terraform.tfvars
-2.) ONE ENV WITH USING WORKSPACES
-  a) main.tf  
-X) backend
+0.) .gitignore  
+1.) DIFFFERENT ENVIRONMENTS WITHOUT WORKSPACES   
+  a) staging/terraform.tfvars  
+  b) production/terraform.tfvars  
+2.) ONE ENV WITH USING WORKSPACES  
+  a) main.tf   
+X) backend  
 
 
 #0 .gitignore
