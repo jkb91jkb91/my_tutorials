@@ -17,4 +17,12 @@ sudo docker-compose up -d
 
 sudo docker exec -it gitlab grep 'Password:' /etc/gitlab/initial_root_password
 
+PASSWORD RESET FOR ROOT AND SET new_password
+sudo docker exec -it gitlab bash -c "gitlab-rails console -e production <<EOF
+user = User.find_by(username: 'root')
+user.password = 'new_password'
+user.password_confirmation = 'new_password'
+user.save!
+EOF"
+
 ```
