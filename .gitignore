@@ -6,7 +6,8 @@
 terraform.tfstate
 terraform.tfstate.backup
 
-
+# Terraform folder roboczy
+.terraform/
 
 projectdevops.eu.crt
 projectdevops.eu.key
