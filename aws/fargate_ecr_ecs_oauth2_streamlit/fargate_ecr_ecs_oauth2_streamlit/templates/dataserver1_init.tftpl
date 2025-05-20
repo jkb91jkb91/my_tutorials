@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# VARIABLES
+
+# EBS
+echo "kuba" >> /tmp/kuba.txt
+sudo mkfs -t ext4 /dev/xvdh
+sudo mkdir -p /mnt/ebs
+sudo mount /dev/xvdh /mnt/ebs
+echo "/dev/xvdh /mnt/ebs ext4 defaults,nofail 0 2" | sudo tee -a /etc/fstab
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# EFS
+sudo apt update && sudo apt install -y nfs-common
+sudo mkdir -p /mnt/efs
+sudo mount -t nfs4 ${nfs_id}.efs.us-east-1.amazonaws.com:/ /mnt/efs
+sudo chown ubuntu:ubuntu /mnt/efs
+sudo chmod 777 /mnt/efs
