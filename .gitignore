@@ -9,6 +9,9 @@ terraform.tfstate.backup
 # Terraform folder roboczy
 .terraform/
 
+# Lock
+.terraform.lock.hcl
+
 projectdevops.eu.crt
 projectdevops.eu.key
 .terraform/
