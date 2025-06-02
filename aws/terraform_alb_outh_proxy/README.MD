@@ -3,3 +3,6 @@
 2) TO DO:  
 -ACM from data  
 -EFS mapping  
+
+
+![Diagram](diagram.png)
