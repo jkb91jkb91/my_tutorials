@@ -18,7 +18,6 @@ projectdevops.eu.crt
 projectdevops.eu.key
 .terraform/
 *.tfplan
-*.tfvars
 crash.log
 *.log
 .terraform.rc
