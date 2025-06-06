@@ -1,140 +1,147 @@
 resource "aws_ecs_cluster" "fargate_cluster" {
-  name = "fargate-mdp-navigator-cluster"
+  name = var.cluster_name
 }
-
-
-# resource "aws_ecs_task_definition" "terraform_mdp" {
-#   family                   = "terraform-mdp"
-#   requires_compatibilities = ["FARGATE"]
-#   network_mode             = "awsvpc"
-#   cpu                      = "256"
-#   memory                   = "512"
-
-#   execution_role_arn = var.execution_role_arn # "arn:aws:iam::311141565994:role/fargateEcsTaskExecutionRole"
-#   task_role_arn      = var.task_role_arn      #"arn:aws:iam::311141565994:role/fargateExtraRole"
-
-#   container_definitions = jsonencode([
-#     {
-#       name      = "streamlit"
-#       image     = "${var.ecr_repo_url}:latest" #"311141565994.dkr.ecr.us-east-1.amazonaws.com/mdp-navigator-repo:latest"
-#       essential = true
-#       portMappings = [
-#         {
-#           containerPort = 8080
-#           protocol      = "tcp"
-#         }
-#       ]
-#     }
-#   ])
-# }
 
 resource "aws_cloudwatch_log_group" "ecs_logs" {
-  name              = "/ecs/terraform-mdp"
-  retention_in_days = 7
+  name              = var.log_group_name
+  retention_in_days = var.logs_retention_in_days
 
   tags = {
-    Name = "ecs-logs"
+    Name = var.log_group_name
   }
 }
 
+resource "aws_cloudwatch_log_group" "apps" {
+  for_each = local.apps_by_name
+  name              = "/ecs/${each.key}"
+  retention_in_days = var.logs_retention_in_days
+}
 
-resource "aws_ecs_task_definition" "terraform_mdp" {
-  family                   = "terraform-mdp"
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  cpu                      = "256"
-  memory                   = "512"
-
-  execution_role_arn = var.execution_role_arn
-  task_role_arn      = var.task_role_arn
-
-  container_definitions = jsonencode([
-    {
-      name      = "nginx"
-      image     = "${var.ecr_repo_url}:nginx"
-      essential = true
-      portMappings = [
-        {
-          containerPort = 90
-          protocol      = "tcp"
-        }
-      ]
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-group         = aws_cloudwatch_log_group.ecs_logs.name
-          awslogs-region        = "us-east-1"
-          awslogs-stream-prefix = "proxy"
-        }
+locals {
+  # Static NGINX container definition
+  nginx_task_definition = {
+    name      = var.nginx_task_definition.name
+    image     = "${var.ecr_repo_url}:${var.nginx_task_definition.image_tag}"
+    essential = true
+    portMappings = [
+      {
+        containerPort = var.nginx_task_definition.container_port
+        protocol      = "tcp"
       }
-      dependsOn = [
-        {
-          containerName = "streamlit"
-          condition     = "HEALTHY"
-        }
-      ]
-      healthCheck = {
-        command     = ["CMD-SHELL", "curl -f http://localhost:90 || exit 1"]
-        interval    = 30
-        timeout     = 5
-        retries     = 3
-        startPeriod = 10
-      }
-    },
-    {
-      name      = "streamlit"
-      image     = "${var.ecr_repo_url}:latest"
-      essential = true
-      portMappings = [
-        {
-          containerPort = 8080
-          protocol      = "tcp"
-        }
-      ]
-      logConfiguration = {
-        logDriver = "awslogs"
-        options = {
-          awslogs-group         = aws_cloudwatch_log_group.ecs_logs.name
-          awslogs-region        = "us-east-1"
-          awslogs-stream-prefix = "streamlit"
-        }
-      }
-      healthCheck = {
-        command     = ["CMD-SHELL", "curl -f http://localhost:8080 || exit 1"]
-        interval    = 30
-        timeout     = 5
-        retries     = 3
-        startPeriod = 10
+    ]
+    logConfiguration = {
+      logDriver = "awslogs"
+      options = {
+        awslogs-group         = aws_cloudwatch_log_group.ecs_logs.name
+        awslogs-region        = var.region
+        awslogs-stream-prefix = var.nginx_task_definition.stream_prefix
       }
     }
-  ])
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f ${var.nginx_task_definition.healthcheck_path} || exit 1"]
+      interval    = 30
+      timeout     = 5
+      retries     = 3
+      startPeriod = 10
+    }
+  }
+  # Dynamic app definitions from var.apps
+  apps_by_name = {
+    for app in var.apps : app.task_definition.container.name => {
+      container_definition = {
+        name      = app.task_definition.container.name
+        image     = "${var.ecr_repo_url}:${app.task_definition.container.image_tag}"
+        essential = true
+        portMappings = [
+          {
+            containerPort = app.task_definition.container.container_port
+            protocol      = "tcp"
+          }
+        ]
+        logConfiguration = {
+          logDriver = "awslogs"
+          options = {
+            awslogs-group         = "/ecs/${app.task_definition.container.name}"
+            awslogs-region        = var.region
+            awslogs-stream-prefix = app.task_definition.container.stream_prefix
+          }
+        }
+        healthCheck = {
+          command     = ["CMD-SHELL", "curl -f ${app.task_definition.container.healthcheck_path} || exit 1"]
+          interval    = 30
+          timeout     = 5
+          retries     = 3
+          startPeriod = 10
+        }
+      }
+      task_config    = app.task_definition.config
+      service_name   = app.service_name
+      replica_count  = app.replica_count
+    }
+  }
 }
 
 
+#----------------------------------- NGINX TASK+SERVICE-----------------------------------
+resource "aws_ecs_task_definition" "nginx_mdp_task" {
+  family = var.nginx_task_definition_config.family
+  cpu    = var.nginx_task_definition_config.cpu
+  memory = var.nginx_task_definition_config.memory
+  requires_compatibilities = ["FARGATE"]
+  network_mode             = "awsvpc"
+  execution_role_arn       = var.execution_role_arn
+  task_role_arn            = var.task_role_arn
+  container_definitions    = jsonencode([local.nginx_task_definition])
+}
 
-resource "aws_ecs_service" "terraform_service" {
-  name                   = "terraform-service"
+resource "aws_ecs_service" "nginx_service" {
+  name                   = var.nginx_service_name
   cluster                = aws_ecs_cluster.fargate_cluster.id
-  task_definition        = aws_ecs_task_definition.terraform_mdp.arn
+  task_definition        = aws_ecs_task_definition.nginx_mdp_task.arn
   launch_type            = "FARGATE"
-  desired_count          = 1
+  desired_count          = var.nginx_replica_count
   enable_execute_command = true
-
   network_configuration {
-    subnets         = [var.subnet1_id, var.subnet2_id]
-    security_groups = [var.sg1_id]
+    subnets          = [var.subnet1_id, var.subnet2_id]
+    security_groups  = [var.sg1_id]
     assign_public_ip = false
   }
-
-    load_balancer {
-    target_group_arn = var.alb_target_group_arn #   module.alb.target_group_arn   # <== TU WSKAZUJESZ BACKEND
-    container_name   = "nginx"              # musi się zgadzać z task definition
-    container_port   = 90
+  load_balancer {
+    target_group_arn = var.alb_target_group_arn       #   module.alb.target_group_arn   # <== TU WSKAZUJESZ BACKEND
+    container_name   = var.nginx_task_definition.name #   musi się zgadzać z task definition
+    container_port   = var.nginx_task_definition.container_port
   }
-
-
   depends_on = [
-    aws_ecs_task_definition.terraform_mdp
+    aws_ecs_task_definition.nginx_mdp_task
   ]
 }
+#-------------------------------------------------------------------------------
+#-------------------------APPS TASK+SERVICE------------------------------------
+resource "aws_ecs_task_definition" "app" {
+  for_each = local.apps_by_name
+  family                   = each.value.task_config.family
+  cpu                      = each.value.task_config.cpu
+  memory                   = each.value.task_config.memory
+  network_mode             = "awsvpc"
+  requires_compatibilities = ["FARGATE"]
+  execution_role_arn       = var.execution_role_arn
+  task_role_arn            = var.task_role_arn
+  container_definitions = jsonencode([each.value.container_definition])
+}
 
+resource "aws_ecs_service" "app" {
+  for_each = local.apps_by_name
+  name            = each.value.service_name
+  cluster         = var.cluster_name
+  task_definition = aws_ecs_task_definition.app[each.key].arn
+  desired_count   = each.value.replica_count
+  launch_type     = "FARGATE"
+
+  network_configuration {
+    subnets          = [var.subnet1_id, var.subnet2_id]
+    security_groups  = [var.sg1_id]
+    assign_public_ip = false
+  }
+  depends_on = [aws_ecs_task_definition.app]
+}
+#---------------------------------------------------------------------------------

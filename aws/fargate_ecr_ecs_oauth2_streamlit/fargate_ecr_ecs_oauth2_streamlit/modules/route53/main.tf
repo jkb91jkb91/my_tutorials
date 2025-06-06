@@ -20,7 +20,7 @@ resource "aws_route53_record" "root_a" {
   name    = "projectdevops2.eu"
   type    = "A"
 
-alias {
+  alias {
     name                   = var.dns
     zone_id                = var.zone_id
     evaluate_target_health = true

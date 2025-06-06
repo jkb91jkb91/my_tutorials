@@ -8,7 +8,7 @@ locals {
 resource "aws_security_group" "allow_http" {
   name        = "allow-http"
   description = "Allow HTTP inbound traffic"
-  vpc_id      = var.vpc_id  # <-- zmień na swoje VPC jeśli trzeba
+  vpc_id      = var.vpc_id # <-- zmień na swoje VPC jeśli trzeba
 
   ingress {
     description      = "Allow HTTP from anywhere"
@@ -19,7 +19,7 @@ resource "aws_security_group" "allow_http" {
     ipv6_cidr_blocks = ["::/0"]
   }
 
-   ingress {
+  ingress {
     description      = "Allow SSH from anywhere"
     from_port        = 22
     to_port          = 22
@@ -29,11 +29,11 @@ resource "aws_security_group" "allow_http" {
   }
 
   egress {
-    description = "Allow all outbound traffic"
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
+    description      = "Allow all outbound traffic"
+    from_port        = 0
+    to_port          = 0
+    protocol         = "-1"
+    cidr_blocks      = ["0.0.0.0/0"]
     ipv6_cidr_blocks = ["::/0"]
   }
 
@@ -44,19 +44,19 @@ resource "aws_security_group" "allow_http" {
 
 # EC2 OAUTH-PROXY
 resource "aws_instance" "my_ec2" {
-  ami                         = local.dataserver_primary.ami
-  instance_type               = var.instance_type
-  availability_zone           = "us-east-1a"
-  subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = [aws_security_group.allow_http.id]
+  ami                    = local.dataserver_primary.ami
+  instance_type          = var.instance_type
+  availability_zone      = "us-east-1a"
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = [aws_security_group.allow_http.id]
 
   tags = merge(
     {
-      "Type"       = "oauth2-proxy"
+      "Type" = "oauth2-proxy"
     }
   )
 
-user_data = <<-EOT
+  user_data = <<-EOT
 #!/bin/bash
 sudo apt-get update -y
 sudo wget https://github.com/oauth2-proxy/oauth2-proxy/releases/download/v7.6.0/oauth2-proxy-v7.6.0.linux-amd64.tar.gz
@@ -84,19 +84,19 @@ EOT
 
 # EC2 APACHE
 resource "aws_instance" "apache" {
-  ami                         = local.dataserver_primary.ami
-  instance_type               = var.instance_type
-  availability_zone           = "us-east-1a"
-  subnet_id                   = var.subnet_id
-  vpc_security_group_ids      = [aws_security_group.allow_http.id]
+  ami                    = local.dataserver_primary.ami
+  instance_type          = var.instance_type
+  availability_zone      = "us-east-1a"
+  subnet_id              = var.subnet_id
+  vpc_security_group_ids = [aws_security_group.allow_http.id]
 
   tags = merge(
     {
-      "Type"       = "apache"
+      "Type" = "apache"
     }
   )
 
-user_data = <<-EOT
+  user_data = <<-EOT
 #!/bin/bash
 sudo apt-get update -y
 sudo apt-get install apache2 -y

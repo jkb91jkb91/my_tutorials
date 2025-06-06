@@ -1,6 +1,9 @@
+#aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+
+
 resource "aws_ecr_repository" "example" {
-  name                 = "mdp-navigator-repo" 
-  image_tag_mutability = "MUTABLE" 
+  name                 = "mdp-navigator-repo"
+  image_tag_mutability = "MUTABLE"
   image_scanning_configuration {
     scan_on_push = true
   }
@@ -11,7 +14,7 @@ resource "aws_ecr_repository" "example" {
 
   tags = {
     Name = "mdp-navigator-repo"
-    App = "mdp-navigator"
+    App  = "mdp-navigator"
   }
 }
 
@@ -22,7 +25,7 @@ resource "aws_ecr_repository_policy" "allow_pull_for_role" {
     Version = "2012-10-17",
     Statement = [
       {
-        Sid = "AllowPullForSpecificRole"
+        Sid    = "AllowPullForSpecificRole"
         Effect = "Allow"
         Principal = {
           AWS = var.fargate_extra_role_arn
