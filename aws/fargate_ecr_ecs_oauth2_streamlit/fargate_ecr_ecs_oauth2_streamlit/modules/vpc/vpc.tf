@@ -152,3 +152,14 @@ resource "aws_route_table_association" "private_2_assoc" {
 #   subnet_id      = aws_subnet.private_2.id
 #   route_table_id = aws_route_table.private.id
 # }
+
+
+
+
+
+####  FARGATE SERVICES
+# resource "aws_service_discovery_private_dns_namespace" "main" {
+#   name        = "local"
+#   vpc         = aws_vpc.main.id
+#   description = "Private namespace for ECS"
+# }

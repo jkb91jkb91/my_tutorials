@@ -28,10 +28,15 @@ variable "sg1_id" {
   description = "sg1_id"
 }
 
-variable "alb_target_group_arn" {
-  type        = string
-  description = "alb_target_group_arn"
-}
+# variable "alb_nginx_target_group_arn" {
+#   type        = string
+#   description = "alb_nginx_target_group_arn"
+# }
+
+# variable "alb_navigator_target_group_arn" {
+#   type        = string
+#   description = "alb_navigator_target_group_arn"
+# }
 
 #variable "ecr_repo_url" {
 #  type = string
@@ -56,9 +61,9 @@ variable "region" {
 
 ################# MDP NAVIGATOR DEPENDENCIES ################
 
-variable "nginx_service_name" {
-  type = string
-}
+# variable "nginx_service_name" {
+#   type = string
+# }
 
 # variable "apps_tasks_definition" {
 #   type = list(object({
@@ -86,27 +91,27 @@ variable "logs_retention_in_days" {
   type = number
 }
 
-variable "nginx_task_definition" {
-  type = object({
-    name             = string
-    image_tag        = string
-    container_port   = number
-    healthcheck_path = string
-    stream_prefix    = string
-  })
-}
+# variable "nginx_task_definition" {
+#   type = object({
+#     name             = string
+#     image_tag        = string
+#     container_port   = number
+#     healthcheck_path = string
+#     stream_prefix    = string
+#   })
+# }
 
-variable "nginx_replica_count" {
-  type = number
-}
+# variable "nginx_replica_count" {
+#   type = number
+# }
 
-variable "nginx_task_definition_config" {
-  type = object({
-    family = string
-    cpu    = string
-    memory = string
-  })
-}
+# variable "nginx_task_definition_config" {
+#   type = object({
+#     family = string
+#     cpu    = string
+#     memory = string
+#   })
+# }
 
 variable "apps" {
   type = list(object({
@@ -127,4 +132,8 @@ variable "apps" {
     service_name  = string
     replica_count = number
   }))
+}
+
+variable "target_group_arns" {
+  type = map(string)
 }

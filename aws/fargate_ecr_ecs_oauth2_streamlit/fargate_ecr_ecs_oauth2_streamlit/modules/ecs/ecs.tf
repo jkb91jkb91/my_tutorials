@@ -18,34 +18,6 @@ resource "aws_cloudwatch_log_group" "apps" {
 }
 
 locals {
-  # Static NGINX container definition
-  nginx_task_definition = {
-    name      = var.nginx_task_definition.name
-    image     = "${var.ecr_repo_url}:${var.nginx_task_definition.image_tag}"
-    essential = true
-    portMappings = [
-      {
-        containerPort = var.nginx_task_definition.container_port
-        protocol      = "tcp"
-      }
-    ]
-    logConfiguration = {
-      logDriver = "awslogs"
-      options = {
-        awslogs-group         = aws_cloudwatch_log_group.ecs_logs.name
-        awslogs-region        = var.region
-        awslogs-stream-prefix = var.nginx_task_definition.stream_prefix
-      }
-    }
-    healthCheck = {
-      command     = ["CMD-SHELL", "curl -f ${var.nginx_task_definition.healthcheck_path} || exit 1"]
-      interval    = 30
-      timeout     = 5
-      retries     = 3
-      startPeriod = 10
-    }
-  }
-  # Dynamic app definitions from var.apps
   apps_by_name = {
     for app in var.apps : app.task_definition.container.name => {
       container_definition = {
@@ -77,45 +49,11 @@ locals {
       task_config    = app.task_definition.config
       service_name   = app.service_name
       replica_count  = app.replica_count
+      target_group_arn = var.target_group_arns[app.task_definition.container.name]
     }
   }
 }
 
-
-#----------------------------------- NGINX TASK+SERVICE-----------------------------------
-resource "aws_ecs_task_definition" "nginx_mdp_task" {
-  family = var.nginx_task_definition_config.family
-  cpu    = var.nginx_task_definition_config.cpu
-  memory = var.nginx_task_definition_config.memory
-  requires_compatibilities = ["FARGATE"]
-  network_mode             = "awsvpc"
-  execution_role_arn       = var.execution_role_arn
-  task_role_arn            = var.task_role_arn
-  container_definitions    = jsonencode([local.nginx_task_definition])
-}
-
-resource "aws_ecs_service" "nginx_service" {
-  name                   = var.nginx_service_name
-  cluster                = aws_ecs_cluster.fargate_cluster.id
-  task_definition        = aws_ecs_task_definition.nginx_mdp_task.arn
-  launch_type            = "FARGATE"
-  desired_count          = var.nginx_replica_count
-  enable_execute_command = true
-  network_configuration {
-    subnets          = [var.subnet1_id, var.subnet2_id]
-    security_groups  = [var.sg1_id]
-    assign_public_ip = false
-  }
-  load_balancer {
-    target_group_arn = var.alb_target_group_arn       #   module.alb.target_group_arn   # <== TU WSKAZUJESZ BACKEND
-    container_name   = var.nginx_task_definition.name #   musi się zgadzać z task definition
-    container_port   = var.nginx_task_definition.container_port
-  }
-  depends_on = [
-    aws_ecs_task_definition.nginx_mdp_task
-  ]
-}
-#-------------------------------------------------------------------------------
 #-------------------------APPS TASK+SERVICE------------------------------------
 resource "aws_ecs_task_definition" "app" {
   for_each = local.apps_by_name
@@ -136,6 +74,12 @@ resource "aws_ecs_service" "app" {
   task_definition = aws_ecs_task_definition.app[each.key].arn
   desired_count   = each.value.replica_count
   launch_type     = "FARGATE"
+  
+   load_balancer {
+    target_group_arn = each.value.target_group_arn
+    container_name   = each.key       
+    container_port   = each.value.container_definition.portMappings[0].containerPort
+  }
 
   network_configuration {
     subnets          = [var.subnet1_id, var.subnet2_id]
@@ -144,4 +88,43 @@ resource "aws_ecs_service" "app" {
   }
   depends_on = [aws_ecs_task_definition.app]
 }
-#---------------------------------------------------------------------------------
+
+
+
+
+
+#----------------------------------- NGINX TASK+SERVICE-----------------------------------
+# resource "aws_ecs_task_definition" "nginx_mdp_task" {
+#   family = var.nginx_task_definition_config.family
+#   cpu    = var.nginx_task_definition_config.cpu
+#   memory = var.nginx_task_definition_config.memory
+#   requires_compatibilities = ["FARGATE"]
+#   network_mode             = "awsvpc"
+#   execution_role_arn       = var.execution_role_arn
+#   task_role_arn            = var.task_role_arn
+#   container_definitions    = jsonencode([local.nginx_task_definition])
+# }
+
+# resource "aws_ecs_service" "nginx_service" {
+#   name                   = var.nginx_service_name
+#   cluster                = aws_ecs_cluster.fargate_cluster.id
+#   task_definition        = aws_ecs_task_definition.nginx_mdp_task.arn
+#   launch_type            = "FARGATE"
+#   desired_count          = var.nginx_replica_count
+#   enable_execute_command = true
+#   network_configuration {
+#     subnets          = [var.subnet1_id, var.subnet2_id]
+#     security_groups  = [var.sg1_id]
+#     assign_public_ip = false
+#   }
+#   load_balancer {
+#     target_group_arn = var.alb_nginx_target_group_arn       #   module.alb.target_group_arn   # <== TU WSKAZUJESZ BACKEND
+#     container_name   = var.nginx_task_definition.name       #   musi się zgadzać z task definition
+#     container_port   = var.nginx_task_definition.container_port
+#   }
+
+#   depends_on = [
+#     aws_ecs_task_definition.nginx_mdp_task
+#   ]
+# }
+#-------------------------------------------------------------------------------

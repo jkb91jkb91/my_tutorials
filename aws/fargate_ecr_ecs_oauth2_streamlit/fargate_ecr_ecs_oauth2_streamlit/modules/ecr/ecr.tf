@@ -1,4 +1,7 @@
 #aws ecr-public get-login-password --region us-east-1 | docker login --username AWS --password-stdin public.ecr.aws
+#aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 311141565994.dkr.ecr.us-east-1.amazonaws.com
+#docker push 311141565994.dkr.ecr.us-east-1.amazonaws.com/mdp-navigator-repo:mdp-navigator-app_latest
+
 
 
 resource "aws_ecr_repository" "example" {

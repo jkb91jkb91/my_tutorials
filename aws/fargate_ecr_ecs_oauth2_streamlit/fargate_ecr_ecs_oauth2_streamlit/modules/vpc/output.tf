@@ -41,3 +41,15 @@ output "subnet2_id" {
   description = "subnet2_id"
   value       = aws_subnet.private_2.id
 }
+
+
+
+
+######### FARGATE REQUIRE THIS #################
+# output "cloudmap_namespace_id" {
+#   value = aws_service_discovery_private_dns_namespace.main.id
+# }
+
+# output "cloudmap_namespace_arn" {
+#   value = aws_service_discovery_private_dns_namespace.main.arn
+# }
