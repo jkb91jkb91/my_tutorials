@@ -7,6 +7,6 @@ RUN apk update && apk add --no-cache curl
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 # Skopiuj aplikację (np. index.html i zasoby)
-COPY html/ /usr/share/nginx/html/
+COPY html/ /etc/nginx/html/
 
 EXPOSE 80
