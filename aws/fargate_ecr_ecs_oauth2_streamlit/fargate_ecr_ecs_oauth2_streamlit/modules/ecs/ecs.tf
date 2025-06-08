@@ -68,7 +68,9 @@ resource "aws_ecs_task_definition" "app" {
 }
 
 resource "aws_ecs_service" "app" {
+  force_new_deployment = true
   for_each = local.apps_by_name
+  enable_execute_command = true   # CONTAINER DEBUGGING
   name            = each.value.service_name
   cluster         = var.cluster_name
   task_definition = aws_ecs_task_definition.app[each.key].arn

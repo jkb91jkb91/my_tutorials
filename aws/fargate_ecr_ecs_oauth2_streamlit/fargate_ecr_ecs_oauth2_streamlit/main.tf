@@ -29,21 +29,21 @@ module "lb" {
   vpc_id     = module.vpc.vpc_id
   subnet1_id = module.vpc.public1_subnet_id
   subnet2_id = module.vpc.public2_subnet_id
-  apps = var.apps
+  apps       = var.apps
 }
 
 # ECS
 module "ecs" {
-  source             = "./modules/ecs"
-  cluster_name       = var.cluster_name
-  execution_role_arn = module.iam.execution_role_arn
-  task_role_arn      = module.iam.task_role_arn
-  ecr_repo_url       = module.ecr.ecr_repo_url
-  subnet1_id         = module.vpc.subnet1_id
-  subnet2_id         = module.vpc.subnet2_id
-  sg1_id             = module.sg.sg1_id
-  target_group_arns = module.lb.target_group_arns
-  log_group_name = var.log_group_name
+  source                 = "./modules/ecs"
+  cluster_name           = var.cluster_name
+  execution_role_arn     = module.iam.execution_role_arn
+  task_role_arn          = module.iam.task_role_arn
+  ecr_repo_url           = module.ecr.ecr_repo_url
+  subnet1_id             = module.vpc.subnet1_id
+  subnet2_id             = module.vpc.subnet2_id
+  sg1_id                 = module.sg.sg1_id
+  target_group_arns      = module.lb.target_group_arns
+  log_group_name         = var.log_group_name
   region                 = var.region
   logs_retention_in_days = var.logs_retention_in_days
   apps                   = var.apps

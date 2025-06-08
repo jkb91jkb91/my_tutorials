@@ -149,3 +149,26 @@ resource "aws_lb_listener_rule" "apps" {
     }
   }
 }
+
+# Dodatkowa reguła: przekierowanie z "/" do "/apps"
+resource "aws_lb_listener_rule" "redirect_root_to_apps" {
+  listener_arn = aws_lb_listener.http[0].arn
+  priority     = 1
+
+  action {
+    type = "redirect"
+    redirect {
+      port        = "443"
+      protocol    = "HTTPS"
+      status_code = "HTTP_302"
+      host        = "#{host}"
+      path        = "/apps"
+    }
+  }
+
+  condition {
+    path_pattern {
+      values = ["/"]
+    }
+  }
+}

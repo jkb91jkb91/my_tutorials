@@ -35,10 +35,10 @@ apps = [
   {
     task_definition = {
       container = {
-        name             = "apps"                                 # ITS PATH NAME >>> DOMAIN/PATH   AND CONTAINER NAME 
-        image_tag        = "nginx"
+        name             = "apps" # ITS PATH NAME >>> DOMAIN/PATH   AND CONTAINER NAME 
+        image_tag        = "apps_7"
         container_port   = 80
-        healthcheck_path = "http://localhost:80" # NGINX 80
+        healthcheck_path = "http://localhost:80/health" # REQUIRED HEALTH PATH
         stream_prefix    = "proxy"
       }
       config = {
@@ -53,11 +53,11 @@ apps = [
   {
     task_definition = {
       container = {
-        name             = "mdp-navigator-app"                      # ITS PATH NAME >>> DOMAIN/PATH   AND CONTAINER NAME 
-        image_tag        = "mdp-navigator-app_latest1"
+        name             = "mdp-navigator-app" # ITS PATH NAME >>> DOMAIN/PATH   AND CONTAINER NAME 
+        image_tag        = "mdp-navigator-app_latest2"
         container_port   = 8501
-        healthcheck_path = "http://localhost:8501" # STREAMLIT 8501
-        stream_prefix    = "streamlit"
+        healthcheck_path = "http://localhost:8501/mdp-navigator-app/" # STREAMLIT 8501
+        stream_prefix    = "mdp-navigator-app"
       }
       config = {
         family = "mdp-navigator-app-task"
@@ -71,11 +71,11 @@ apps = [
   {
     task_definition = {
       container = {
-        name             = "new-app"                                # ITS PAHT NAME >>> DOMAIN/PATH   AND CONTAINER NAME 
-        image_tag        = "mdp-navigator-app_latest1"
+        name             = "new-app" # ITS PAHT NAME >>> DOMAIN/PATH   AND CONTAINER NAME 
+        image_tag        = "mdp-navigator-app_latest2"
         container_port   = 8501
-        healthcheck_path = "http://localhost:8501"
-        stream_prefix    = "streamlit"
+        healthcheck_path = "http://localhost:8501/new-app/"
+        stream_prefix    = "new-app"
       }
       config = {
         family = "new-app-task"
