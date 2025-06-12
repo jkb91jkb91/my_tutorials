@@ -1,13 +1,35 @@
-# 1
+# ECS Fargate Platform Starter
 
-BUILD NGINX IMAGE >> PUSH TO ECR
-BUILD STREAMLIT   >> PUSH TO ECR
+Production-ready szkielet do uruchamiania aplikacji kontenerowych w AWS z pomocą ECS + Fargate, HTTPS, CI/CD i monitoringiem.
 
-aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 311141565994.dkr.ecr.us-east-1.amazonaws.com
-docker build -t my-streamlit-app .
-docker tag my-streamlit-app:latest 311141565994.dkr.ecr.us-east-1.amazonaws.com/mdp-navigator-repo:my-streamlit-app
-docker push 311141565994.dkr.ecr.us-east-1.amazonaws.com/mdp-navigator-repo:my-streamlit-app
+## 🧠 Co to robi?
 
-docker build -t nginx .
+Ten projekt pozwala szybko uruchomić:
+- Aplikację w kontenerze (Fargate)
+- HTTPS przez ACM + ALB
+- Podstawowe role IAM
+- Infrastruktura jako kod – Terraform
+
+✅ Idealne jako starter dla startupu / MVP / microservice
+
+## 🗺️ Architektura
+
+![Diagram](./diagram.png)
+
+## ⚙️ Stack
+
+- AWS ECS Fargate
+- ALB + ACM
+- Terraform (modułowe podejście)
+- GitHub Actions (w wersji PRO)
+- Prometheus (w wersji PRO)
+
+## 🚀 Jak uruchomić
+
+```bash
+git clone ...
+cd ecs-starter
+terraform init
+terraform apply
 
 
