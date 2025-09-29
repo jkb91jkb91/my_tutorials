@@ -14,7 +14,8 @@ IMPORTANT POINT RELATED TO LOGS IN ECS AND REDIRECTING THEM TO STDOUT
 Use python -u  # without -u you will have problems with redirection of logs into ECS LOGS ( CLOUDWATCH )
 
 ```
-python script.pyDomyślnie buforuje wyjście, czyli np. print() może nie pojawić się od razu w logachpython -u   script.pyWyłącza buforowanie – wszystko co wypiszesz przez print() pojawia się natychmiast  
+python script.py Domyślnie buforuje wyjście, czyli np. print() może nie pojawić się od razu w logach  
+python -u  script.py Wyłącza buforowanie – wszystko co wypiszesz przez print() pojawia się natychmiast  
 ```
 
 ```
