@@ -3,7 +3,7 @@
 1. Minimal Example  
 2. What is module/package  
 3. __init__.py  and imports
-
+4. Dependencies  
 
 #1. Minimal Example  
 
@@ -35,15 +35,15 @@ if __name__ == "__main__":
 module is one file like main.py  
 package is a folder with python files  like /mytools or so mostly with __init__.py inside of it  
 
-#3. __init__.py
--today it might be empty
--it is used to mark packet 
+#3. __init__.py  
+-today it might be empty  
+-it is used to mark packet   
 
-imports:
--prefer to use explicit imports like ( *from mytool.config import load_config* )
-- avoid using from x import *
+imports:  
+-prefer to use explicit imports like ( *from mytool.config import load_config* )  
+- avoid using from x import *  
 
-Structure example:
+Structure example:  
 ```
 mytool/
   pyproject.toml
@@ -58,3 +58,6 @@ mytool/
   tests/
     test_smoke.py
 ```
+
+#4. Dependencies, venv, pyproject, pip-tools, poetry, uv  
+The most often found problem amongst devops is: *on my computer code works* >>> Solution ( isolation + lock )
