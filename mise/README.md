@@ -1,7 +1,8 @@
 MAC
 ```
 brew install mise
-echo 'eval "$(mise activate zsh)"' >> ~/.zshrc
+eecho 'eval "$(mise activate zsh)"' >> ~/.zshrc
+source ~/.zshrc
 ```
 
 LINUX
@@ -28,7 +29,8 @@ Installation
 mise install
 ```
 
-Example of usecase 
+Check if package are installed  
+jkb91@MacBook-Air-Klaudia mise_config % mise ls
 
 ```
 jkb91@MacBook-Air-Klaudia mise_config % mise ls
@@ -39,6 +41,7 @@ python     3.12.12  ~/mise_config/.mise.toml  3.12
 terraform  1.6.6    ~/mise_config/.mise.toml  1.6.6
 ```
 
+Chck if package is in PATH
 ```
 mise which terraform
 ```
