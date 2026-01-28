@@ -29,7 +29,7 @@ Installation
 mise install
 ```
 
-Check if package are installed  
+Check if packages are installed  
 jkb91@MacBook-Air-Klaudia mise_config % mise ls
 
 ```
