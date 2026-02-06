@@ -41,7 +41,8 @@ python     3.12.12  ~/mise_config/.mise.toml  3.12
 terraform  1.6.6    ~/mise_config/.mise.toml  1.6.6
 ```
 
-Chck if package is in PATH
+Activation GLOBALLY 
 ```
-mise which terraform
+mise use -g terraform@1.6.6 awscli@2.15.10 python@3.12.12 go@1.22.12
+
 ```
