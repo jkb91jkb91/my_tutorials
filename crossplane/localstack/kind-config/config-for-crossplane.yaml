@@ -4,5 +4,3 @@ name: crossplane
 nodes:
   - role: control-plane
     image: kindest/node:v1.29.2
-  - role: worker
-    image: kindest/node:v1.29.2
