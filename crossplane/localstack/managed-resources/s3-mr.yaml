@@ -1,9 +1,0 @@
-apiVersion: s3.aws.crossplane.io/v1beta1
-kind: Bucket
-metadata:
-  name: my-crossplane-bucket-dev
-spec:
-  forProvider:
-    locationConstraint: eu-central-1
-  providerConfigRef:
-    name: aws-default

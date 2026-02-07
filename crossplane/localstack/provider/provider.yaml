@@ -1,6 +1,0 @@
-apiVersion: pkg.crossplane.io/v1
-kind: Provider
-metadata:
-  name: aws-default
-spec:
-  package: xpkg.upbound.io/crossplane-contrib/provider-aws:v0.45.0
