@@ -102,7 +102,7 @@ spec:
     services: [iam, s3, sqs, sts]
     url:
       type: Static
-      static: http://${LOCALSTACK_IP}:4566
+      static: http://172.18.0.1:4566
   skip_credentials_validation: true
   skip_metadata_api_check: true
   s3_use_path_style: true
