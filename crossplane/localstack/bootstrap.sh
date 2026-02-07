@@ -19,6 +19,7 @@ check_if_kind_installed() {
 start_localstack() {
     docker run --rm -d --name localstack -p 4566:4566 -e SERVICES="$LOCALSTACK_SERVICES" -e DEBUG=1 localstack/localstack
 }
+
 start_kind() {
   kind create cluster --name cross --config $CONFIG_KIND/config-for-crossplane.yaml
 }
@@ -33,7 +34,6 @@ crossplane_install() {
   helm install crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace
   kubectl -n crossplane-system rollout status deploy/crossplane --timeout=300s
   kubectl -n crossplane-system rollout status deploy/crossplane-rbac-manager --timeout=300s || true
-
 }
 
 aws_providers_install() {
@@ -107,8 +107,6 @@ spec:
   skip_metadata_api_check: true
   s3_use_path_style: true
 EOF
-
-
 }
 
 deploy_mr_s3() {
@@ -127,13 +125,11 @@ spec:
 EOF
 }
 
-
 main() {
     check_if_kind_installed
     start_localstack
     start_kind
     crossplane_install
-    #sleep 200s # After crossplane wee ned to wait
     aws_providers_install
     config_provider
     deploy_mr_s3
