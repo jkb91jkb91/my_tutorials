@@ -69,24 +69,24 @@ Disadvangates: No deamon sets, sometimes it might cost more during highest overl
     - name  
     - role  
     - vpc_config  
-~~4) Managed Node Group  ~~  
-~~    - cluster_name  ~~  
-~~    - node_role_arn  ~~  
-~~    - subnets_ids  ~~  
-~~    - ami_type  ~~  
-~~    - capacity_type  ~~  
-~~    - scalling_config  ~~  
+~~4) Managed Node Group~~                                                    # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+    ~~- cluster_name~~                                                       # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+    ~~- node_role_arn~~                                                      # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+    ~~- subnets_ids~~                                                        # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+    ~~- ami_type~~                                                           # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+    ~~- capacity_type~~                                                      # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+    ~~- scalling_config~~                                                    # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
 6) Managed add-ons  
     - cni  
     - coredns  
     - kubeproxy  
-   ~~ - ebs_csi   ~~                                                            # NOT USED ON FARGATE  
+  ~~- ebs_csi~~                                                                # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
 7) IAM Role eks_cluster  
-~~8) IAM Role eks_node  ~~                                                      # NOT USED ON FARGATE  
-~~  - arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy  ~~                     # NOT USED ON FARGATE  
-~~   - arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy  ~~                         # NOT USED ON FARGATE  
-~~   - arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly ~~            # NOT USED ON FARGATE  
-8) Access Entries ( instead aws-auth ) # Responsible for access into CLUSTER    # NOT USED ON FARGATE  
+~~8) IAM Role eks_node~~                                                       # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+   ~~- arn:aws:iam::aws:policy/AmazonEKSWorkerNodePolicy~~                     # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+   ~~- arn:aws:iam::aws:policy/AmazonEKS_CNI_Policy~~                          # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+   ~~- arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly~~            # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES  
+8) Access Entries ( instead aws-auth ) # Responsible for access into CLUSTER   # NOT USED ON FARGATE, NEEDED WITH MANAGED NODES 
 9) EKS Access Policy association   
 
 ## EKS LOGGING INTO CLUSTER  
