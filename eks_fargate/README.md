@@ -69,13 +69,13 @@ Disadvangates: No deamon sets, sometimes it might cost more during highest overl
     - name  
     - role  
     - vpc_config  
-~~4) Managed Node Group  ~~
-~~    - cluster_name  ~~
-~~    - node_role_arn  ~~
-~~    - subnets_ids  ~~
-~~    - ami_type  ~~
-~~    - capacity_type  ~~
-~~    - scalling_config  ~~
+~~4) Managed Node Group  ~~  
+~~    - cluster_name  ~~  
+~~    - node_role_arn  ~~  
+~~    - subnets_ids  ~~  
+~~    - ami_type  ~~  
+~~    - capacity_type  ~~  
+~~    - scalling_config  ~~  
 6) Managed add-ons  
     - cni  
     - coredns  
