@@ -16,6 +16,7 @@ module "vpc" {
   private_subnet_for_bastion_cidr = var.private_subnet_for_bastion_cidr
   private1_subnet_cidr            = var.private1_subnet_cidr
   private2_subnet_cidr            = var.private2_subnet_cidr
+  public_subnet_cidr              = var.public_subnet_cidr
   vpc_name                        = var.vpc_name
   cluster_name                    = var.cluster_name
   vpc_cidr                        = var.vpc_cidr
@@ -25,25 +26,15 @@ module "vpc" {
 }
 
 module "sg" {
-  vpc_id   = module.vpc.vpc_id
-  project_name                       = var.project_name
-  environment_name                   = var.environment_name
-  cluster_name                       = var.cluster_name
-  vpc_name = var.vpc_name
-  source   = "./modules/sg"
+  vpc_id           = module.vpc.vpc_id
+  project_name     = var.project_name
+  environment_name = var.environment_name
+  cluster_name     = var.cluster_name
+  vpc_name         = var.vpc_name
+  source           = "./modules/sg"
 }
 
-module "vpc_endpoints" {
-  region                             = var.region
-  project_name                       = var.project_name
-  environment_name                   = var.environment_name
-  cluster_name                       = var.cluster_name
-  vpc_id                             = module.vpc.vpc_id
-  vpc_name                           = var.vpc_name
-  aws_security_group_bastion_id      = module.sg.aws_security_group_bastion_id
-  private_subnet_for_bastion_host_id = module.vpc.private_subnet_for_bastion_host_id
-  source                             = "./modules/vpc_endpoints"
-}
+
 
 module "bastion_host" {
   region                             = var.region
@@ -53,8 +44,19 @@ module "bastion_host" {
   cluster_name                       = var.cluster_name
   vpc_id                             = module.vpc.vpc_id
   vpc_name                           = var.vpc_name
-  private_subnet_for_bastion_host_id = module.vpc.private_subnet_for_bastion_host_id
+  private_subnet_for_bastion_host_id = module.vpc.public_subnet_for_bastion_host_id
   source                             = "./modules/ec2"
+}
+
+#EKS
+module "eks" {
+  source                        = "./modules/eks"
+  vpc_name                      = var.vpc_name
+  vpc_id                        = module.vpc.vpc_id
+  cluster_name                  = var.cluster_name
+  #cluster_version               = var.cluster_version
+  subnet_ids                    = [module.vpc.private_subnet1_id, module.vpc.private_subnet2_id]
+  aws_security_group_bastion_id = module.sg.aws_security_group_bastion_id
 }
 
 # IAM
@@ -68,15 +70,7 @@ module "bastion_host" {
 #   vpc_id = module.vpc.vpc_id
 # }
 
-#EKS
-# module "eks" {
-#   source = "./modules/eks"
-#   vpc_id = module.vpc.vpc_id
-#   cluster_name  =  var.cluster_name
-#   cluster_version = var.cluster_version
-#   subnet_ids = var.subnet_ids
-#   instance_types = var.instance_types
-# }
+
 
 
 
@@ -87,7 +81,17 @@ module "bastion_host" {
 # }
 
 
-
+# module "vpc_endpoints" {
+#   region                             = var.region
+#   project_name                       = var.project_name
+#   environment_name                   = var.environment_name
+#   cluster_name                       = var.cluster_name
+#   vpc_id                             = module.vpc.vpc_id
+#   vpc_name                           = var.vpc_name
+#   aws_security_group_bastion_id      = module.sg.aws_security_group_bastion_id
+#   private_subnet_for_bastion_host_id = module.vpc.private_subnet_for_bastion_host_id
+#   source                             = "./modules/vpc_endpoints"
+# }
 
 
 

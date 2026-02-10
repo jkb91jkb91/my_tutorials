@@ -1,11 +1,10 @@
-# Amazon Linux 2023 (x86_64) - KONKRETNA WERSJA
 data "aws_ami" "al2023" {
   owners      = ["137112412989"] # Amazon
   most_recent = true
 
   filter {
     name   = "name"
-    values = ["al2023-ami-2023.9.20250929.0-kernel-6.1-x86_64"]
+    values = ["al2023-ami-2023.*-kernel-6.1-x86_64"]
   }
 
   filter {
@@ -42,7 +41,7 @@ resource "aws_instance" "bastion" {
   ami                         = data.aws_ami.al2023.id
   instance_type               = "t3.micro"
   subnet_id                   = var.private_subnet_for_bastion_host_id
-  associate_public_ip_address = false
+  associate_public_ip_address = true
   iam_instance_profile        = aws_iam_instance_profile.bastion.name
   vpc_security_group_ids      = [var.aws_security_group_bastion_id]
   tags = merge(local.common_tags, {
@@ -50,16 +49,16 @@ resource "aws_instance" "bastion" {
   })
 
   # Bez SSH – opcjonalny zestaw narzędzi
-  # user_data = <<-EOF
-  #   #!/bin/bash
-  #   set -e
-  #   dnf -y update
-  #   dnf -y install unzip
-  #   # kubectl (ostatnia stabilna)
-  #   curl -sSL -o /usr/local/bin/kubectl \
-  #     https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
-  #   chmod +x /usr/local/bin/kubectl
-  # EOF
+  user_data = <<-EOF
+    #!/bin/bash
+    set -e
+    dnf -y update
+    dnf -y install unzip
+    # kubectl (ostatnia stabilna)
+    curl -sSL -o /usr/local/bin/kubectl \
+      https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    chmod +x /usr/local/bin/kubectl
+  EOF
 
   # Wymuś IMDSv2 (dobry nawyk)
   metadata_options {
@@ -75,7 +74,7 @@ resource "aws_instance" "bastion" {
 }
 
 resource "aws_iam_role" "bastion" {
-  name               = "${var.vpc_name}-bastion-role"
+  name = "${var.vpc_name}-bastion-role"
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
