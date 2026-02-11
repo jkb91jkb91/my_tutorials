@@ -124,7 +124,7 @@ kubectl create ns job-ns
 ```
 
 ## HOW TO CONFIGURE CLOUDWATCH LOGS FOR RUNNING POD WITH FLUENT BIT
-https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html?source=post_page-----dc23d3826565---------------------------------------  
+https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html?source=post_page-----dc23d3826565
 
 Each CronJob should have  
 -independent forwarding  
