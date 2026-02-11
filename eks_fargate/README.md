@@ -116,11 +116,55 @@ It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s
 ## CREATE CRON JOB IN THE CLUSTER  
 1) Create namspace for jobs  
 ```
-kubectl create ns job-ns
-```
-2)
+kubectl create ns jobs
 ```
 
+2) Create first cronjobs  
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-jeden
+  namespace: jobs
+spec:
+  schedule: "*/15 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      template:
+        metadata:
+          labels:
+            cronjob: cronjob-jeden-label   # <-- LABEL USED IN CONFIG MAP
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: main
+              image: <YOUR_IMAGE>
+```
+
+3) Create second cronjobs  
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-dwa
+  namespace: jobs
+spec:
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      template:
+        metadata:
+          labels:
+            cronjob: cronjob-dwa-label     # <-- LABEL USED IN CONFIG MAP
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: main
+              image: <YOUR_IMAGE>
 ```
 
 ## HOW TO CONFIGURE CLOUDWATCH LOGS FOR RUNNING POD WITH FLUENT BIT
@@ -200,53 +244,6 @@ data:
         log_group_name /eks/fargate/others
         log_stream_prefix OTHERS-
         auto_create_group true  
-```
-3) Create first cronjobs
-```
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: cronjob-jeden
-  namespace: jobs
-spec:
-  schedule: "*/15 * * * *"
-  concurrencyPolicy: Forbid
-  jobTemplate:
-    spec:
-      backoffLimit: 5
-      template:
-        metadata:
-          labels:
-            cronjob: cronjob-jeden-label   # <-- LABEL USED IN CONFIG MAP
-        spec:
-          restartPolicy: Never
-          containers:
-            - name: main
-              image: <YOUR_IMAGE>
-
-```
-4) Create second cronjobs
-```
-apiVersion: batch/v1
-kind: CronJob
-metadata:
-  name: cronjob-dwa
-  namespace: jobs
-spec:
-  schedule: "0 * * * *"
-  concurrencyPolicy: Forbid
-  jobTemplate:
-    spec:
-      backoffLimit: 5
-      template:
-        metadata:
-          labels:
-            cronjob: cronjob-dwa-label     # <-- LABEL USED IN CONFIG MAP
-        spec:
-          restartPolicy: Never
-          containers:
-            - name: main
-              image: <YOUR_IMAGE>
 ```
 
 
