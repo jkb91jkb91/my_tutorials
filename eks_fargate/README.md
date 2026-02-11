@@ -52,8 +52,8 @@ aws ssm start-session --target i-XXXXXXXXXXXX --region <region>
 ```
 
 ## EKS  WORKLOAD TYPE #######################################################################################
-1) Fargate (serverless pods)
--Lack of Nodes (serverless)
+1) Fargate (serverless pods)  
+-Lack of Nodes (serverless)  
 -You pay only for used CPU/RAM  
 
 Advantages  
