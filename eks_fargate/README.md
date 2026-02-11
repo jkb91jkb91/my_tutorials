@@ -84,7 +84,6 @@ Disadvantages
 ```
 
 ## EKS RESOURCES  
-###############################################################################################  
 Strikethrough lines shows which resources are required for EKS on EC2  
 It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s  
 
