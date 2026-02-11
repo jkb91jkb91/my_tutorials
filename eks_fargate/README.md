@@ -1,7 +1,7 @@
 #  EKS ON FARGATE: 
 #  PLATFORM TO LAUNCH CRONJOBS THAT SEND LOGS INTO CLOUDWATCH  
 
-WHAT YOU GET  ###########################################################################################  
+WHAT YOU GET  #############################################################################  
 With only one command you will get:  
 1.) Fully working EKS on Fargate  
 2.) EC2 bastion host without public IP  
@@ -25,8 +25,8 @@ Whole setup is placed into terraform modules:
 
 
 
-########################################## PRACTICAL PART ################################################  
-PREQUISUITES  ############################################################################################  
+############################ PRACTICAL PART ################################################  
+PREQUISUITES  ##############################################################################  
 1. **AWS credentials** configured in your local environment or use SSO ( not included in this project )  
 
 ```bash
@@ -40,7 +40,7 @@ or set your ~/.aws/credentials
 aws_access_key_id = "your-access-key"
 aws_secret_access_key = "your-secret-key"
 ```
-## DEPLOYMENT  ############################################################################################  
+## DEPLOYMENT  #############################################################################  
 1. 🚀 Deploy resources  
 
 ```
@@ -50,7 +50,7 @@ terraform plan
 terraform apply
 ```
 
-## CONNECTING INTO CLUSTER  #################################################################################  
+## CONNECTING INTO CLUSTER  #################################################################   
 
 1. Connection to AWS from your machine is done by using SSM Agent. EC2 does not use public IP.
 ```
@@ -63,8 +63,8 @@ kubectl get pods
 
 
 
-########################################## THEORETICAL PART ################################################  
-## EKS  WORKLOAD TYPE #######################################################################################  
+########################################## THEORETICAL PART ##################################  
+## EKS  WORKLOAD TYPE ########################################################################  
 1) Fargate (serverless pods)  
 -Lack of Nodes (serverless)  
 -You pay only for used CPU/RAM  
@@ -82,7 +82,7 @@ Disadvantages
 ```
 
 ## EKS RESOURCES  
-#########################################################################################################  
+###############################################################################################  
 Strikethrough lines shows which resources are required for EKS on EC2  
 It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s  
 
@@ -113,7 +113,7 @@ It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s
 9) EKS Access Policy association   
 
 ## HOW TO LOG IN INTO CLUSTER FROM BASTION HOST EC2  
-#########################################################################################################  
+###############################################################################################   
 FOR LOGGING INTO CLUSTER WE HAVE TWO OPTIONS >>>  
     - Access Entries <<< preferred and used below  
     - aws-auth  
