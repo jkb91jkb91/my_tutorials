@@ -1,4 +1,5 @@
-#  EKS ON FARGATE: PLATFORM TO LAUNCH CRONJOBS THAT LOG OUT INTO CLOUDWATCH
+#  EKS ON FARGATE: 
+#  PLATFORM TO LAUNCH CRONJOBS THAT SEND LOGS INTO CLOUDWATCH  
 
 WHAT YOU GET  ###########################################################################################  
 With only one command you will get:  
@@ -24,6 +25,7 @@ Whole setup is placed into terraform modules:
 
 
 
+########################################## PRACTICAL PART ################################################  
 PREQUISUITES  ############################################################################################  
 1. **AWS credentials** configured in your local environment or use SSO ( not included in this project )  
 
@@ -53,8 +55,15 @@ terraform apply
 1. Connection to AWS from your machine is done by using SSM Agent. EC2 does not use public IP.
 ```
 aws ssm start-session --target i-XXXXXXXXXXXX --region <region>
+kubectl get pods
 ```
 
+
+
+
+
+
+########################################## THEORETICAL PART ################################################  
 ## EKS  WORKLOAD TYPE #######################################################################################  
 1) Fargate (serverless pods)  
 -Lack of Nodes (serverless)  
