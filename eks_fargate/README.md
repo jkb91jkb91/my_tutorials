@@ -53,12 +53,19 @@ aws ssm start-session --target i-XXXXXXXXXXXX --region <region>
 
 ## EKS  WORKLOAD TYPE #######################################################################################
 1) Fargate (serverless pods)
+-Lack of Nodes (serverless)
+-You pay only for used CPU/RAM  
 
+Advantages  
 ```
-Fargate (serverless pods)
-Lack of Nodes, you pay only for CPU/RAM
-Advamtages: no infrastructure management, easy to start with
-Disadvangates: No deamon sets, sometimes it might cost more during highest overload
+1) No infrastructure management
+2) Easy to start with
+```
+
+Disadvantages  
+```
+1) No deamon sets
+2) sometimes it might cost more during highest overloads
 ```
 
 ## EKS RESOURCES  
