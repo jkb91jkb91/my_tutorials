@@ -1,4 +1,4 @@
-#  EKS PLATFORM: FARGATE
+#  EKS ON FARGATE: PLATFORM TO LAUNCH CRONJOBS THAT LOG OUT INTO CLOUDWATCH
 
 ---
 
@@ -20,7 +20,7 @@
 
 To run this project, you’ll need:
 
-1. **AWS credentials** configured in your local environment    NOT RECOMMENDED BUT THE SIMPLEST WAY  
+1. **AWS credentials** configured in your local environment or use SSO ( not included in this project )  
 
 ```bash
 export AWS_ACCESS_KEY_ID="your-access-key"
@@ -63,6 +63,9 @@ Disadvangates: No deamon sets, sometimes it might cost more during highest overl
 
 ## EKS RESOURCES  
 #########################################################################################################
+Strikethrough lines shows which resources are required for EKS on EC2  
+It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s  
+
 1) VPC/subnets  
 1) OIDC  (connected with issuer)  
 2) EKS Control Plane  
