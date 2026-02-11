@@ -26,6 +26,7 @@ Whole setup is placed into terraform modules:
 
 
 ############################ PRACTICAL PART ################################################  
+############################################################################################
 PREQUISUITES  ##############################################################################  
 1. **AWS credentials** configured in your local environment or use SSO ( not included in this project )  
 
@@ -64,6 +65,7 @@ kubectl get pods
 
 
 ########################################## THEORETICAL PART ##################################  
+##############################################################################################  
 ## EKS  WORKLOAD TYPE ########################################################################  
 1) Fargate (serverless pods)  
 -Lack of Nodes (serverless)  
@@ -111,6 +113,29 @@ It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s
    ~~- arn:aws:iam::aws:policy/AmazonEC2ContainerRegistryReadOnly~~   
 8) Access Entries ( instead aws-auth ) # Responsible for access into CLUSTER  
 9) EKS Access Policy association   
+
+## CREATE CRON JOB IN THE CLUSTER  
+1) Create namspace for jobs  
+```
+kubectl create ns job-ns
+```
+2)
+```
+
+```
+
+## HOW TO CONFIGURE CLOUDWATCH LOGS FOR RUNNING POD  
+1) Create namespace  aws-observability  
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: aws-observability
+  labels:
+    aws-observability: enabled
+```
+2) Create Config-Map aws-logging  inside of the aws-observability  namespace  
+
 
 ## HOW TO LOG IN INTO CLUSTER FROM BASTION HOST EC2  
 ###############################################################################################   
