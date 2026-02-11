@@ -113,7 +113,13 @@ It is clearly visible how much simple is EKS on Fargate without Nodes on EC2s
 8) Access Entries ( instead aws-auth ) # Responsible for access into CLUSTER  
 9) EKS Access Policy association   
 
-## CREATE CRON JOB IN THE CLUSTER  
+## HOW TO LOG IN INTO CLUSTER FROM BASTION HOST EC2  
+###############################################################################################   
+FOR LOGGING INTO CLUSTER WE HAVE TWO OPTIONS >>>  
+    - Access Entries <<< preferred and used below  
+    - aws-auth  
+
+## CREATE CRON JOBS IN THE CLUSTER  
 1) Create namspace for jobs  
 ```
 kubectl create ns jobs
@@ -246,10 +252,4 @@ data:
         auto_create_group true  
 ```
 
-
-## HOW TO LOG IN INTO CLUSTER FROM BASTION HOST EC2  
-###############################################################################################   
-FOR LOGGING INTO CLUSTER WE HAVE TWO OPTIONS >>>  
-    - Access Entries <<< preferred and used below  
-    - aws-auth  
 
