@@ -133,7 +133,53 @@ metadata:
   labels:
     aws-observability: enabled
 ```
-2) Create Config-Map aws-logging  inside of the aws-observability  namespace  
+2) Create one Config-Map aws-logging inside of the aws-observability namespace
+   This Config-Map contains log configuration for each Pod  
+   On the example we have configuration for
+   - 2 pods  
+   - others/fallback  
+```
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aws-logging
+  namespace: aws-observability
+data:
+  filters.conf: |
+    [FILTER]
+        Name                kubernetes
+        Match               kube.*
+        Labels              On
+        Annotations         Off
+
+  output.conf: |
+    # CronJob_1
+    [OUTPUT]
+        Name cloudwatch_logs
+        Match kube.*cronjob-jeden*
+        region eu-central-1
+        log_group_name /eks/cronjob/job_number1
+        log_stream_prefix CRONJOB
+        auto_create_group true
+
+    # CronJob_1
+    [OUTPUT]
+        Name cloudwatch_logs
+        Match kube.*cronjob-dwa*
+        region eu-central-1
+        log_group_name /eks/cronjob/job_number1
+        log_stream_prefix CRONJOB
+        auto_create_group true
+
+    # fallback (reszta)
+    [OUTPUT]
+        Name cloudwatch_logs
+        Match *
+        region eu-central-1
+        log_group_name /eks/fargate/others
+        log_stream_prefix OTHEERS
+        auto_create_group true
+```
 
 
 ## HOW TO LOG IN INTO CLUSTER FROM BASTION HOST EC2  
