@@ -27,7 +27,7 @@ Whole setup is placed into terraform modules:
 
 ############################ PRACTICAL PART ################################################  
 ############################################################################################
-PREQUISUITES  ##############################################################################  
+## PREQUISUITES  ##############################################################################  
 1. **AWS credentials** configured in your local environment or use SSO ( not included in this project )  
 
 ```bash
