@@ -123,7 +123,19 @@ kubectl create ns job-ns
 
 ```
 
-## HOW TO CONFIGURE CLOUDWATCH LOGS FOR RUNNING POD  
+## HOW TO CONFIGURE CLOUDWATCH LOGS FOR RUNNING POD WITH FLUENT BIT
+https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html?source=post_page-----dc23d3826565---------------------------------------  
+
+Each CronJob should have  
+-independent forwarding  
+-independent subscriptions  
+-independent retention period  
+
+LogGroups:  
+CronJob1 will log into → /eks/cronjob/job_number1
+CronJob2 will log into → /eks/cronjob/job_number2
+
+
 1) Create namespace  aws-observability  
 ```
 apiVersion: v1
@@ -152,33 +164,89 @@ data:
         Labels              On
         Annotations         Off
 
+    # CronJob1 -> creates TAG > cronjob.jeden
+    [FILTER]
+        Name   rewrite_tag
+        Match  kube.*
+        Rule   $kubernetes['labels']['cronjob'] ^cronjob-jeden-label$ cronjob.jeden false
+
+    # CronJob2 -> creates TAG > cronjob.dwa
+    [FILTER]
+        Name   rewrite_tag
+        Match  kube.*
+        Rule   $kubernetes['labels']['cronjob'] ^cronjob-dwa-label$ cronjob.dwa false
+
   output.conf: |
-    # CronJob_1
     [OUTPUT]
         Name cloudwatch_logs
-        Match kube.*cronjob-jeden*
+        Match cronjob.jeden
         region eu-central-1
         log_group_name /eks/cronjob/job_number1
-        log_stream_prefix CRONJOB
+        log_stream_prefix CRONJOB-
         auto_create_group true
 
-    # CronJob_1
     [OUTPUT]
         Name cloudwatch_logs
-        Match kube.*cronjob-dwa*
+        Match cronjob.dwa
         region eu-central-1
-        log_group_name /eks/cronjob/job_number1
-        log_stream_prefix CRONJOB
+        log_group_name /eks/cronjob/job_number2
+        log_stream_prefix CRONJOB-
         auto_create_group true
 
-    # fallback (reszta)
     [OUTPUT]
         Name cloudwatch_logs
         Match *
         region eu-central-1
         log_group_name /eks/fargate/others
-        log_stream_prefix OTHEERS
-        auto_create_group true
+        log_stream_prefix OTHERS-
+        auto_create_group true  
+```
+3) Create first cronjobs
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-jeden
+  namespace: jobs
+spec:
+  schedule: "*/15 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      template:
+        metadata:
+          labels:
+            cronjob: cronjob-jeden-label   # <-- LABEL USED IN CONFIG MAP
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: main
+              image: <YOUR_IMAGE>
+
+```
+4) Create second cronjobs
+```
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: cronjob-dwa
+  namespace: jobs
+spec:
+  schedule: "0 * * * *"
+  concurrencyPolicy: Forbid
+  jobTemplate:
+    spec:
+      backoffLimit: 5
+      template:
+        metadata:
+          labels:
+            cronjob: cronjob-dwa-label     # <-- LABEL USED IN CONFIG MAP
+        spec:
+          restartPolicy: Never
+          containers:
+            - name: main
+              image: <YOUR_IMAGE>
 ```
 
 
