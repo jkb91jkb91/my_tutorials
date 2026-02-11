@@ -173,6 +173,14 @@ spec:
               image: <YOUR_IMAGE>
 ```
 
+## PERMISSIONS  
+1) Fargate permissions: Amazon EKS Pod execution role
+   - used for downloading images
+   - used for cloudwatch logs
+
+
+2) IRSA for POD
+
 ## HOW TO CONFIGURE CLOUDWATCH LOGS FOR RUNNING POD WITH FLUENT BIT
 https://docs.aws.amazon.com/eks/latest/userguide/fargate-logging.html?source=post_page-----dc23d3826565
 
