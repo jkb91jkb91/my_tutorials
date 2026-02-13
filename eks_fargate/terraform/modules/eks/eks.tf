@@ -10,17 +10,24 @@
 
 resource "aws_eks_cluster" "this" {
   name     = var.cluster_name
-  #version  = var.cluster_version
   role_arn = aws_iam_role.eks_cluster_role.arn
 
-  vpc_config {
-    subnet_ids              = var.subnet_ids     # prefer prywatne
-    endpoint_private_access = true               # Use Bastion Host to connect to Kube Api Server
-    security_group_ids    = [aws_security_group.eks_cluster.id] # CREATE SG TO USE THIS
+
+  # CLUSTER ACCESS: EKS API, recommended in 2026
+  access_config {
+    authentication_mode = "API_AND_CONFIG_MAP"
   }
 
-  enabled_cluster_log_types = ["api","audit","authenticator"]
+  vpc_config {
+    subnet_ids              = var.subnet_ids                      # prefer prywatne
+    endpoint_private_access = true                                # Use Bastion Host to connect to Kube Api Server
+    security_group_ids      = [aws_security_group.eks_cluster.id] # CREATE SG TO USE THIS
+  }
+
+  enabled_cluster_log_types = ["api", "audit", "authenticator"]
 }
+
+
 
 resource "aws_eks_fargate_profile" "default" {
   cluster_name           = aws_eks_cluster.this.name
@@ -36,6 +43,24 @@ resource "aws_eks_fargate_profile" "default" {
     aws_iam_role_policy_attachment.eks_fargate_pod_execution_role_policy
   ]
 }
+
+resource "aws_eks_fargate_profile" "system" {
+  cluster_name           = aws_eks_cluster.this.name
+  fargate_profile_name   = "${var.cluster_name}-fp-system"
+  pod_execution_role_arn = aws_iam_role.eks_fargate_pod_execution_role.arn
+  subnet_ids             = var.subnet_ids
+
+   selector { namespace = "kube-system" } # Required for core-dns , otherwise you will get >>>>>>
+  #kube-system   coredns-7d58d485c9-c8bz6   0/1     Pending   0          47m
+  #kube-system   coredns-7d58d485c9-dk75z   0/1     Pending   0          47m
+  # <<<<<<<
+
+  depends_on = [
+    aws_eks_cluster.this,
+    aws_iam_role_policy_attachment.eks_fargate_pod_execution_role_policy
+  ]
+}
+
 
 
 # === IAM: Rola dla control plane (EKS Cluster) ===
@@ -61,9 +86,9 @@ resource "aws_iam_role" "eks_fargate_pod_execution_role" {
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
     Statement = [{
-      Effect = "Allow",
+      Effect    = "Allow",
       Principal = { Service = "eks-fargate-pods.amazonaws.com" },
-      Action = "sts:AssumeRole"
+      Action    = "sts:AssumeRole"
     }]
   })
 }
@@ -100,6 +125,7 @@ resource "aws_security_group" "eks_cluster" {
   description = "EKS cluster security group"
   vpc_id      = var.vpc_id
 
+
   ingress {
     description     = "Kubernetes API from bastion SG"
     from_port       = 443
@@ -117,3 +143,24 @@ resource "aws_security_group" "eks_cluster" {
 }
 
 
+
+##################################### ACCESS ENTRIES INTO CLUSTER FOR IAM ROLE ATTACHED TO EC2 #################################################
+resource "aws_eks_access_entry" "bastion" {
+  cluster_name  = aws_eks_cluster.this.name
+  principal_arn = var.iam_role_bastion_arn
+  type          = "STANDARD"
+
+  depends_on = [aws_eks_cluster.this]
+}
+
+resource "aws_eks_access_policy_association" "bastion_admin" {
+  cluster_name  = aws_eks_cluster.this.name
+  principal_arn = var.iam_role_bastion_arn
+  policy_arn    = "arn:aws:eks::aws:cluster-access-policy/AmazonEKSClusterAdminPolicy"
+
+  access_scope {
+    type = "cluster"
+  }
+
+  depends_on = [aws_eks_access_entry.bastion]
+}

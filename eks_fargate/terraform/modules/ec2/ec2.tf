@@ -42,25 +42,27 @@ resource "aws_instance" "bastion" {
   instance_type               = "t3.micro"
   subnet_id                   = var.private_subnet_for_bastion_host_id
   associate_public_ip_address = true
-  iam_instance_profile        = aws_iam_instance_profile.bastion.name
+  iam_instance_profile        = var.iam_role #aws_iam_instance_profile.bastion.name
   vpc_security_group_ids      = [var.aws_security_group_bastion_id]
   tags = merge(local.common_tags, {
     Name = "${var.vpc_name}-ec2-bastion-host"
   })
 
-  # Bez SSH – opcjonalny zestaw narzędzi
+
   user_data = <<-EOF
     #!/bin/bash
     set -e
     dnf -y update
     dnf -y install unzip
-    # kubectl (ostatnia stabilna)
-    curl -sSL -o /usr/local/bin/kubectl \
-      https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
+    curl -sSL -o /usr/local/bin/kubectl https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
     chmod +x /usr/local/bin/kubectl
+    mkdir -p /home/ec2-user/.kube
+    aws eks update-kubeconfig --region us-east-1 --name fargate --kubeconfig /home/ec2-user/.kube/config
+    chown -R ec2-user:ec2-user /home/ec2-user/.kube
+    chmod 600 /home/ec2-user/.kube/config
   EOF
 
-  # Wymuś IMDSv2 (dobry nawyk)
+  # Enforce IMDSv2 as good practice
   metadata_options {
     http_endpoint = "enabled"
     http_tokens   = "required"
@@ -73,27 +75,3 @@ resource "aws_instance" "bastion" {
   }
 }
 
-resource "aws_iam_role" "bastion" {
-  name = "${var.vpc_name}-bastion-role"
-  assume_role_policy = jsonencode({
-    Version = "2012-10-17",
-    Statement = [{
-      Effect    = "Allow",
-      Principal = { Service = "ec2.amazonaws.com" },
-      Action    = "sts:AssumeRole"
-    }]
-  })
-  tags = merge(local.common_tags, {
-    Name = "${var.vpc_name}-ec2-bastion-role"
-  })
-}
-
-resource "aws_iam_role_policy_attachment" "ssm_core" {
-  role       = aws_iam_role.bastion.name
-  policy_arn = "arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore"
-}
-
-resource "aws_iam_instance_profile" "bastion" {
-  name = "${var.vpc_name}-bastion-profile"
-  role = aws_iam_role.bastion.name
-}

@@ -11,9 +11,9 @@ output "public_subnet_for_bastion_host_id" {
 }
 
 output "private_subnet1_id" {
-  value = aws_subnet.private_subnet_1.id 
+  value = aws_subnet.private_subnet_1.id
 }
 
 output "private_subnet2_id" {
-  value = aws_subnet.private_subnet_2.id 
+  value = aws_subnet.private_subnet_2.id
 }

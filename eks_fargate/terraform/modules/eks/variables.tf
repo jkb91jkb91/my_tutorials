@@ -8,3 +8,8 @@ variable "subnet_ids" {
   description = "List of subnet IDs for EKS (prefer private subnets)"
   type        = list(string)
 }
+
+variable "iam_role_bastion_arn" {
+  type = string
+}
+

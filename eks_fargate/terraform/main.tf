@@ -34,7 +34,23 @@ module "sg" {
   source           = "./modules/sg"
 }
 
+module "iam" {
+  source       = "./modules/iam"
+  region       = var.region
+  cluster_name = var.cluster_name
+  vpc_name     = var.vpc_name
+}
 
+#EKS
+module "eks" {
+  source                        = "./modules/eks"
+  vpc_name                      = var.vpc_name
+  vpc_id                        = module.vpc.vpc_id
+  cluster_name                  = var.cluster_name
+  subnet_ids                    = [module.vpc.private_subnet1_id, module.vpc.private_subnet2_id]
+  aws_security_group_bastion_id = module.sg.aws_security_group_bastion_id
+  iam_role_bastion_arn          = module.iam.iam_role_bastion_arn
+}
 
 module "bastion_host" {
   region                             = var.region
@@ -46,18 +62,12 @@ module "bastion_host" {
   vpc_name                           = var.vpc_name
   private_subnet_for_bastion_host_id = module.vpc.public_subnet_for_bastion_host_id
   source                             = "./modules/ec2"
+  depends_on                         = [module.eks, module.iam]
+  iam_role                           = module.iam.iam_role_ec2_name
 }
 
-#EKS
-module "eks" {
-  source                        = "./modules/eks"
-  vpc_name                      = var.vpc_name
-  vpc_id                        = module.vpc.vpc_id
-  cluster_name                  = var.cluster_name
-  #cluster_version               = var.cluster_version
-  subnet_ids                    = [module.vpc.private_subnet1_id, module.vpc.private_subnet2_id]
-  aws_security_group_bastion_id = module.sg.aws_security_group_bastion_id
-}
+
+
 
 # IAM
 # module "iam" {
