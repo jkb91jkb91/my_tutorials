@@ -1,0 +1,8 @@
+[tools]
+terraform = "1.6.6"
+awscli = "2.15.10"
+python = "3.12"
+go = "1.22"
+kubectl = "1.29.2" # Version as image in kind cluster
+helm = "3.15.4"
+goreleaser = "2.13.3" # Required for building cross-platform golang binaries

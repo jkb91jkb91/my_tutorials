@@ -24,7 +24,7 @@ python = "3.12"
 go = "1.22"
 ```
 
-Installation
+Simple usage
 ```
 mise install
 ```
