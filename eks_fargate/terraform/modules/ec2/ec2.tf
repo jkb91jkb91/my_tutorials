@@ -60,6 +60,7 @@ resource "aws_instance" "bastion" {
     aws eks update-kubeconfig --region us-east-1 --name fargate --kubeconfig /home/ec2-user/.kube/config
     chown -R ec2-user:ec2-user /home/ec2-user/.kube
     chmod 600 /home/ec2-user/.kube/config
+    kubectl patch deployment coredns -n kube-system --type json -p='[{"op": "remove", "path": "/spec/template/spec/tolerations"}]' # THIS IS REQUIRED TO NOT HAVE coreDns as PENDING >>>https://repost.aws/questions/QUCuFoRCw4SQuLKhUZFeM9Xw/coredns-pods-in-eks-fargate-are-in-pending-state-and-the-addon-is-in-error-due-to-insufficientnumberofreplicas
   EOF
 
   # Enforce IMDSv2 as good practice

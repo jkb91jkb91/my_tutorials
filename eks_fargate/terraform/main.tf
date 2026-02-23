@@ -41,6 +41,21 @@ module "iam" {
   vpc_name     = var.vpc_name
 }
 
+module "ecr" {
+  source = "./modules/ecr"
+}
+
+module "vpc_endpoints" {
+  source                             = "./modules/vpc_endpoints"
+  vpc_id                             = module.vpc.vpc_id
+  priv_subnet1_id                    = module.vpc.private_subnet1_id
+  priv_subnet2_id                    = module.vpc.private_subnet2_id
+  endpoint_sg_id                     = module.sg.endpoint_sg_id
+  s3_route_table_ids                 = module.vpc.s3_route_table_ids
+  depends_on = [module.ecr]
+}
+
+
 #EKS
 module "eks" {
   source                        = "./modules/eks"
@@ -50,6 +65,7 @@ module "eks" {
   subnet_ids                    = [module.vpc.private_subnet1_id, module.vpc.private_subnet2_id]
   aws_security_group_bastion_id = module.sg.aws_security_group_bastion_id
   iam_role_bastion_arn          = module.iam.iam_role_bastion_arn
+  depends_on = [module.vpc_endpoints]
 }
 
 module "bastion_host" {
@@ -62,9 +78,12 @@ module "bastion_host" {
   vpc_name                           = var.vpc_name
   private_subnet_for_bastion_host_id = module.vpc.public_subnet_for_bastion_host_id
   source                             = "./modules/ec2"
-  depends_on                         = [module.eks, module.iam]
   iam_role                           = module.iam.iam_role_ec2_name
+  depends_on                         = [module.eks, module.iam]
 }
+
+
+
 
 
 
@@ -90,18 +109,6 @@ module "bastion_host" {
 #   fargate_extra_role_arn = module.iam.fargate_extra_role_arn
 # }
 
-
-# module "vpc_endpoints" {
-#   region                             = var.region
-#   project_name                       = var.project_name
-#   environment_name                   = var.environment_name
-#   cluster_name                       = var.cluster_name
-#   vpc_id                             = module.vpc.vpc_id
-#   vpc_name                           = var.vpc_name
-#   aws_security_group_bastion_id      = module.sg.aws_security_group_bastion_id
-#   private_subnet_for_bastion_host_id = module.vpc.private_subnet_for_bastion_host_id
-#   source                             = "./modules/vpc_endpoints"
-# }
 
 
 

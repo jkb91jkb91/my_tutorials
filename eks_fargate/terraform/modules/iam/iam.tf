@@ -43,3 +43,29 @@ resource "aws_iam_instance_profile" "bastion" {
   name = "${var.vpc_name}-bastion-profile"
   role = aws_iam_role.bastion.name
 }
+
+
+############################ ECR POLICIES ##############################
+# Inline policy: ECR + CloudWatch Logs
+resource "aws_iam_role_policy" "ecr_and_logs_policy" {
+  name = "ecr-and-logs-policy"
+  role = aws_iam_role.bastion.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}

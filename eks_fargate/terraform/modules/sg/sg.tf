@@ -34,3 +34,33 @@ resource "aws_security_group" "bastion" {
     Name = "${var.vpc_name}-bation-sg"
   })
 }
+
+
+############################## ECR SG ##################################
+resource "aws_security_group" "vpc_endpoints_sg" {
+  name        = "vpc-endpoints-sg"
+  description = "Security Group for VPC Endpoints"
+  vpc_id      = var.vpc_id
+
+
+  ingress {
+    description = "Allow HTTPS"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+
+  // EGRESS - Allow all outbound traffic
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  tags = {
+    Name = "vpc-endpoints-sg"
+  }
+}

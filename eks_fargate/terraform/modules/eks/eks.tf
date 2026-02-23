@@ -50,7 +50,12 @@ resource "aws_eks_fargate_profile" "system" {
   pod_execution_role_arn = aws_iam_role.eks_fargate_pod_execution_role.arn
   subnet_ids             = var.subnet_ids
 
-   selector { namespace = "kube-system" } # Required for core-dns , otherwise you will get >>>>>>
+  selector {
+    namespace = "kube-system"
+    labels = {
+      "k8s-app" = "kube-dns"
+    }
+  } # Required for core-dns , otherwise you will get >>>>>>
   #kube-system   coredns-7d58d485c9-c8bz6   0/1     Pending   0          47m
   #kube-system   coredns-7d58d485c9-dk75z   0/1     Pending   0          47m
   # <<<<<<<
@@ -92,6 +97,33 @@ resource "aws_iam_role" "eks_fargate_pod_execution_role" {
     }]
   })
 }
+
+############################ ECR POLICIES ##############################
+# Inline policy: ECR + CloudWatch Logs
+resource "aws_iam_role_policy" "ecr_and_logs_policy" {
+  name = "ecr-and-logs-policy"
+  role = aws_iam_role.eks_fargate_pod_execution_role.id
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ecr:GetAuthorizationToken",
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchGetImage",
+          "logs:CreateLogStream",
+          "logs:PutLogEvents"
+        ]
+        Resource = "*"
+      }
+    ]
+  })
+}
+
+
 
 resource "aws_iam_role_policy_attachment" "eks_fargate_pod_execution_role_policy" {
   role       = aws_iam_role.eks_fargate_pod_execution_role.name
