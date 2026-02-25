@@ -26,8 +26,15 @@ kubectl get kustomizations -A
 # JAK TESTOWAC FLUXA
 1)  odpalasz values.yaml na najwyzszym poziomie  
 ```
- helm template . -f values.yaml
+ cd my-chart 
+ helm template <NAME_FO_RELEASE>. -f values.yaml
+ helm template test . -f values.yaml
  ```
+ if you dont have chart locally then >
+ ```
+helm template bitnami/package -f values.yaml
+helm template test bitnami/nginx --version <VER> -f values.yaml
+```
 2) nastepnie wrzucasz wartosci do HelmRelease i testujesz to tak >>>   
 ```
 k apply -f ADRES_RELEASEA
