@@ -242,4 +242,13 @@ gcloud compute firewall-rules create allow-ssh-vpc-wide \
 #Prerequisuite >> VM in private subnet exists
 ```
 gcloud compute ssh COMPUTE_ENGINE_NAME   --zone=us-central1-c   --tunnel-through-iap
+<<<<<<< Updated upstream:gcp/gcloud/README.md
 ```         
+=======
+
+
+#**************************************** TERRAFORM *********************************
+gcloud compute machine-types list --zones=us-central1-a
+gcloud compute images list --project=debian-cloud
+
+>>>>>>> Stashed changes:gcp/gcloud/gcloud_commands
