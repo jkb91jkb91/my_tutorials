@@ -1,3 +1,12 @@
+#MOST REQUIRED COMMANDS TO START QUICKLY
+```
+helm repo add bitnami https://charts.bitnami.com/bitnami
+helm search repo bitnami/nginx --versions | head
+helm show values bitnami/nginx --version <VER> > values.yaml
+helm template test bitnami/nginx --version <VER> -f values.yaml
+```
+
+
 # TIPY 
 1) po zrobieniu helm create usuwaj /templates bo blad wyskoczy      
 2) w value.yaml na najnwyzsym poziomie musi byc nazwa folderu charts/nginx to wtedy bedziesz mial nginx     
