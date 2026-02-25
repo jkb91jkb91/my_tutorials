@@ -1,6 +1,8 @@
 #  EKS ON FARGATE: 
 #  PLATFORM TO LAUNCH CRONJOBS THAT SEND LOGS INTO CLOUDWATCH  
 
+![Diagram](./DIAGRAM.png)
+
 ## WHAT YOU GET  #############################################################################  
 With only one command you will get:  
 1.) Fully working EKS on Fargate  
