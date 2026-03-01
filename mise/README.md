@@ -1,17 +1,19 @@
-MAC
+# INSTALLATION MAC
 ```
 brew install mise
 eecho 'eval "$(mise activate zsh)"' >> ~/.zshrc
 source ~/.zshrc
 ```
 
-LINUX
+# INSTALLATION LINUX
 ```
+curl https://mise.jdx.dev/install.sh | sh
 echo 'eval "$(mise activate bash)"' >> ~/.bashrc
+source ~/.bashrc
 ```
 
-
-Create .mise.toml file
+# COPY CONFIGURATION
+1) Prerequisuite: You should have locally mise.toml file  
 ```
 [tools]
 terraform = "1.6.6"
@@ -22,10 +24,19 @@ k9s = "0.32.4"
 node = "20"
 python = "3.12"
 go = "1.22"
+argocd = "2.12.5"
+flux2 = "2.4.0"
 ```
 
-Simple usage
+2) Copy config
 ```
+mkdir -p ~/.config/mise
+cp mise.toml ~/.config/mise/config.toml
+```
+
+3) Install globally
+```
+cd ..  # To not stay in the same directory from which you copied mise.toml
 mise install
 ```
 
