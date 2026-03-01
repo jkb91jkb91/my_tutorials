@@ -24,8 +24,10 @@ k9s = "0.32.4"
 node = "20"
 python = "3.12"
 go = "1.22"
-argocd = "2.12.5"
 flux2 = "2.4.0"
+argocd = "2.12.5"
+istioctl = "1.28.4"
+neovim = "0.11.5"
 ```
 
 2) Copy config
