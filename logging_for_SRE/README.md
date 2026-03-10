@@ -64,5 +64,16 @@ touch logger_json/src/sre_logger.py
 
 3) Installation guide
 ```
-pip install "git+https://github.com/jkb91jkb91/my_tutorials.git#subdirectory=logging_for_SRE/logger_json"
+uv init my-app    # Create Project and venv
+uv venv
+uv pip list       # Show locally installed packets
+uv pip install "git+https://github.com/jkb91jkb91/my_tutorials.git#subdirectory=logging_for_SRE/logger_json"
+uv pip list
+```
+
+```
+root@jkb91:~/my_app# uv pip list
+Package     Version
+----------- -------
+logger-json 0.1.0
 ```
