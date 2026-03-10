@@ -28,7 +28,7 @@ def init_json_logger(service_name: str = "app", level=logging.INFO):
     logger = logging.getLogger(service_name)
     logger.setLevel(level)
 
-    handler = logging.StreamHandler(sys.stdout)
+    handler = logging.StreamHandler(sys.stderr)
     handler.setFormatter(JsonFormatter())
 
     if logger.hasHandlers():
