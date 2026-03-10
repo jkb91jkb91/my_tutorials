@@ -29,3 +29,35 @@ Its SRE document that says developers
   "user_id": 441
 }
 ```
+# PRACTICAL PART: PACKAGE CREATION #######################################################
+
+1) Download uv  
+```
+curl -LsSf https://astral.sh/uv/install.sh | sh
+uv init --lib logger_json    # --lib means >>> create project of librarby, not application
+```
+
+```
+└── logger_json
+    ├── pyproject.toml
+    ├── README.md
+    └── src
+        └── logger_json
+            ├── __init__.py
+            └── py.typed
+```
+2) Create you own file 
+```
+touch logger_json/src/sre_logger.py
+```
+
+```
+└── logger_json
+    ├── pyproject.toml
+    ├── README.md
+    └── src
+        └── logger_json
+            ├── __init__.py
+            ├── py.typed
+            └── sre_logger.py
+```
