@@ -61,3 +61,8 @@ touch logger_json/src/sre_logger.py
             ├── py.typed
             └── sre_logger.py
 ```
+
+3) Installation guide
+```
+pip install "git+https://github.com/jkb91jkb91/my_tutorials.git#subdirectory=logging_for_SRE/logger_json"
+```
