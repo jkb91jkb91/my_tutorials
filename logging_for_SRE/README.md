@@ -106,10 +106,7 @@ root@jkb91:~/testing-module-app# uv run python main.py
 {"timestamp": "2026-03-11T10:24:19.738788Z", "level": "INFO", "message": "something", "logger": "custom-logger"}
 {"timestamp": "2026-03-11T10:24:23.739197Z", "level": "INFO", "message": "something", "logger": "custom-logger"}
 ```
-5) How to import this module into single python module app.py  
-```
 
-```
 6) Build Dockerfile based on files from dist
 ```
 dist
