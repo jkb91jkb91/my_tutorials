@@ -1,4 +1,21 @@
 # BASIC INFO
+This tutorial shows how to build custom logger in file: sre_logger.py, you can use this to directly download this package or to build dist/  
+alternative way of not building custom solution is to use python-json-logger  <<< if you want to have quick solution use this >>>  
+```
+import logging
+from pythonjsonlogger.json import JsonFormatter
+
+logger = logging.getLogger()
+logger.setLevel(logging.INFO)
+
+handler = logging.StreamHandler()
+handler.setFormatter(JsonFormatter())
+
+logger.addHandler(handler)
+
+logger.info("Logging using python-json-logger!", extra={"more_data": True})
+# {"message": "Logging using python-json-logger!", "more_data": true}
+```
 
 # 1 Set standard logging for JSON ( policy for logging )  , NO-LOGGING WITH PLAIN-TEXT
 Its SRE document that says developers  
@@ -10,10 +27,10 @@ Its SRE document that says developers
 # 2 As SRE you should write library for logging and you should force developers to use it  
 - This is the most clever approach  
 - There is no sense to use 20 different logger formatters  
-- you can base on this library: https://pypi.org/project/python-json-logger/  
+- you can base on this library: https://pypi.org/project/python-json-logger/   >>>> This not custom but the simplest way of having output in json  
 
 
-# 3 How to use the logger  
+# 3 Prper json logger should contain
 - JSON format on-liner  
 - timestamp in UTC  
 - mandatory fields like: level, message, service, env, logger  
