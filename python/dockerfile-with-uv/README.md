@@ -1,6 +1,6 @@
 
 
-#1.) Docker image with uv for .whl <<< better for PRD scenarios
+# 1.) Docker image with uv for .whl <<< better for PRD scenarios
 
 First info, if you install from whl, ther is no sense to use uv << its additional tool installed in the image  
 ```
@@ -21,7 +21,7 @@ RUN uv pip install --system /tmp/logger_json-0.1.0-py3-none-any.whl
 COPY main.py /app
 CMD ["python", "main.py"]
 ```
-#2.) Docker image with uv for packages from repo directly in the docker file  
+# 2.) Docker image with uv for packages from repo directly in the docker file  
 
 ```
 FROM python:3.12-slim
@@ -32,7 +32,7 @@ COPY main.py /app
 CMD ["python", "main.py"]
 ```
 
-#3.) Docker image with uv for packages from repo directly placed in pyproject.toml   
+# 3.) Docker image with uv for packages from repo directly placed in pyproject.toml   
 Prerequisuite, package in pyproject.toml  
 1) locally you have to install that package  
 if you dont have uv just init
