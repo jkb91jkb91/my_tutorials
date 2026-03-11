@@ -77,9 +77,8 @@ uv init my-app    # Create Project and venv
 uv venv
 uv pip list       # Show locally installed packets
 uv pip install "git+https://github.com/jkb91jkb91/my_tutorials.git#subdirectory=logging_for_SRE/logger_json"
-uv pip list
 ```
-
+uv pip list
 ```
 root@jkb91:~/my_app# uv pip list
 Package     Version
@@ -87,9 +86,25 @@ Package     Version
 logger-json 0.1.0
 ```
 
-app.py
+main.py
+```
+from logger_json import init_json_logger
+import time
+def main():
+    logger = init_json_logger("custom-logger")
+    while True:
+        time.sleep(4)
+        logger.info("something")
+
+if __name__ == "__main__":
+    main()
 ```
 
+uv run python main.py
+```
+root@jkb91:~/testing-module-app# uv run python main.py 
+{"timestamp": "2026-03-11T10:24:19.738788Z", "level": "INFO", "message": "something", "logger": "custom-logger"}
+{"timestamp": "2026-03-11T10:24:23.739197Z", "level": "INFO", "message": "something", "logger": "custom-logger"}
 ```
 5) How to import this module into single python module app.py  
 ```
