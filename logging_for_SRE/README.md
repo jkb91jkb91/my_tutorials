@@ -136,8 +136,7 @@ requires-python = ">=3.12"
 
 
 
-
-6) Build Dockerfile based on files from dist
+# 6) Build Dockerfile based on files from dist  
 ```
 dist
 │   ├── logger_json-0.1.0-py3-none-any.whl
