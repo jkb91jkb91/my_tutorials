@@ -62,17 +62,38 @@ logger-json = { git = "https://github.com/jkb91jkb91/my_tutorials.git", subdirec
 
 2) Above command automatically should put this dependency into pyproject.toml
 Prerequisuites: install uv in dockerimage  
+
+
+The simplest Dockerfile
+```
+FROM python:3.12-slim
+WORKDIR /app
+RUN pip install --no-cache-dir uv
+COPY pyproject.toml uv.lock ./
+
+RUN uv sync --no-dev # installs only runtime dependencies from lock
+
+COPY . .
+CMD ["uv", "run", "python", "main.py"]
+```
+
+
+Production version  
+ - different layer only for dependencies >>> --no-install-project
 ```
 FROM python:3.12-slim
 
 WORKDIR /app
 
+ENV UV_LINK_MODE=copy
+
 RUN pip install --no-cache-dir uv
 
-COPY pyproject.toml .
-RUN uv pip install --system -r pyproject.toml
+COPY pyproject.toml uv.lock ./
+RUN uv sync --no-dev --no-install-project # different layer only for dependencies
 
-COPY main.py /app
+COPY . .
+RUN uv sync --no-dev                      # installs only runtime dependencies from lock
 
-CMD ["python", "main.py"]
+CMD [".venv/bin/python", "main.py"]
 ```
