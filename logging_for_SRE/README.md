@@ -30,7 +30,7 @@ Its SRE document that says developers
 - you can base on this library: https://pypi.org/project/python-json-logger/   >>>> This not custom but the simplest way of having output in json  
 
 
-# 3 Prper json logger should contain
+# 3 Proper json logger should contain
 - JSON format on-liner  
 - timestamp in UTC  
 - mandatory fields like: level, message, service, env, logger  
@@ -79,26 +79,7 @@ touch logger_json/src/sre_logger.py
             └── sre_logger.py
 ```
 
-
-3) Optional, how to build packages
-```
-cd logging_for_SRE/logger_json
-uv run python -m build        # It has to fit what is in pyproject.toml like
->>> [project]
-requires-python = ">=3.12"
-```
-```
-.
-├── dist
-│   ├── logger_json-0.1.0-py3-none-any.whl
-│   └── logger_json-0.1.0.tar.gz
-├── pyproject.toml
-├── README.md
-├── src
-│   └── logger_json
-└── uv.lock
-```
-4) Installation guide
+# 4 Testing on real app
 ```
 uv init my-app    # Create Project and venv
 uv venv
@@ -134,9 +115,45 @@ root@jkb91:~/testing-module-app# uv run python main.py
 {"timestamp": "2026-03-11T10:24:23.739197Z", "level": "INFO", "message": "something", "logger": "custom-logger"}
 ```
 
+# 5 Optional, how to build packages dist/
+```
+cd logging_for_SRE/logger_json
+uv run python -m build        # It has to fit what is in pyproject.toml like
+>>> [project]
+requires-python = ">=3.12"
+```
+```
+.
+├── dist
+│   ├── logger_json-0.1.0-py3-none-any.whl
+│   └── logger_json-0.1.0.tar.gz
+├── pyproject.toml
+├── README.md
+├── src
+│   └── logger_json
+└── uv.lock
+```
+
+
+
+
 6) Build Dockerfile based on files from dist
 ```
 dist
 │   ├── logger_json-0.1.0-py3-none-any.whl
 │   └── logger_json-0.1.0.tar.gz
 ```
+
+Dockerfile  
+```
+FROM python:3.12-slim
+
+WORKDIR /app
+COPY logger_json-0.1.0-py3-none-any.whl /tmp/
+RUN pip install --no-cache-dir  /tmp/logger_json-0.1.0-py3-none-any.whl
+
+COPY main.py /app
+CMD [ "python", "main.py" ]
+~                              
+```
+
