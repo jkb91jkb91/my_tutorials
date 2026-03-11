@@ -86,7 +86,17 @@ cd logging_for_SRE/logger_json
 uv run python -m build        # It has to fit what is in pyproject.toml like
 >>> [project]
 requires-python = ">=3.12"
-
+```
+```
+.
+├── dist
+│   ├── logger_json-0.1.0-py3-none-any.whl
+│   └── logger_json-0.1.0.tar.gz
+├── pyproject.toml
+├── README.md
+├── src
+│   └── logger_json
+└── uv.lock
 ```
 4) Installation guide
 ```
