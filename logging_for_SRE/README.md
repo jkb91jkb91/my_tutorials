@@ -62,7 +62,16 @@ touch logger_json/src/sre_logger.py
             └── sre_logger.py
 ```
 
-3) Installation guide
+
+3) Optional, how to build packages
+```
+cd logging_for_SRE/logger_json
+uv run python -m build        # It has to fit what is in pyproject.toml like
+>>> [project]
+requires-python = ">=3.12"
+
+```
+4) Installation guide
 ```
 uv init my-app    # Create Project and venv
 uv venv
@@ -76,4 +85,19 @@ root@jkb91:~/my_app# uv pip list
 Package     Version
 ----------- -------
 logger-json 0.1.0
+```
+
+app.py
+```
+
+```
+5) How to import this module into single python module app.py  
+```
+
+```
+6) Build Dockerfile based on files from dist
+```
+dist
+│   ├── logger_json-0.1.0-py3-none-any.whl
+│   └── logger_json-0.1.0.tar.gz
 ```
