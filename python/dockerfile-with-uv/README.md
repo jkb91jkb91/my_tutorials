@@ -61,6 +61,7 @@ logger-json = { git = "https://github.com/jkb91jkb91/my_tutorials.git", subdirec
 ```
 
 2) Above command automatically should put this dependency into pyproject.toml
+Prerequisuites: install uv in dockerimage  
 ```
 FROM python:3.12-slim
 
